@@ -1,0 +1,61 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "e8e65a10f0fd",
+  "session_id": "019e7d63-afc3-7cf0-9278-b375a54d1066",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-31T10:05:44.16356Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "skills/workflows/agents-md-improver/SKILL.md",
+    "skills/workflows/agents-md-improver/references/quality-criteria.md",
+    "skills/workflows/agents-md-improver/references/templates.md"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.5",
+  "turn_id": "2ec2357664e8",
+  "token_usage": {
+    "input_tokens": 301802,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1856000,
+    "output_tokens": 17714,
+    "api_call_count": 62
+  },
+  "session_metrics": {
+    "turn_count": 8
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-31T10:05:44.152954Z",
+    "agent_lines": 495,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 4,
+    "human_removed": 0,
+    "total_committed": 497,
+    "total_lines_changed": 499,
+    "agent_percentage": 99.19839679358718,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 2,
+      "user_lines_removed": 2,
+      "agent_lines_added": 499,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "skills/workflows/agents-md-improver/SKILL.md": 2
+      },
+      "user_removed_per_file": {
+        "skills/workflows/agents-md-improver/SKILL.md": 2
+      }
+    }
+  ]
+}
