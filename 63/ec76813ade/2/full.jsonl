@@ -1,0 +1,5 @@
+{"type":"session","version":3,"id":"019e7d8d-26a5-7062-9bdf-c114150d3330","timestamp":"2026-05-31T10:21:03.014Z","cwd":"/Users/jfmoe/Coder/skills"}
+{"type":"model_change","id":"2b2a7562","parentId":null,"timestamp":"2026-05-31T10:21:03.103Z","provider":"axonhub","modelId":"gpt-5.4"}
+{"type":"thinking_level_change","id":"f0f52daa","parentId":"2b2a7562","timestamp":"2026-05-31T10:21:03.103Z","thinkingLevel":"medium"}
+{"type":"message","id":"6ef5687b","parentId":"f0f52daa","timestamp":"2026-05-31T10:21:57.132Z","message":{"role":"user","content":[{"type":"text","text":"hi"}],"timestamp":1780222917036}}
+{"type":"message","id":"9b09c15a","parentId":"6ef5687b","timestamp":"2026-05-31T10:21:58.857Z","message":{"role":"assistant","content":[{"type":"text","text":"Hi — how can I help?"}],"api":"openai-completions","provider":"axonhub","model":"gpt-5.4","usage":{"input":2305,"output":11,"cacheRead":0,"cacheWrite":0,"totalTokens":2316,"cost":{"input":0,"output":0,"cacheRead":0,"cacheWrite":0,"total":0}},"stopReason":"stop","timestamp":1780222917168,"responseId":"chatcmpl-331e9618cfa3146f8a45ecc85be08d3c"}}
