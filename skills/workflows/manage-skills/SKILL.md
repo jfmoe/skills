@@ -64,18 +64,18 @@ npx skills add ~/Coder/skills --list
 
 ## Installing and Syncing
 
-Cursor or Codex reads `~/.agents/skills`, so target only `claude-code` by default. Let the `skills` CLI manage symlinks; do not write a custom symlink script.
+Default target is `-a codex claude-code`: `codex` writes `.agents/skills` (read by Cursor and Codex), `claude-code` writes `.claude/skills`. Let the `skills` CLI manage symlinks; do not write a custom symlink script. See [skills-cli.md](skills-cli.md) for how the target choice affects copy vs symlink mode.
 
 Global (self-created):
 
 ```bash
-npx skills add ~/Coder/skills -g -a claude-code --skill '*' -y
+npx skills add ~/Coder/skills -g -a codex claude-code --skill '*' -y
 ```
 
 Project-level (self-created):
 
 ```bash
-npx skills add ~/Coder/skills -a claude-code --skill '*' -y
+npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
 ```
 
 Run install/update commands automatically when the user asks to install or update skills. If scope is ambiguous, ask whether they mean global or project-level — unless context clearly indicates personal global setup.

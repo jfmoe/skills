@@ -4,8 +4,9 @@ Invoke as `npx skills <command> [options]`. A `<source>` package is either a loc
 
 Repo conventions:
 
-- Default agent target is `claude-code` (`-a claude-code`); Cursor reads `~/.agents/skills` automatically, so it needs no separate target.
-- Let the CLI manage symlinks into runtime dirs; never hand-edit `~/.agents/skills`, `~/.claude/skills`, `~/.cursor/skills`, or project `.agents/skills`.
+- Default target is `-a codex claude-code`: `codex` writes `.agents/skills` (read by Cursor and Codex), `claude-code` writes `.claude/skills`. (`-a cursor` ≈ `codex`.)
+- Multiple target dirs use symlink mode (real files in `.agents/skills`, symlinked into `.claude/skills`); a single agent copies directly into its one dir.
+- Let the CLI manage symlinks; never hand-edit `~/.agents/skills`, `~/.claude/skills`, `~/.cursor/skills`, or project `.agents/skills`.
 - `<source>` for self-created skills is always `~/Coder/skills`.
 
 ## add — install or sync skills
@@ -32,16 +33,19 @@ Common uses:
 npx skills add ~/Coder/skills --list
 
 # Install all self-created skills globally
-npx skills add ~/Coder/skills -g -a claude-code --skill '*' -y
+npx skills add ~/Coder/skills -g -a codex claude-code --skill '*' -y
 
 # Install all self-created skills into the current project
-npx skills add ~/Coder/skills -a claude-code --skill '*' -y
+npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
+
+# Cursor/Codex only (.agents/skills)
+npx skills add ~/Coder/skills -a codex --skill '*' -y
 
 # Install a single self-created skill globally
-npx skills add ~/Coder/skills -g -a claude-code --skill manage-skills -y
+npx skills add ~/Coder/skills -g -a codex claude-code --skill manage-skills -y
 
 # Install a third-party skill globally (then record it in registry/third-party.md)
-npx skills add vercel-labs/agent-skills -g -a claude-code --skill pr-review -y
+npx skills add vercel-labs/agent-skills -g -a codex claude-code --skill pr-review -y
 ```
 
 ## list / ls — list installed skills
