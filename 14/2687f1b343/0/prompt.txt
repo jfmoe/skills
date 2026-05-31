@@ -1,0 +1,66 @@
+在当前项目复刻一个 codex 版的 feature-dev skill，不允许自动触发，subagent 指定用 gpt-5.3-codex，要求尽量保持提示词完整，只做从claude到codex的适配：
+
+原项目：/Users/jfmoe/.claude/plugins/marketplaces/claude-plugins-official/plugins/feature-dev
+
+https://developers.openai.com/codex/subagents
+
+---
+
+1. subagent 的model 都设置为 medium 思考的 gpt-5.4
+2. CLAUDE.md 都改为 AGENTS.md
+
+---
+
+PLEASE IMPLEMENT THIS PLAN:
+# Codex Feature-Dev Skill 复刻计划
+
+## Summary
+在当前技能源仓库 `/Users/jfmoe/Coder/skills` 中新增一个 Codex 版 `feature-dev` 自建 skill，放在 `skills/coding/feature-dev/`。迁移目标是尽量保留原 Claude 插件提示词，只做从 Claude 到 Codex 的必要适配，并保证该 skill 不会自动触发，只有用户显式提到 `feature-dev` 或要求使用该工作流时才启用。
+
+同时把原插件的三个 agent 提示词迁移为 Codex custom agent TOML 源文件，所有 subagent 统一使用 `gpt-5.4` 和 medium 思考。
+
+## Key Changes
+- 新增 `skills/coding/feature-dev/SKILL.md`：
+  - frontmatter `name: feature-dev`
+  - `description` 明确写成 manual-only，禁止普通 feature 请求自动触发
+  - 主体内容基于原 `commands/feature-dev.md`
+  - 最小必要适配：
+    - `$ARGUMENTS` -> 用户的 feature description
+    - `TodoWrite` -> Codex todos / plan updates
+    - “launch agents” -> spawn Codex custom agents by name
+    - 所有 `CLAUDE.md` 提法统一改为 `AGENTS.md`
+- 新增 bundled custom agent 源文件：
+  - `skills/coding/feature-dev/agents/code-explorer.toml`
+  - `skills/coding/feature-dev/agents/code-architect.toml`
+  - `skills/coding/feature-dev/agents/code-reviewer.toml`
+- 每个 TOML 使用 Codex custom agent schema：
+  - `name`
+  - `description`
+  - `model = "gpt-5.4"`
+  - `model_reasoning_effort = "medium"`
+  - `sandbox_mode = "read-only"`
+  - `developer_instructions = """..."""`
+- 三个 agent 的 `developer_instructions` 尽量逐段保留原 Claude 插件内容，只做必要适配：
+  - 去掉 Claude frontmatter 的 `tools/model/color`
+  - 将工具相关措辞改成 “Use Codex-native tools”
+  - 所有 `CLAUDE.md` 改为 `AGENTS.md`
+  - reviewer 中 `>= 80` 使用 ASCII，避免 TOML/Markdown 兼容问题
+- 不复制原插件的 `.claude-plugin/plugin.json`、`README.md`、`LICENSE`，因为 Codex skill 源仓库只需要 skill 内容和必要资源。
+
+## Validation
+- 创建后运行只读校验：
+  - `npx skills add ~/Coder/skills --list`
+- 校验期望：
+  - 列表中出现 `feature-dev`
+  - skill frontmatter 可被 CLI 正确解析
+  - 不修改 runtime 目录，不手动编辑 `~/.agents/skills`、`~/.claude/skills`、`~/.cursor/skills`
+- 额外只读检查：
+  - 确认三个 TOML 文件包含 `model = "gpt-5.4"`
+  - 确认三个 TOML 文件包含 `model_reasoning_effort = "medium"`
+  - 确认 `SKILL.md` description 含 manual-only 触发限制
+  - 确认新增内容不再出现 `CLAUDE.md`
+
+## Assumptions
+- “当前项目复刻”理解为先在 `/Users/jfmoe/Coder/skills` 这个 source repo 中创建可维护版本，不自动安装或同步到 runtime。
+- Codex custom agents 的官方 runtime 位置是 `~/.codex/agents/` 或项目 `.codex/agents/`；本计划只在 skill 源目录保存这三个 TOML 作为源文件，不在规划阶段设计额外自动安装脚本。
+- 后续如果需要实际生效，可在实现完成后另行决定是否把 skill 用 `npx skills add ~/Coder/skills -g -a codex --skill feature-dev -y` 同步，并按 Codex subagents 文档把三个 TOML 部署到 `~/.codex/agents/`。

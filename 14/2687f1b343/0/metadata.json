@@ -1,0 +1,62 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "142687f1b343",
+  "session_id": "019e7d40-2ae2-73a2-8660-af2eb277902a",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-31T09:18:37.983764Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "skills/coding/feature-dev/SKILL.md",
+    "skills/coding/feature-dev/agents/code-architect.toml",
+    "skills/coding/feature-dev/agents/code-explorer.toml",
+    "skills/coding/feature-dev/agents/code-reviewer.toml"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.5",
+  "turn_id": "910b3f6d5b55",
+  "token_usage": {
+    "input_tokens": 192453,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 2866688,
+    "output_tokens": 18897,
+    "api_call_count": 47
+  },
+  "session_metrics": {
+    "turn_count": 5
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-31T09:18:37.963022Z",
+    "agent_lines": 270,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 2,
+    "human_removed": 0,
+    "total_committed": 271,
+    "total_lines_changed": 272,
+    "agent_percentage": 99.26470588235294,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 1,
+      "user_lines_removed": 1,
+      "agent_lines_added": 272,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "skills/coding/feature-dev/SKILL.md": 1
+      },
+      "user_removed_per_file": {
+        "skills/coding/feature-dev/SKILL.md": 1
+      }
+    }
+  ]
+}

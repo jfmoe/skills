@@ -1,0 +1,28 @@
+{
+  "cli_version": "0.6.3",
+  "checkpoint_id": "142687f1b343",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "skills/coding/feature-dev/SKILL.md",
+    "skills/coding/feature-dev/agents/code-architect.toml",
+    "skills/coding/feature-dev/agents/code-explorer.toml",
+    "skills/coding/feature-dev/agents/code-reviewer.toml"
+  ],
+  "sessions": [
+    {
+      "metadata": "/14/2687f1b343/0/metadata.json",
+      "transcript": "/14/2687f1b343/0/full.jsonl",
+      "content_hash": "/14/2687f1b343/0/content_hash.txt",
+      "prompt": "/14/2687f1b343/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 192453,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 2866688,
+    "output_tokens": 18897,
+    "api_call_count": 47
+  }
+}
