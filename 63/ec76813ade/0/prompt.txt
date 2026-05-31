@@ -1,0 +1,1 @@
+更新当前全局安装的三方skill到当前项目的registry/third-party.md
