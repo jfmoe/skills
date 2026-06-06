@@ -1,6 +1,6 @@
 ---
 name: agents-md-improver
-description: Manual-only. Use only when the user explicitly asks for agents-md-improver to audit, revise, or improve AGENTS.md files. Do not auto-invoke for ordinary AGENTS.md edits.
+description: Manual-only.
 ---
 
 # AGENTS.md Improver
@@ -37,12 +37,12 @@ Do not silently edit global files. Global files require explicit user intent and
 
 ## File Types and Placement
 
-| Type | Location | Purpose |
-| --- | --- | --- |
-| Project root | `./AGENTS.md` | Shared repository instructions and project-wide rules |
-| Nested scope | `./packages/*/AGENTS.md`, `./apps/*/AGENTS.md`, or any nested `AGENTS.md` | Directory-specific instructions that override or refine parent context |
-| Local/private | `./.agents.md` or a user-specified local file | Personal or local-only instructions, usually gitignored |
-| Global defaults | User-specified global paths | Cross-project preferences and durable agent defaults |
+| Type            | Location                                                                  | Purpose                                                                |
+| --------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Project root    | `./AGENTS.md`                                                             | Shared repository instructions and project-wide rules                  |
+| Nested scope    | `./packages/*/AGENTS.md`, `./apps/*/AGENTS.md`, or any nested `AGENTS.md` | Directory-specific instructions that override or refine parent context |
+| Local/private   | `./.agents.md` or a user-specified local file                             | Personal or local-only instructions, usually gitignored                |
+| Global defaults | User-specified global paths                                               | Cross-project preferences and durable agent defaults                   |
 
 When multiple files exist, place each addition at the narrowest scope where it remains useful.
 
@@ -52,15 +52,15 @@ For each file, evaluate whether it helps an agent act correctly with minimal ext
 
 Quick checklist:
 
-| Criterion | Weight | Check |
-| --- | --- | --- |
-| Commands and workflows | High | Are build, test, lint, deploy, install, and validation commands documented when relevant? |
-| Project structure | High | Can an agent understand important directories, entry points, and ownership boundaries? |
-| Agent-specific rules | High | Are constraints about edits, approvals, tools, language, style, and safety clear? |
-| Non-obvious patterns | Medium | Are gotchas, conventions, generated files, and integration quirks captured? |
-| Conciseness | Medium | Is the file dense and useful without generic advice or obvious restatements? |
-| Currency | High | Does it match the current repository and tooling? |
-| Actionability | High | Are instructions concrete, executable, and scoped? |
+| Criterion              | Weight | Check                                                                                     |
+| ---------------------- | ------ | ----------------------------------------------------------------------------------------- |
+| Commands and workflows | High   | Are build, test, lint, deploy, install, and validation commands documented when relevant? |
+| Project structure      | High   | Can an agent understand important directories, entry points, and ownership boundaries?    |
+| Agent-specific rules   | High   | Are constraints about edits, approvals, tools, language, style, and safety clear?         |
+| Non-obvious patterns   | Medium | Are gotchas, conventions, generated files, and integration quirks captured?               |
+| Conciseness            | Medium | Is the file dense and useful without generic advice or obvious restatements?              |
+| Currency               | High   | Does it match the current repository and tooling?                                         |
+| Actionability          | High   | Are instructions concrete, executable, and scoped?                                        |
 
 Quality grades:
 
@@ -80,6 +80,7 @@ Use this format:
 ## AGENTS.md Quality Report
 
 ### Summary
+
 - Files found: X
 - Average score: X/100
 - Files needing update: X
@@ -87,22 +88,25 @@ Use this format:
 ### File-by-File Assessment
 
 #### 1. ./AGENTS.md (Project Root)
+
 **Score: XX/100 (Grade: X)**
 
-| Criterion | Score | Notes |
-| --- | --- | --- |
-| Commands/workflows | X/15 | ... |
-| Project structure | X/15 | ... |
-| Agent-specific rules | X/20 | ... |
-| Non-obvious patterns | X/15 | ... |
-| Conciseness | X/10 | ... |
-| Currency | X/15 | ... |
-| Actionability | X/10 | ... |
+| Criterion            | Score | Notes |
+| -------------------- | ----- | ----- |
+| Commands/workflows   | X/15  | ...   |
+| Project structure    | X/15  | ...   |
+| Agent-specific rules | X/20  | ...   |
+| Non-obvious patterns | X/15  | ...   |
+| Conciseness          | X/10  | ...   |
+| Currency             | X/15  | ...   |
+| Actionability        | X/10  | ...   |
 
 **Issues:**
+
 - ...
 
 **Recommended additions:**
+
 - ...
 ```
 
@@ -133,13 +137,13 @@ Diff format:
 
 **Why:** Build validation was missing, so future agents would not know the expected check.
 
-```diff
+````diff
 + ## Validation
 +
 + ```bash
 + npm test
 + ```
-```
+````
 ````
 
 ## Phase 5: Apply Approved Updates
