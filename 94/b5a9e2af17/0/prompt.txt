@@ -1,0 +1,37 @@
+/skill-creator:skill-creator 先完整读这份 spec（以它为唯一事实来源）：
+/Users/jfmoe/Ops/docs/superpowers/specs/2026-06-08-hermes-agent-skill-design.md
+
+落地要求：
+- 位置：~/Coder/skills/skills/workflows/hermes-agent/，由 manage-skills 创建/管理。
+- 文件：SKILL.md + reference/config-editing.md + reference/troubleshooting.md +
+  reference/operations.md（按 spec 第 4、5 节，不要 cli.md）。
+- 语言：所有技能文件用英文写（仓库 AGENTS.md 规定）。
+- 核心原则「路由+发现，不存副本」：任何易过时的清单/表格都不要写进技能——
+  config 段、provider 清单、子命令清单、slash 命令、症状清单一律改为指向活文件
+  ~/.hermes/config.yaml / `hermes ... --help` / `hermes config|tools list|skills list`
+  或远程文档。技能只保留稳定的 gotcha、流程、安全规范、本机结构事实。
+- 两条硬规则要在 SKILL.md 置顶：① 不确定/未覆盖 → fetch 文档索引
+  https://hermes-agent.nousresearch.com/docs/assets/files/llms-d4972c57170916efd83766ae50c3bb3d.txt ，
+  不要猜；② 精确命令 flag 运行前用 `hermes <cmd> --help` 现查。
+- 安全护栏直接采用 Hermes 自带 autonomous-ai-agents skill 的配置/安全规范（见 spec 5.2），
+  不另起一套。
+- 本机事实：GUI /Applications/Hermes.app 与 CLI ~/.local/bin/hermes 共用 ~/.hermes/ home；
+  写入前先用 `hermes <cmd> --help` 核实命令真实存在与参数，不凭记忆编。
+
+---
+
+/Users/jfmoe/.hermes/skills/autonomous-ai-agents/hermes-agent/SKILL.md
+
+---
+
+~/.hermes 下面应该有 hermes 的本地全量文档，让 subagent 去探索一下，这样可以把skill里的web链接改成本地文档库，更方便查询
+
+---
+
+让 subagent review 一下这个skill
+1. 确保路径正确
+2. 是否有重复内容、无意义内容等，提出精简改进意见
+
+---
+
+description 也精简一些

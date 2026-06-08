@@ -1,0 +1,102 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "94b5a9e2af17",
+  "session_id": "e86eb144-a90c-4259-ac7d-eab05e1c0376",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-08T15:58:19.874231Z",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "files_touched": [
+    "skills/workflows/hermes-agent/SKILL.md",
+    "skills/workflows/hermes-agent/reference/config-editing.md",
+    "skills/workflows/hermes-agent/reference/operations.md",
+    "skills/workflows/hermes-agent/reference/troubleshooting.md"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "f0ea34fb80c3",
+  "token_usage": {
+    "input_tokens": 3797,
+    "cache_creation_tokens": 103866,
+    "cache_read_tokens": 4451349,
+    "output_tokens": 35539,
+    "api_call_count": 50
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-skill-creator:skill-creator-2026-06-08T15:21:59.736018Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "skill-creator:skill-creator"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "30f09b64521f",
+      "timestamp": "2026-06-08T15:21:59.736018Z",
+      "native": {
+        "command": "/skill-creator:skill-creator"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/skill-creator:skill-creator",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 4
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-08T15:58:19.862291Z",
+    "agent_lines": 160,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 160,
+    "total_lines_changed": 160,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 155,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 161,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 160,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 5,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 160,
+      "agent_lines_removed": 0
+    }
+  ]
+}
