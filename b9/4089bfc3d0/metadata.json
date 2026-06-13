@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "b94089bfc3d0",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "skills/workflows/apple-container/SKILL.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/b9/4089bfc3d0/0/metadata.json",
+      "transcript": "/b9/4089bfc3d0/0/full.jsonl",
+      "content_hash": "/b9/4089bfc3d0/0/content_hash.txt",
+      "prompt": "/b9/4089bfc3d0/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 3286,
+    "cache_creation_tokens": 71503,
+    "cache_read_tokens": 592652,
+    "output_tokens": 10518,
+    "api_call_count": 19
+  }
+}
