@@ -7,7 +7,9 @@ description: 'Use when the user mentions apple container, the `container` CLI, m
 
 Apple's native container runtime for macOS. Runs OCI-compatible Linux containers using Apple's virtualization framework — no Docker Desktop needed.
 
-**Requirements:** macOS 26+ (some networking features require macOS 26)
+**Requirements:** macOS 26 only. Apple does not support older macOS versions (it depends on macOS 26 virtualization/networking features).
+
+> **Version note (1.0.0+):** `container system property get`/`set` were **removed**. System configuration now lives in a TOML file at `~/.config/container/config.toml`. The DNS setup below reflects this; older docs showing `container system property set dns.domain ...` are outdated and will fail.
 
 ## Install & First-Time Setup
 
@@ -22,10 +24,19 @@ container system kernel set --recommended
 
 # 3. Enable inter-container DNS (required for multi-container setups, needs sudo)
 sudo container system dns create local
-container system property set dns.domain local
+
+# 4. Set it as the default domain via the TOML config (replaces the old `property set`)
+mkdir -p ~/.config/container
+cat >> ~/.config/container/config.toml <<'EOF'
+[dns]
+domain = "local"
+EOF
+
+# 5. Restart the service so the config takes effect
+container system stop && container system start
 ```
 
-Step 2 is mandatory — without a kernel, `container run` fails. Step 3 requires **both** commands; omitting `property set dns.domain` leaves DNS non-functional even though the domain was created.
+Step 2 is mandatory — without a kernel, `container run` fails. For DNS you need **both** the `dns create` command (step 3) and the `[dns] domain` entry in `config.toml` (step 4); creating the domain alone leaves resolution non-functional. Verify config with `container system property list`.
 
 ## Docker → Apple Container Migration
 
@@ -46,6 +57,9 @@ The CLI is intentionally Docker-compatible in syntax. Most commands map directly
 | `docker tag`            | `container image tag`                       |                                                             |
 | `docker rmi`            | `container image delete`                    |                                                             |
 | `docker cp`             | `container copy` / `container cp`           |                                                             |
+| `docker save`           | `container image save`                      | Export image to tar                                         |
+| `docker load`           | `container image load`                      | Import image from tar                                       |
+| `docker export`         | `container export`                          | Export container filesystem to tar                          |
 | `docker inspect`        | `container inspect`                         |                                                             |
 | `docker stats`          | `container stats`                           | Adds `--no-stream`                                          |
 | `docker volume create`  | `container volume create`                   |                                                             |
@@ -86,11 +100,14 @@ container run -v my-data:/data my-image
 
 ### Local DNS (access containers by name)
 
-Both commands are required — omitting `property set` leaves DNS non-functional:
+Both steps are required — creating the domain without the `[dns] domain` config entry leaves DNS non-functional:
 
 ```bash
 sudo container system dns create local
-container system property set dns.domain local
+# Set default domain in ~/.config/container/config.toml (replaces removed `property set`):
+#   [dns]
+#   domain = "local"
+container system stop && container system start   # restart to apply
 # Now access containers at: http://<container-name>.local
 container run --name my-app -d --rm nginx
 open http://my-app.local
@@ -214,11 +231,13 @@ container delete my-app 2>/dev/null || true
 1. **No daemon** — uses macOS launchd services (`container system start/stop`)
 2. **Apple Virtualization** — runs a real Linux VM per container, not a shared daemon
 3. **No Compose** — orchestrate with scripts or use individual commands
-4. **DNS requires setup** — `sudo container system dns create <domain>` + `container system property set dns.domain <domain>`
+4. **DNS requires setup** — `sudo container system dns create <domain>` + a `[dns] domain = "<domain>"` entry in `~/.config/container/config.toml` (the old `container system property set dns.domain` was removed in 1.0.0)
 5. **Rosetta support** — run x86_64 images on arm64: `container run --rosetta ...`
 6. **SSH forwarding** — `container run --ssh ...` forwards host SSH agent
 7. **Socket publishing** — `container run --publish-socket host:container` for Unix sockets
 8. **Builder is separate** — BuildKit runs in its own container (`container builder start/stop`)
+9. **TOML config (1.0.0+)** — system configuration lives in `~/.config/container/config.toml` with sections `[build]`, `[container]`, `[dns]`, `[kernel]`, `[network]`, `[registry]`, `[vminit]`. `container system property list` inspects current values; there is no `get`/`set`.
+10. **`container machine` (1.0.0+)** — manages long-lived Linux VMs with tighter host integration, distinct from per-container ephemeral VMs (`container machine create/run/list/stop/delete`).
 
 ## System Management
 
@@ -228,6 +247,8 @@ container system version         # Show CLI and API versions
 container system df              # Disk usage
 container system logs --last 5m  # Recent service logs
 container system kernel set --recommended  # Update kernel
+container system property list   # Show current config (from config.toml); no get/set in 1.0.0+
+container system dns list        # List configured DNS domains
 ```
 
 ## Cleanup
