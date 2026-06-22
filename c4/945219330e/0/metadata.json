@@ -1,0 +1,95 @@
+{
+  "cli_version": "0.7.5",
+  "checkpoint_id": "c4945219330e",
+  "session_id": "019eef9f-7d13-7661-aafe-fe0913ba6d42",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-22T15:01:11.563592Z",
+  "branch": "main",
+  "checkpoints_count": 6,
+  "files_touched": [
+    "skills/coding/grok-search/SKILL.md",
+    "skills/coding/grok-search/scripts/grok-search.mjs"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.5",
+  "turn_id": "d5ac2dbf2c6a",
+  "token_usage": {
+    "input_tokens": 652840,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 8441600,
+    "output_tokens": 45496,
+    "api_call_count": 94
+  },
+  "session_metrics": {
+    "turn_count": 17
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-22T15:01:11.516025Z",
+    "agent_lines": 395,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 1,
+    "human_removed": 0,
+    "total_committed": 396,
+    "total_lines_changed": 396,
+    "agent_percentage": 99.74747474747475,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 359,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 404,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 402,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 5,
+      "user_lines_added": 1,
+      "user_lines_removed": 1,
+      "agent_lines_added": 402,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "skills/coding/grok-search/SKILL.md": 1
+      },
+      "user_removed_per_file": {
+        "skills/coding/grok-search/SKILL.md": 1
+      }
+    },
+    {
+      "checkpoint_number": 6,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 397,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 7,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 397,
+      "agent_lines_removed": 0
+    }
+  ]
+}

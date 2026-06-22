@@ -1,0 +1,125 @@
+[$brainstorming](/Users/jfmoe/.agents/skills/brainstorming/SKILL.md) [jiujiu532/grok2api](https://github.com/jiujiu532/grok2api) 基于这个项目提供的 grok-4.20-multi-agent-console 模型，创建一个skill，提供 web search 和 x search 功能，skill 调用方需要配置 baseUrl 和 apiKey
+
+---
+
+[$writing-great-skills](/Users/jfmoe/.agents/skills/writing-great-skills/SKILL.md) 参考这个规范实现
+
+---
+
+PLEASE IMPLEMENT THIS PLAN:
+# 创建 `coding/grok-search` Skill（按 `writing-great-skills` 规范）
+
+**Summary**
+- 新增 `skills/coding/grok-search/SKILL.md` 和 `skills/coding/grok-search/scripts/grok-search.mjs`。
+- 该 skill 设计为 **model-invoked**：代理应能在用户要求 Web/X 搜索、或其他 skill 需要新鲜 Web/X 证据且已配置 `grok2api` 时自动触发。
+- `SKILL.md` 保持短、步骤化、带可检查完成条件；脚本承担请求组装，避免把参数细节堆进 skill 正文。
+
+**Skill Design**
+- Frontmatter：
+  - `name: grok-search`
+  - `description` 前置 leading words：`Grok search via grok2api...`
+  - 触发分支只保留三类：Web search、X search、其他 skill 需要 configured `grok2api` fresh evidence。
+- 正文采用步骤而非长参考：
+  - Confirm configuration: `baseUrl` 与 `apiKey` 来自环境变量或用户上下文；缺任一项即停止并说明缺失项。
+  - Choose lane: `web`、`x`、`both` 三选一；完成条件是搜索 lane 明确。
+  - Run probe: 调用脚本；完成条件是得到回答或明确的 HTTP/配置错误。
+  - Report evidence: 回答中说明使用的是 Grok Web/X 搜索，并保留模型返回的来源/引用文本；不虚构 `search_sources`。
+- 单一事实源：
+  - 配置名、默认模型、CLI 参数只在脚本 `--help` 和 skill 的 “Run the script” 小节出现一次。
+  - 不记录上游部署教程；只指向调用方必须已有 `grok2api baseUrl/apiKey`。
+
+**Script Design**
+- Node 18+ ESM，无第三方依赖。
+- 默认配置：
+  - `GROK_SEARCH_BASE_URL`
+  - `GROK_SEARCH_API_KEY`
+  - `GROK_SEARCH_MODEL=grok-4.20-multi-agent-console`
+- CLI：
+  - `node scripts/grok-search.mjs --query "..." --mode web|x|both`
+  - 可选 `--format text|json`
+  - 可选 `--base-url`、`--api-key`、`--model`、`--timeout-ms`
+- 请求走 `POST {baseUrl}/v1/responses`，默认不传客户端 function tools；依赖 `grok2api` console 路由为该模型自动注入 `web_search` 和 `x_search`，脚本用 `instructions/input` 约束使用 Web、X 或两者。
+- 响应解析支持常见 Responses API 结构：优先提取 `output_text` / message content；保留 `raw` 供 JSON 模式调试。
+- 错误处理：缺配置、非法 mode、HTTP 非 2xx、JSON 解析失败、超时均返回非零退出码和明确错误。
+
+**Validation**
+- `node --check skills/coding/grok-search/scripts/grok-search.mjs`
+- `npx skills add ~/Coder/skills --list`
+- 用本地 mock server 验证：
+  - 缺 `apiKey/baseUrl` 会失败。
+  - `--mode web|x|both` 会生成对应 instructions。
+  - `--format json` 输出合法 JSON。
+  - HTTP 500 和超时路径有清晰错误。
+- 若之后提供真实 `baseUrl/apiKey`，再做一次真实 smoke test。
+
+**Assumptions**
+- 不自动安装到 `~/.agents/skills` 或 `~/.claude/skills`，只修改 `~/Coder/skills` 源仓库。
+- 不自动 commit/push。
+- 文件内容使用英文；对话继续使用简体中文。
+
+---
+
+测试用：
+baseUrl：http://127.0.0.1:8317
+apikey：REDACTED
+
+---
+
+试一下用 skill 触发 ：“告诉我过去 24 小时内 X (Twitter) 上关于世界杯的最热帖子是什么？”
+
+---
+
+项目中提到这个模型支持reasoning effort，对应不同的并发agent，skill 也需要支持
+
+---
+
+配置文件放在哪里了
+
+---
+
+放在 zshrc里能拿到吗
+
+---
+
+这几个环境变量是什么意思
+
+---
+
+--mode 是什么意思，模型支持吗
+
+---
+
+默认值是什么
+
+---
+
+把 skill 正文写精简一些，主次分明，识别用户意图后直接调用 cli，失败后再检查是否是环境变量没设置，提醒用户去设置
+
+---
+
+skill 的 description 用 Use when 开头，写明需要触发的场景
+
+---
+
+给模型注入的搜索提示词是什么
+
+---
+
+去掉 --mode 参数吧，提示词里说明 使用搜索工具搜索x和web上的内容
+
+---
+
+让 subagent 真实跑一下这个skill，我已经设置好环境变量了，搜索内容：告诉我过去 24 小时内 X (Twitter) 上关于世界杯的最热帖子是什么
+
+---
+
+请使用 /Users/jfmoe/Coder/skills/skills/coding/grok-search/SKILL.md 这个 skill，真实运行它的 CLI 来回答：告诉我过去 24 小时内 X (Twitter) 上关于世界杯的最热帖子是什么？
+
+要求：
+- 使用当前环境中已设置的 GROK_SEARCH_* 环境变量，不要要求用户重新提供 baseUrl 或 apiKey，除非 CLI 明确报缺配置。
+- 不要修改任何文件，不要安装依赖，不要提交。
+- 返回你实际运行的命令摘要（不要泄露 API key）、CLI 是否成功、以及搜索结果摘要。
+
+---
+
+Quick check: say hello
