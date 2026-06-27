@@ -64,3 +64,17 @@ npx skills add ~/Coder/skills --list
 ```
 
 For forks, confirm the snapshot under `registry/upstream/` is NOT listed as a skill (rename its `SKILL.md` to `SKILL.md.orig` if it is). After registry changes, regenerate the ledger with `sync-registry.mjs` and review the diff.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in this repo's GitHub Issues (via the `gh` CLI). External PRs are **not** a triage surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Five canonical triage roles using their default label strings (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
