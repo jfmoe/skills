@@ -1,0 +1,426 @@
+{
+  "generatedBy": "skills/workflows/manage-skills/scripts/sync-registry.mjs",
+  "globalThirdParty": [
+    {
+      "name": "bun",
+      "source": "bun.sh",
+      "sourceUrl": "https://bun.sh/docs/.well-known/skills/bun/SKILL.md",
+      "skillPath": "",
+      "updatedAt": "2026-05-05T04:20:27.338Z"
+    },
+    {
+      "name": "find-docs",
+      "source": "upstash/context7",
+      "sourceUrl": "https://github.com/upstash/context7.git",
+      "skillPath": "skills/find-docs/SKILL.md",
+      "updatedAt": "2026-06-22T15:06:13.171Z"
+    },
+    {
+      "name": "find-skills",
+      "source": "vercel-labs/skills",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "updatedAt": "2026-06-27T06:46:13.770Z"
+    },
+    {
+      "name": "grill-me",
+      "source": "mattpocock/skills",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "updatedAt": "2026-06-18T12:42:15.627Z"
+    },
+    {
+      "name": "handoff",
+      "source": "mattpocock/skills",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/handoff/SKILL.md",
+      "updatedAt": "2026-06-18T12:47:17.226Z"
+    },
+    {
+      "name": "last30days",
+      "source": "mvanhorn/last30days-skill",
+      "sourceUrl": "https://github.com/mvanhorn/last30days-skill.git",
+      "skillPath": "skills/last30days/SKILL.md",
+      "updatedAt": "2026-06-27T06:46:19.370Z"
+    },
+    {
+      "name": "ssh",
+      "source": "dicklesworthstone/agent_flywheel_clawdbot_skills_and_integrations",
+      "sourceUrl": "https://github.com/dicklesworthstone/agent_flywheel_clawdbot_skills_and_integrations.git",
+      "skillPath": "skills/ssh/SKILL.md",
+      "updatedAt": "2026-02-17T12:52:51.651Z"
+    },
+    {
+      "name": "teach",
+      "source": "mattpocock/skills",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/teach/SKILL.md",
+      "updatedAt": "2026-06-18T12:42:23.433Z"
+    },
+    {
+      "name": "writing-great-skills",
+      "source": "mattpocock/skills",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/writing-great-skills/SKILL.md",
+      "updatedAt": "2026-06-27T06:46:16.192Z"
+    }
+  ],
+  "projectThirdParty": [
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "brainstorming",
+      "source": "obra/superpowers",
+      "skillPath": "skills/brainstorming/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "building-native-ui",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/building-native-ui/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "Expo UI Jetpack Compose",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/expo-ui-jetpack-compose/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "Expo UI SwiftUI",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/expo-ui-swift-ui/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "expo-module",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/expo-module/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "vercel-composition-patterns",
+      "source": "vercel-labs/agent-skills",
+      "skillPath": "skills/composition-patterns/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "vercel-react-best-practices",
+      "source": "vercel-labs/agent-skills",
+      "skillPath": "skills/react-best-practices/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/Aizo",
+      "name": "vercel-react-native-skills",
+      "source": "vercel-labs/agent-skills",
+      "skillPath": "skills/react-native-skills/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/expo-example",
+      "name": "building-native-ui",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/building-native-ui/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/expo-example",
+      "name": "Expo UI Jetpack Compose",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/expo-ui-jetpack-compose/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/expo-example",
+      "name": "Expo UI SwiftUI",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/expo-ui-swift-ui/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/expo-example",
+      "name": "expo-dev-client",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/expo-dev-client/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/expo-example",
+      "name": "expo-module",
+      "source": "expo/skills",
+      "skillPath": "plugins/expo/skills/expo-module/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/expo-example",
+      "name": "vercel-react-native-skills",
+      "source": "vercel-labs/agent-skills",
+      "skillPath": "skills/react-native-skills/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "ask-matt",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/ask-matt/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "codebase-design",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/codebase-design/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "diagnosing-bugs",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "domain-modeling",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/domain-modeling/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "grill-me",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/productivity/grill-me/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "grill-with-docs",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/grill-with-docs/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "grilling",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/productivity/grilling/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "handoff",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/productivity/handoff/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "implement",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/implement/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "improve-codebase-architecture",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "prototype",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/prototype/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "review",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/in-progress/review/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "setup-matt-pocock-skills",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "tdd",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/tdd/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "teach",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/productivity/teach/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "to-issues",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/to-issues/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "to-prd",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/to-prd/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "triage",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/triage/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/hermes-ops",
+      "name": "writing-great-skills",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/productivity/writing-great-skills/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "diagnose",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/diagnose/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "grill-with-docs",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/grill-with-docs/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "improve-codebase-architecture",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "prototype",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/prototype/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "setup-matt-pocock-skills",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "tdd",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/tdd/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "to-issues",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/to-issues/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "to-prd",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/to-prd/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "triage",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/triage/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/persona",
+      "name": "zoom-out",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/zoom-out/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "ask-matt",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/ask-matt/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "codebase-design",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/codebase-design/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "diagnosing-bugs",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "domain-modeling",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/domain-modeling/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "grill-with-docs",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/grill-with-docs/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "grilling",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/productivity/grilling/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "implement",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/implement/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "improve-codebase-architecture",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "prototype",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/prototype/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "review",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/in-progress/review/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "setup-matt-pocock-skills",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "tdd",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/tdd/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "to-issues",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/to-issues/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "to-prd",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/to-prd/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "triage",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/triage/SKILL.md"
+    },
+    {
+      "project": "/Users/jfmoe/Coder/voxlab",
+      "name": "zoom-out",
+      "source": "mattpocock/skills",
+      "skillPath": "skills/engineering/zoom-out/SKILL.md"
+    }
+  ],
+  "projectScanIssues": [],
+  "forks": []
+}

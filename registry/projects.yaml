@@ -1,0 +1,16 @@
+# Projects to scan for third-party skill usage.
+#
+# This is the ONLY hand-maintained registry input. The scanner reads each
+# project's `skills-lock.json` to build the cross-project ledger.
+# Add or remove paths as needed; absolute paths or ~ are both fine.
+#
+# Refresh the ledger after editing:
+#   node skills/workflows/manage-skills/scripts/sync-registry.mjs
+#
+# Pre-seeded from projects that already had a skills-lock.json — review and trim.
+projects:
+  - ~/Coder/Aizo
+  - ~/Coder/voxlab
+  - ~/Coder/expo-example
+  - ~/Coder/persona
+  - ~/Coder/hermes-ops

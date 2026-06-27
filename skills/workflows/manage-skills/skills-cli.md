@@ -44,8 +44,9 @@ npx skills add ~/Coder/skills -a codex --skill '*' -y
 # Install a single self-created skill globally
 npx skills add ~/Coder/skills -g -a codex claude-code --skill manage-skills -y
 
-# Install a third-party skill globally (then record it in registry/third-party.md)
+# Install a third-party skill globally (then regenerate the ledger)
 npx skills add vercel-labs/agent-skills -g -a codex claude-code --skill pr-review -y
+node ~/Coder/skills/skills/workflows/manage-skills/scripts/sync-registry.mjs
 ```
 
 ## list / ls — list installed skills
@@ -86,7 +87,7 @@ npx skills remove web-design            # by name
 npx skills rm -g -a claude-code --skill manage-skills -y
 ```
 
-If a removed skill was a global third-party skill, also delete its row from `registry/third-party.md`.
+If a removed skill was a third-party skill, regenerate the ledger afterward: `node ~/Coder/skills/skills/workflows/manage-skills/scripts/sync-registry.mjs` (the ledger is generated; do not hand-edit it).
 
 ## update / upgrade — update to latest
 

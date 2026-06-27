@@ -29,17 +29,22 @@ git -C ~/Coder/skills pull --ff-only
 ## Repository Layout
 
 ```text
-skills/
-  workflows/        Non-coding, general agent workflows
-  coding/           Coding-related skills
-registry/
-  third-party.md    Third-party global skills in use
+skills/                 Installable skills (copied verbatim into projects)
+  workflows/            Non-coding, general agent workflows
+  coding/               Coding-related skills
+registry/               Management metadata (never installed)
+  projects.yaml         Hand-maintained: project paths to scan
+  upstream/<skill>/     Pristine upstream snapshots for forks
+  third-party.md        Generated: human-readable ledger
+  inventory.json        Generated: machine-readable ledger
 ```
 
 - Self-created skills: `skills/<category>/<skill-name>/SKILL.md`.
 - `<skill-name>` is lowercase kebab-case (e.g. `manage-skills`, `macos-maintenance`).
 - Only categories are `workflows` and `coding`; do not add others.
 - For ops skills: general macOS maintenance/troubleshooting goes to `workflows/`; writing shell/launchd/automation/CI code goes to `coding/`.
+- Three skill classes: **original** (self-created), **fork** (modified third-party — see Forking), **third-party** (installed unmodified, tracked only in the registry).
+- Never put management metadata inside `skills/<category>/<skill>/`; everything there is copied into projects on install.
 
 ## Creating or Editing a Skill
 
@@ -82,14 +87,53 @@ Run install/update commands automatically when the user asks to install or updat
 
 For the full set of CLI commands and options (`add`, `list`, `remove`, `update`, `find`, `init`), see [skills-cli.md](skills-cli.md).
 
-## Third-Party Registry
+## Forking a Third-Party Skill
 
-Maintain `registry/third-party.md` only for GLOBAL third-party skill installs/removals.
+A fork is a third-party skill you modified. Keep two copies — a clean installable one and a pristine snapshot for diffing.
 
-- Record only third-party skills currently in use. Fields: `Skill`, `Source`, `Scope`.
-- `Scope` is `global`, or a project path only when the user explicitly asks to record project-level usage.
-- Never record self-created skills here.
-- Do not auto-populate from installed directories unless the user asks for an audit or inventory.
+To create a fork:
+
+1. Fetch the upstream skill into a temp dir, noting its `ref` and `commit`.
+2. Save the pristine files to `registry/upstream/<skill>/`. **Rename every `SKILL.md` to `SKILL.md.orig`** — `npx skills` registers any literal `SKILL.md` in the repo as installable (verified; there is no ignore option). Keep other files as-is.
+3. Write `registry/upstream/<skill>/meta.yaml`:
+
+```yaml
+source: owner/repo
+ref: main
+commit: <sha>
+upstream_path: path/in/source
+local_path: skills/<category>/<skill>
+fetched_at: YYYY-MM-DD
+notes: |
+  - what changed
+```
+
+4. Copy the upstream into `skills/<category>/<skill>/SKILL.md` as the starting point and apply your changes.
+5. Validate: `npx skills add ~/Coder/skills --list` must show the fork as ONE skill (the snapshot must not appear).
+6. Regenerate the ledger (below).
+
+To update a fork from upstream — three-way compare:
+
+- A = freshly fetched upstream (temp)
+- B = `registry/upstream/<skill>/` (old pristine)
+- C = `skills/<category>/<skill>/SKILL.md` (your modified copy)
+
+Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite B with A and bump `commit` / `fetched_at` / `notes` in `meta.yaml`. Regenerate the ledger.
+
+## Registry (generated)
+
+`registry/third-party.md` and `registry/inventory.json` are GENERATED — never hand-edit them.
+
+- The only hand-maintained input is `registry/projects.yaml` (project paths to scan). Add/remove paths there as the user installs third-party skills into projects.
+- Regenerate after any third-party install/remove/fork or after editing `projects.yaml`:
+
+```bash
+node skills/workflows/manage-skills/scripts/sync-registry.mjs
+```
+
+- Data sources: global lock `~/.agents/.skill-lock.json`, each project's `skills-lock.json`, and fork `meta.yaml` files. Self-created skills (`jfmoe/skills` / local to this repo) are excluded.
+- Per-project reproducibility belongs to each project's `skills-lock.json` (`npx skills experimental_install` restores from it); the ledger is only a cross-project overview.
+- Review the git diff after regenerating; output is deterministic, so a clean run yields no spurious changes.
 
 ## Rules
 
