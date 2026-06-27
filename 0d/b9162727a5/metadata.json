@@ -1,0 +1,34 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "0db9162727a5",
+  "strategy": "manual-commit",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 5,
+  "files_touched": [
+    "AGENTS.md",
+    "README.md",
+    "docs/superpowers/specs/2026-06-27-skills-repo-management-design.md",
+    "registry/inventory.json",
+    "registry/projects.yaml",
+    "registry/third-party.md",
+    "registry/upstream/README.md",
+    "skills/workflows/manage-skills/SKILL.md",
+    "skills/workflows/manage-skills/scripts/sync-registry.mjs",
+    "skills/workflows/manage-skills/skills-cli.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0d/b9162727a5/0/metadata.json",
+      "transcript": "/0d/b9162727a5/0/full.jsonl",
+      "content_hash": "/0d/b9162727a5/0/content_hash.txt",
+      "prompt": "/0d/b9162727a5/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 4224,
+    "cache_creation_tokens": 194933,
+    "cache_read_tokens": 3665617,
+    "output_tokens": 68799,
+    "api_call_count": 45
+  }
+}

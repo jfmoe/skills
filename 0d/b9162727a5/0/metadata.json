@@ -1,0 +1,117 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "0db9162727a5",
+  "session_id": "c14ccf6d-cede-45a7-91a6-7a6061bcf99c",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T12:13:48.158338Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 5,
+  "save_step_count": 2,
+  "files_touched": [
+    "AGENTS.md",
+    "README.md",
+    "docs/superpowers/specs/2026-06-27-skills-repo-management-design.md",
+    "registry/inventory.json",
+    "registry/projects.yaml",
+    "registry/third-party.md",
+    "registry/upstream/README.md",
+    "skills/workflows/manage-skills/SKILL.md",
+    "skills/workflows/manage-skills/scripts/sync-registry.mjs",
+    "skills/workflows/manage-skills/skills-cli.md"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "18b74aa0a4fe",
+  "token_usage": {
+    "input_tokens": 4224,
+    "cache_creation_tokens": 194933,
+    "cache_read_tokens": 3665617,
+    "output_tokens": 68799,
+    "api_call_count": 45
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-brainstorming-2026-06-27T06:57:18.930476Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "brainstorming"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "c363c972ab5c",
+      "timestamp": "2026-06-27T06:57:18.930476Z",
+      "native": {
+        "command": "/brainstorming"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/brainstorming",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "prompt-skill-claude-code-brainstorming-2026-06-27T07:00:22.114293Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "brainstorming"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "46031b7ee980",
+      "timestamp": "2026-06-27T07:00:22.114293Z",
+      "native": {
+        "command": "/brainstorming"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/brainstorming",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 5
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-27T12:13:48.149792Z",
+    "agent_lines": 1134,
+    "agent_removed": 28,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 1134,
+    "total_lines_changed": 1162,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 186,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 1134,
+      "agent_lines_removed": 28
+    }
+  ]
+}

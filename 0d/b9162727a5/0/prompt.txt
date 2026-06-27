@@ -1,0 +1,25 @@
+/brainstorming
+
+---
+
+/brainstorming 这是我的skill仓库，除了纯自定义的skill外，还有两种情况：
+1. 在其他项目内，直接用 npx skills 安装第三方 github 源的skill
+2. 基于第三方 skill，修改一个自定义的版本
+
+无论是哪种情况，目前项目的架构都不利于skill的管理，你有什么优化方案
+
+---
+
+使用 .upstream/ ，会被 npx skills 安装进项目吗
+
+---
+
+同意
+
+---
+
+确认
+
+---
+
+进入实现
