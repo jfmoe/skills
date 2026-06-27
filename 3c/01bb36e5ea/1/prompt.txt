@@ -1,0 +1,1 @@
+https://github.com/jackwener/OpenCLI 这个项目是什么原理，消耗token多吗
