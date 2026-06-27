@@ -58,6 +58,37 @@
         "label": "/implement",
         "default_collapsed": true
       }
+    },
+    {
+      "id": "claude-skill-toolu_01VXAPX2eBStNaYJ4vYHU7AV",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "review"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "f2c5dda6e147",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 580,
+        "end": 581,
+        "entry_ids": [
+          "dc70a260-be4b-41ce-87de-d444ac662e37"
+        ],
+        "tool_use_id": "toolu_01VXAPX2eBStNaYJ4vYHU7AV"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01VXAPX2eBStNaYJ4vYHU7AV"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: review",
+        "default_collapsed": true
+      }
     }
   ],
   "initial_attribution": {
