@@ -34,8 +34,7 @@ skills/                 Installable skills (copied verbatim into projects)
 registry/               Management metadata (never installed)
   projects.yaml         Hand-maintained: project paths to scan
   upstream/<skill>/     Pristine upstream snapshots for forks
-  third-party.md        Generated: human-readable ledger
-  inventory.json        Generated: machine-readable ledger
+  ledger.yaml           Generated: cross-project third-party + fork ledger
 ```
 
 - Self-created skills: `skills/<skill-name>/SKILL.md` — one flat level, no category directories (see ADR-0004).
@@ -119,7 +118,7 @@ Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite 
 
 ## Registry (generated)
 
-`registry/third-party.md` and `registry/inventory.json` are GENERATED — never hand-edit them.
+`registry/ledger.yaml` is GENERATED — never hand-edit it.
 
 - The only hand-maintained input is `registry/projects.yaml` (project paths to scan). Add/remove paths there as the user installs third-party skills into projects.
 - Regenerate after any third-party install/remove/fork or after editing `projects.yaml`:

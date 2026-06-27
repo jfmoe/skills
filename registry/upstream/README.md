@@ -37,5 +37,5 @@ and has no ignore/exclude option (both verified). A pristine `SKILL.md` here wou
 registered as an installable skill and could even collide with the real fork. So rename every
 `SKILL.md` inside a snapshot to `SKILL.md.orig`. Diffing still works on content.
 
-Forks are surfaced in the generated ledger (`registry/third-party.md`) by scanning the
+Forks are surfaced in the generated ledger (`registry/ledger.yaml`) by scanning the
 `meta.yaml` files here.

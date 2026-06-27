@@ -11,8 +11,7 @@ skills/              Installable skills (copied verbatim into projects on instal
 registry/            Management metadata (never installed)
   projects.yaml      Hand-maintained: project paths to scan
   upstream/          Pristine upstream snapshots for forks
-  third-party.md     Generated: human-readable third-party ledger
-  inventory.json     Generated: machine-readable ledger
+  ledger.yaml        Generated: cross-project third-party + fork ledger
 ```
 
 Skills come in three classes:
