@@ -1,0 +1,45 @@
+source: obra/superpowers
+ref: main
+commit: 896224c4b1879920ab573417e68fd51d2ccc9072
+upstream_path: skills/brainstorming
+local_path: skills/workflows/brainstorming
+fetched_at: 2026-06-27
+notes: |
+  Local modifications — re-apply these whenever updating from upstream:
+
+  1. description set to "Manual-only." so the skill never auto-triggers. (SKILL.md)
+  2. Terminal state changed: instead of automatically invoking the writing-plans
+     skill after the spec is approved, the fork closes the flow and tells the user
+     brainstorming is complete, leaving the next step to the user. All automatic
+     skill-chaining language removed (writing-plans / frontend-design / etc.).
+     (SKILL.md only — step 9, the flow-diagram terminal node + edge, the
+     "terminal state" paragraph, the sub-project line, the scope-check line, the
+     user-review-gate message, and the "After Approval" block.)
+  3. De-branded the "superpowers" ecosystem:
+     - Spec output path docs/superpowers/specs/ -> docs/specs/
+       (SKILL.md step 6 and the "After the Design" section, and
+       spec-document-reviewer-prompt.md).
+     - Visual-companion runtime session directory .superpowers/brainstorm/ ->
+       .brainstorm/ (scripts/start-server.sh path logic + usage comment,
+       scripts/stop-server.sh comment, and visual-companion.md references
+       including the .gitignore hint). scripts/server.cjs needs no change — it
+       receives the directory via env, never hardcodes it.
+     - NOT changed (deliberately left upstream): the "Superpowers" UI branding,
+       remote logo, and telemetry env handling in scripts/server.cjs and
+       scripts/frame-template.html. These only render inside the user's own
+       browser tab during a session, so they were judged not worth the
+       script-divergence cost.
+  4. Fixed an internal path reference for the fork's layout: SKILL.md points to
+     the visual companion guide as `visual-companion.md` (its own sibling), not
+     upstream's repo-root `skills/brainstorming/visual-companion.md`, which does
+     not resolve under skills/workflows/brainstorming/ or after install.
+
+  Reconciled to the upstream commit above on 2026-06-27: took scripts/,
+  visual-companion.md, and spec-document-reviewer-prompt.md from upstream
+  wholesale, then re-applied the local modifications listed above. This absorbed
+  upstream's session-key auth, the --open flag (kept — orthogonal to manual-only),
+  selection-indicator changes, and the just-in-time visual-companion model. The
+  just-in-time model replaced the older "Visual questions ahead?" flow node; that
+  node was upstream's all along (introduced in obra/superpowers and later removed
+  there), NOT a local modification — an earlier note here claimed otherwise and was
+  wrong.
