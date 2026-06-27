@@ -1,0 +1,5 @@
+@docs/superpowers/specs/2026-06-27-skills-repo-management-design.md 把这篇spec的内容，基于仓库现状，吸收进 adr、context等文件中，然后删除这个文件夹
+
+---
+
+提交代码
