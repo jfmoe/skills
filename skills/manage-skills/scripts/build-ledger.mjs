@@ -197,11 +197,15 @@ export function emitYaml(doc) {
   return lines.join('\n') + '\n';
 }
 
-// --- public entry point -----------------------------------------------------
+// --- public entry points ----------------------------------------------------
 
-export function buildLedger(raw) {
-  const { globalThirdParty, projectThirdParty, projectScanIssues, forks } = assembleLedger(raw);
-  const doc = {
+// Render already-assembled records to the YAML ledger (snake_case keys, full
+// field set). Split from buildLedger so a caller that already has the records
+// (e.g. the shell, which also wants the row counts) renders without re-running
+// the collectors.
+export function renderLedger(records) {
+  const { globalThirdParty, projectThirdParty, projectScanIssues, forks } = records;
+  return emitYaml({
     generated_by: GENERATED_BY,
     global_third_party: globalThirdParty.map((r) => ({
       name: r.name,
@@ -229,6 +233,9 @@ export function buildLedger(raw) {
       local_path: r.localPath,
       fetched_at: r.fetchedAt,
     })),
-  };
-  return emitYaml(doc);
+  });
+}
+
+export function buildLedger(raw) {
+  return renderLedger(assembleLedger(raw));
 }

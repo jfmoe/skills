@@ -22,7 +22,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 
-import { assembleLedger, buildLedger, parseProjectsYaml } from './build-ledger.mjs';
+import { assembleLedger, renderLedger, parseProjectsYaml } from './build-ledger.mjs';
 
 const HOME = os.homedir();
 
@@ -98,9 +98,11 @@ function readSnapshot(repoRoot) {
 const repoRoot = resolveRepoRoot();
 const snapshot = readSnapshot(repoRoot);
 
-fs.writeFileSync(path.join(repoRoot, 'registry/ledger.yaml'), buildLedger(snapshot));
+// Assemble the records once, then both render the ledger and report the counts.
+const records = assembleLedger(snapshot);
+fs.writeFileSync(path.join(repoRoot, 'registry/ledger.yaml'), renderLedger(records));
 
-const { globalThirdParty, projectThirdParty, projectScanIssues, forks } = assembleLedger(snapshot);
+const { globalThirdParty, projectThirdParty, projectScanIssues, forks } = records;
 console.error(
   `synced registry: ${globalThirdParty.length} global, ${projectThirdParty.length} project, ${forks.length} fork(s); ` +
     `${projectScanIssues.length} scan note(s)`,

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import {
   buildLedger,
   assembleLedger,
+  renderLedger,
   parseProjectsYaml,
   parseMetaYaml,
   isSelf,
@@ -22,7 +23,7 @@ const readFixture = (name) => JSON.parse(fs.readFileSync(path.join(here, 'fixtur
 // regression net for the format change (md + json -> single ledger.yaml).
 test('golden: assembleLedger reproduces the pre-refactor inventory records', () => {
   const snapshot = readFixture('ledger-snapshot.json');
-  const expected = readFixture('expected-inventory.json');
+  const expected = readFixture('expected-ledger-records.json');
   const got = assembleLedger(snapshot);
 
   assert.deepEqual(got.globalThirdParty, expected.globalThirdParty);
@@ -41,6 +42,20 @@ test('golden: buildLedger returns a YAML string with the expected top-level sect
   assert.match(yaml, /^forks:$/m);
   // empty section renders as `key: []`
   assert.match(yaml, /^project_scan_issues: \[\]$/m);
+});
+
+test('renderLedger: renders assembled records to snake_case YAML without re-collecting', () => {
+  const records = {
+    globalThirdParty: [{ name: 'x', source: 's', sourceUrl: 'u', skillPath: 'p', updatedAt: 't' }],
+    projectThirdParty: [],
+    projectScanIssues: [],
+    forks: [],
+  };
+  const yaml = renderLedger(records);
+  assert.match(yaml, /^global_third_party:$/m);
+  assert.match(yaml, /^ {4}source_url: "u"$/m); // camelCase -> snake_case key
+  assert.match(yaml, /^project_third_party: \[\]$/m);
+  assert.match(yaml, /^forks: \[\]$/m);
 });
 
 // --- isSelf: all three self-detection paths + a clear third-party ------------
