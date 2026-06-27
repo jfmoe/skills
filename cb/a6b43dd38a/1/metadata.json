@@ -1,0 +1,102 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "cba6b43dd38a",
+  "session_id": "f5143216-5d68-40b5-a8f3-b7346fc4e08d",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T13:44:13.857321Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 2,
+  "save_step_count": 2,
+  "files_touched": [
+    "skills/workflows/brainstorming/SKILL.md",
+    "skills/workflows/brainstorming/scripts/frame-template.html",
+    "skills/workflows/brainstorming/scripts/helper.js",
+    "skills/workflows/brainstorming/scripts/server.cjs",
+    "skills/workflows/brainstorming/scripts/start-server.sh",
+    "skills/workflows/brainstorming/scripts/stop-server.sh",
+    "skills/workflows/brainstorming/spec-document-reviewer-prompt.md",
+    "skills/workflows/brainstorming/visual-companion.md"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "0e265d576684",
+  "token_usage": {
+    "input_tokens": 10175,
+    "cache_creation_tokens": 40029,
+    "cache_read_tokens": 508429,
+    "output_tokens": 15649,
+    "api_call_count": 12
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-27T13:44:13.853387Z",
+    "agent_lines": 0,
+    "agent_removed": 1,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 134,
+    "total_committed": 1,
+    "total_lines_changed": 135,
+    "agent_percentage": 0.7407407407407408,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 3420,
+      "user_lines_removed": 281,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "registry/inventory.json": 20,
+        "registry/third-party.md": 4,
+        "registry/upstream/agents-md-improver/SKILL.md.orig": 179,
+        "registry/upstream/agents-md-improver/meta.yaml": 15,
+        "registry/upstream/agents-md-improver/references/quality-criteria.md": 109,
+        "registry/upstream/agents-md-improver/references/templates.md": 253,
+        "registry/upstream/agents-md-improver/references/update-guidelines.md": 150,
+        "registry/upstream/brainstorming/SKILL.md.orig": 159,
+        "registry/upstream/brainstorming/meta.yaml": 41,
+        "registry/upstream/brainstorming/scripts/frame-template.html": 213,
+        "registry/upstream/brainstorming/scripts/helper.js": 167,
+        "registry/upstream/brainstorming/scripts/server.cjs": 723,
+        "registry/upstream/brainstorming/scripts/start-server.sh": 209,
+        "registry/upstream/brainstorming/scripts/stop-server.sh": 120,
+        "registry/upstream/brainstorming/spec-document-reviewer-prompt.md": 49,
+        "registry/upstream/brainstorming/visual-companion.md": 298,
+        "skills/workflows/brainstorming/SKILL.md": 7,
+        "skills/workflows/brainstorming/scripts/frame-template.html": 25,
+        "skills/workflows/brainstorming/scripts/helper.js": 101,
+        "skills/workflows/brainstorming/scripts/server.cjs": 399,
+        "skills/workflows/brainstorming/scripts/start-server.sh": 72,
+        "skills/workflows/brainstorming/scripts/stop-server.sh": 67,
+        "skills/workflows/brainstorming/spec-document-reviewer-prompt.md": 2,
+        "skills/workflows/brainstorming/visual-companion.md": 38
+      },
+      "user_removed_per_file": {
+        "registry/inventory.json": 1,
+        "registry/third-party.md": 1,
+        "skills/coding/land-issues/SKILL.md": 90,
+        "skills/coding/land-issues/references/implementer-prompt.md": 34,
+        "skills/coding/land-issues/references/reviewer-prompt.md": 21,
+        "skills/workflows/brainstorming/SKILL.md": 13,
+        "skills/workflows/brainstorming/scripts/frame-template.html": 26,
+        "skills/workflows/brainstorming/scripts/helper.js": 22,
+        "skills/workflows/brainstorming/scripts/server.cjs": 30,
+        "skills/workflows/brainstorming/scripts/start-server.sh": 11,
+        "skills/workflows/brainstorming/scripts/stop-server.sh": 3,
+        "skills/workflows/brainstorming/spec-document-reviewer-prompt.md": 2,
+        "skills/workflows/brainstorming/visual-companion.md": 27
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 3482,
+      "agent_lines_removed": 471
+    }
+  ]
+}
