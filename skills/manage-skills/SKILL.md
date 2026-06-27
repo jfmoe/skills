@@ -37,9 +37,8 @@ registry/               Management metadata (never installed)
   ledger.yaml           Generated: cross-project third-party + fork ledger
 ```
 
-- Self-created skills: `skills/<skill-name>/SKILL.md` — one flat level, no category directories (see ADR-0004).
-- `<skill-name>` is lowercase kebab-case (e.g. `manage-skills`, `macos-maintenance`).
-- Three skill classes: **original** (self-created), **fork** (modified third-party — see Forking), **third-party** (installed unmodified, tracked only in the registry).
+- `<skill-name>` is lowercase kebab-case (e.g. `manage-skills`, `macos-maintenance`); flat, no category directories (ADR-0004).
+- Three classes: **original** (self-created), **fork** (modified third-party — see Forking), **third-party** (installed unmodified, tracked only in the registry).
 - Never put management metadata inside `skills/<skill>/`; everything there is copied into projects on install.
 
 ## Creating or Editing a Skill
@@ -136,5 +135,4 @@ node skills/manage-skills/scripts/sync-registry.mjs
 ## Rules
 
 - Do not manually edit runtime install directories: `~/.agents/skills`, `~/.claude/skills`, `~/.cursor/skills`, or project `.agents/skills`.
-- Do not auto-commit or auto-push; commit and push only when the user asks.
 - Always read the relevant skill's content before acting on a skill-specific workflow.
