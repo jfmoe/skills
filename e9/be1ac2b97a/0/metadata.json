@@ -1,0 +1,64 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "e9be1ac2b97a",
+  "session_id": "0904ea9f-1aa8-4aab-bab5-510af66c7e1a",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T16:02:25.122793Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "skills/manage-skills/SKILL.md",
+    "AGENTS.md",
+    "registry/upstream/README.md",
+    "docs/adr/0006-fork-procedure-single-canonical-home.md"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "f2c5dda6e147",
+  "checkpoint_transcript_start": 468,
+  "transcript_lines_at_start": 468,
+  "token_usage": {
+    "input_tokens": 310,
+    "cache_creation_tokens": 12929,
+    "cache_read_tokens": 1851033,
+    "output_tokens": 10548,
+    "api_call_count": 10
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-implement-2026-06-27T15:19:22.015921Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "implement"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "f2c5dda6e147",
+      "timestamp": "2026-06-27T15:19:22.015921Z",
+      "native": {
+        "command": "/implement"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/implement",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "initial_attribution": {
+    "calculated_at": "2026-06-27T16:02:25.107204Z",
+    "agent_lines": 46,
+    "agent_removed": 42,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 46,
+    "total_lines_changed": 88,
+    "agent_percentage": 100,
+    "metric_version": 2
+  }
+}

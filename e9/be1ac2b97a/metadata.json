@@ -1,0 +1,28 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "e9be1ac2b97a",
+  "strategy": "manual-commit",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "AGENTS.md",
+    "docs/adr/0006-fork-procedure-single-canonical-home.md",
+    "registry/upstream/README.md",
+    "skills/manage-skills/SKILL.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/e9/be1ac2b97a/0/metadata.json",
+      "transcript": "/e9/be1ac2b97a/0/full.jsonl",
+      "content_hash": "/e9/be1ac2b97a/0/content_hash.txt",
+      "prompt": ""
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 310,
+    "cache_creation_tokens": 12929,
+    "cache_read_tokens": 1851033,
+    "output_tokens": 10548,
+    "api_call_count": 10
+  }
+}
