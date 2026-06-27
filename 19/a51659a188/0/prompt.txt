@@ -1,0 +1,30 @@
+/grill-with-docs 对比brainstorming和上游的差异，进行更新
+
+---
+
+首先对比一下上游和当前的差异
+
+---
+
+"Visual questions ahead? 不是我加的，我改的只有1、2两点
+
+---
+
+保留
+再加一点修改，去掉 superpowers 相关的残留，比如spec文件落到 docs/specs
+
+---
+
+Tier 1 + Tier 2
+
+---
+
+可以
+
+---
+
+应该需要改成相对路径的对应文件把
+
+---
+
+提交代码
