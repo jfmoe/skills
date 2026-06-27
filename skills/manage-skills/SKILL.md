@@ -91,18 +91,20 @@ To create a fork:
 
 1. Fetch the upstream skill into a temp dir, noting its `ref` and `commit`.
 2. Save the pristine files to `registry/upstream/<skill>/`. **Rename every `SKILL.md` to `SKILL.md.orig`** — `npx skills` registers any literal `SKILL.md` in the repo as installable (verified; there is no ignore option). Keep other files as-is.
-3. Write `registry/upstream/<skill>/meta.yaml`:
+3. Write `registry/upstream/<skill>/meta.yaml`. This is the canonical `meta.yaml` schema:
 
 ```yaml
-source: owner/repo
-ref: main
-commit: <sha>
-upstream_path: path/in/source
-local_path: skills/<skill>
-fetched_at: YYYY-MM-DD
-notes: |
+source: owner/repo                 # upstream github source (or URL)
+ref: main                          # branch or tag fetched
+commit: <sha>                      # exact commit fetched
+upstream_path: path/in/source      # skill subpath inside the source repo
+local_path: skills/<skill>         # the modified copy in this repo
+fetched_at: YYYY-MM-DD             # fetch date
+notes: |                           # human provenance: what changed and why
   - what changed
 ```
+
+   `notes` is human provenance, not inventory data — it is intentionally absent from the generated ledger. Do not "fix" that.
 
 4. Copy the upstream into `skills/<skill>/SKILL.md` as the starting point and apply your changes.
 5. Validate: `npx skills add ~/Coder/skills --list` must show the fork as ONE skill (the snapshot must not appear).

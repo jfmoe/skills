@@ -1,41 +1,23 @@
 # Upstream Snapshots (for forks)
 
-A **fork** is a third-party skill you modified. It has two copies:
-
-- **Installable, modified copy** — `skills/<skill>/SKILL.md`. Kept clean: no
-  upstream files, no management metadata. `npx skills` copies the whole skill folder into
-  every project that installs it, so nothing extra belongs here.
-- **Pristine upstream snapshot** — `registry/upstream/<skill>/` (this directory). The
-  unmodified upstream files, kept for diffing when upstream changes.
+This directory holds the **pristine upstream snapshot** of each fork — the unmodified
+upstream files of a third-party skill you modified, kept for diffing when upstream changes.
+The clean, installable copy of the fork lives separately at `skills/<skill>/SKILL.md`.
 
 ## Layout
 
 ```text
 registry/upstream/<skill>/
-  SKILL.md.orig     # pristine upstream SKILL.md, RENAMED (see below)
+  SKILL.md.orig     # pristine upstream SKILL.md, renamed (see ADR-0001)
   ...               # other upstream files, as-is (references/, scripts/, ...)
-  meta.yaml         # provenance
+  meta.yaml         # provenance (schema lives in the canonical home — see below)
 ```
 
-`meta.yaml`:
+The `meta.yaml` files here are scanned to surface forks in the generated ledger
+(`registry/ledger.yaml`).
 
-```yaml
-source: owner/repo                 # upstream github source (or URL)
-ref: main                          # branch or tag fetched
-commit: <sha>                      # exact commit fetched
-upstream_path: path/in/source      # skill subpath inside the source repo
-local_path: skills/<skill>         # the modified copy in this repo
-fetched_at: 2026-06-27             # fetch date
-notes: |
-  - what was changed / removed
-```
+## See also
 
-## Why `SKILL.md.orig` instead of `SKILL.md`
-
-`npx skills` discovers skills by the literal filename `SKILL.md` **anywhere** in the repo,
-and has no ignore/exclude option (both verified). A pristine `SKILL.md` here would be wrongly
-registered as an installable skill and could even collide with the real fork. So rename every
-`SKILL.md` inside a snapshot to `SKILL.md.orig`. Diffing still works on content.
-
-Forks are surfaced in the generated ledger (`registry/ledger.yaml`) by scanning the
-`meta.yaml` files here.
+- **Fork procedure (create + update) and the `meta.yaml` schema** — the `manage-skills`
+  skill (`skills/manage-skills/SKILL.md`), the single canonical home (ADR-0006).
+- **Why the snapshot's `SKILL.md` is renamed to `SKILL.md.orig`** — ADR-0001.

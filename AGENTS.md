@@ -17,14 +17,12 @@ This repository is the personal source repository for user-created agent skills.
 
 ## Forks
 
-A fork is a third-party skill you modified. Keep two copies:
+A fork is a third-party skill you modified. Invariants:
 
-- **Installable, modified copy**: `skills/<skill>/SKILL.md` — clean, no upstream files.
-- **Pristine upstream snapshot**: `registry/upstream/<skill>/` — the unmodified upstream files plus `meta.yaml` (`source`, `ref`, `commit`, `upstream_path`, `local_path`, `fetched_at`, `notes`).
+- Keep two copies: the clean installable copy at `skills/<skill>/SKILL.md`, and a pristine upstream snapshot at `registry/upstream/<skill>/`.
 - Rename every `SKILL.md` inside a snapshot to `SKILL.md.orig`. `npx skills` discovers skills by the literal filename `SKILL.md` anywhere in the repo and has no ignore option (both verified), so a pristine `SKILL.md` would be wrongly registered as installable.
-- On upstream updates: re-fetch upstream, diff against the snapshot, port wanted changes into the modified copy, then refresh the snapshot and `meta.yaml`.
 
-See `registry/upstream/README.md` for the full layout.
+The fork procedure (create + update flows) and the `meta.yaml` schema have one canonical home — the `manage-skills` skill (`skills/manage-skills/SKILL.md`); see ADR-0006. Snapshot directory layout: `registry/upstream/README.md`. Rationale for the `.orig` rename: ADR-0001.
 
 ## Registry
 
