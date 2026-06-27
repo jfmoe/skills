@@ -1,0 +1,140 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "329fac7e5a20",
+  "session_id": "0fe4eafd-6f0b-4c02-84a3-6f25eaba0a69",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T13:00:52.208909Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".agents/skills/codebase-design/DEEPENING.md",
+    ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+    ".agents/skills/codebase-design/SKILL.md",
+    ".agents/skills/domain-modeling/ADR-FORMAT.md",
+    ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+    ".agents/skills/domain-modeling/SKILL.md",
+    ".agents/skills/grill-with-docs/SKILL.md",
+    ".agents/skills/grilling/SKILL.md",
+    ".agents/skills/implement/SKILL.md",
+    ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+    ".agents/skills/improve-codebase-architecture/SKILL.md",
+    ".agents/skills/prototype/LOGIC.md",
+    ".agents/skills/prototype/SKILL.md",
+    ".agents/skills/prototype/UI.md",
+    ".agents/skills/review/SKILL.md",
+    ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+    ".agents/skills/setup-matt-pocock-skills/domain.md",
+    ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+    ".agents/skills/setup-matt-pocock-skills/issue-tracker-gitlab.md",
+    ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md",
+    ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+    ".agents/skills/tdd/SKILL.md",
+    ".agents/skills/tdd/mocking.md",
+    ".agents/skills/tdd/refactoring.md",
+    ".agents/skills/tdd/tests.md",
+    ".agents/skills/to-issues/SKILL.md",
+    ".agents/skills/to-prd/SKILL.md",
+    ".agents/skills/triage/AGENT-BRIEF.md",
+    ".agents/skills/triage/OUT-OF-SCOPE.md",
+    ".agents/skills/triage/SKILL.md",
+    ".agents/skills/writing-great-skills/GLOSSARY.md",
+    ".agents/skills/writing-great-skills/SKILL.md",
+    "skills-lock.json"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "8ebd5e134e0f",
+  "checkpoint_transcript_start": 101,
+  "transcript_lines_at_start": 101,
+  "token_usage": {
+    "input_tokens": 137,
+    "cache_creation_tokens": 6803,
+    "cache_read_tokens": 206611,
+    "output_tokens": 4829,
+    "api_call_count": 4
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-setup-matt-pocock-skills-2026-06-27T12:49:58.650736Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "setup-matt-pocock-skills"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "4cb4925e88fc",
+      "timestamp": "2026-06-27T12:49:58.650736Z",
+      "native": {
+        "command": "/setup-matt-pocock-skills"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/setup-matt-pocock-skills",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-27T13:00:52.205195Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 14,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 14,
+    "total_lines_changed": 14,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 2356,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".agents/skills/codebase-design/DEEPENING.md": 37,
+        ".agents/skills/codebase-design/DESIGN-IT-TWICE.md": 44,
+        ".agents/skills/codebase-design/SKILL.md": 114,
+        ".agents/skills/domain-modeling/ADR-FORMAT.md": 47,
+        ".agents/skills/domain-modeling/CONTEXT-FORMAT.md": 60,
+        ".agents/skills/domain-modeling/SKILL.md": 74,
+        ".agents/skills/grill-with-docs/SKILL.md": 7,
+        ".agents/skills/grilling/SKILL.md": 10,
+        ".agents/skills/implement/SKILL.md": 15,
+        ".agents/skills/improve-codebase-architecture/HTML-REPORT.md": 123,
+        ".agents/skills/improve-codebase-architecture/SKILL.md": 66,
+        ".agents/skills/prototype/LOGIC.md": 79,
+        ".agents/skills/prototype/SKILL.md": 31,
+        ".agents/skills/prototype/UI.md": 112,
+        ".agents/skills/review/SKILL.md": 69,
+        ".agents/skills/setup-matt-pocock-skills/SKILL.md": 127,
+        ".agents/skills/setup-matt-pocock-skills/domain.md": 51,
+        ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md": 34,
+        ".agents/skills/setup-matt-pocock-skills/issue-tracker-gitlab.md": 35,
+        ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md": 19,
+        ".agents/skills/setup-matt-pocock-skills/triage-labels.md": 15,
+        ".agents/skills/tdd/SKILL.md": 108,
+        ".agents/skills/tdd/mocking.md": 59,
+        ".agents/skills/tdd/refactoring.md": 10,
+        ".agents/skills/tdd/tests.md": 61,
+        ".agents/skills/to-issues/SKILL.md": 84,
+        ".agents/skills/to-prd/SKILL.md": 75,
+        ".agents/skills/triage/AGENT-BRIEF.md": 207,
+        ".agents/skills/triage/OUT-OF-SCOPE.md": 105,
+        ".agents/skills/triage/SKILL.md": 112,
+        ".agents/skills/writing-great-skills/GLOSSARY.md": 195,
+        ".agents/skills/writing-great-skills/SKILL.md": 82,
+        "skills-lock.json": 89
+      }
+    }
+  ]
+}

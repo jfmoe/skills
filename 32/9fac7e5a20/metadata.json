@@ -1,0 +1,57 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "329fac7e5a20",
+  "strategy": "manual-commit",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".agents/skills/codebase-design/DEEPENING.md",
+    ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+    ".agents/skills/codebase-design/SKILL.md",
+    ".agents/skills/domain-modeling/ADR-FORMAT.md",
+    ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+    ".agents/skills/domain-modeling/SKILL.md",
+    ".agents/skills/grill-with-docs/SKILL.md",
+    ".agents/skills/grilling/SKILL.md",
+    ".agents/skills/implement/SKILL.md",
+    ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+    ".agents/skills/improve-codebase-architecture/SKILL.md",
+    ".agents/skills/prototype/LOGIC.md",
+    ".agents/skills/prototype/SKILL.md",
+    ".agents/skills/prototype/UI.md",
+    ".agents/skills/review/SKILL.md",
+    ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+    ".agents/skills/setup-matt-pocock-skills/domain.md",
+    ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+    ".agents/skills/setup-matt-pocock-skills/issue-tracker-gitlab.md",
+    ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md",
+    ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+    ".agents/skills/tdd/SKILL.md",
+    ".agents/skills/tdd/mocking.md",
+    ".agents/skills/tdd/refactoring.md",
+    ".agents/skills/tdd/tests.md",
+    ".agents/skills/to-issues/SKILL.md",
+    ".agents/skills/to-prd/SKILL.md",
+    ".agents/skills/triage/AGENT-BRIEF.md",
+    ".agents/skills/triage/OUT-OF-SCOPE.md",
+    ".agents/skills/triage/SKILL.md",
+    ".agents/skills/writing-great-skills/GLOSSARY.md",
+    ".agents/skills/writing-great-skills/SKILL.md",
+    "skills-lock.json"
+  ],
+  "sessions": [
+    {
+      "metadata": "/32/9fac7e5a20/0/metadata.json",
+      "transcript": "/32/9fac7e5a20/0/full.jsonl",
+      "content_hash": "/32/9fac7e5a20/0/content_hash.txt",
+      "prompt": "/32/9fac7e5a20/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 137,
+    "cache_creation_tokens": 6803,
+    "cache_read_tokens": 206611,
+    "output_tokens": 4829,
+    "api_call_count": 4
+  }
+}
