@@ -101,3 +101,7 @@ push并关闭issue
 ---
 
 English in README.md, AGENTS.md, skill files. 删掉
+
+---
+
+提交、合并到main、push
