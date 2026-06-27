@@ -1,0 +1,23 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "76901bf0d86d",
+  "strategy": "manual-commit",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 1,
+  "files_touched": null,
+  "sessions": [
+    {
+      "metadata": "/76/901bf0d86d/0/metadata.json",
+      "transcript": "/76/901bf0d86d/0/full.jsonl",
+      "content_hash": "/76/901bf0d86d/0/content_hash.txt",
+      "prompt": "/76/901bf0d86d/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 5980,
+    "cache_creation_tokens": 111691,
+    "cache_read_tokens": 4145331,
+    "output_tokens": 91210,
+    "api_call_count": 49
+  }
+}

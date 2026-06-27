@@ -1,0 +1,111 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "76901bf0d86d",
+  "session_id": "8573b5e5-d2bc-4b48-861e-341b79a25292",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T13:46:44.120235Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [],
+  "agent": "Claude Code",
+  "model": "",
+  "turn_id": "cf36da55bc59",
+  "token_usage": {
+    "input_tokens": 5980,
+    "cache_creation_tokens": 111691,
+    "cache_read_tokens": 4145331,
+    "output_tokens": 91210,
+    "api_call_count": 49
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-grill-with-docs-2026-06-27T13:11:28.910885Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "grill-with-docs"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "2b166b5736e4",
+      "timestamp": "2026-06-27T13:11:28.910885Z",
+      "native": {
+        "command": "/grill-with-docs"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/grill-with-docs",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01LFPPGoodWjBTuRhEwKm37g",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "grilling"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "cf36da55bc59",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 20,
+        "end": 21,
+        "entry_ids": [
+          "cca819a3-522d-4344-b61f-1cce81168ba2"
+        ],
+        "tool_use_id": "toolu_01LFPPGoodWjBTuRhEwKm37g"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01LFPPGoodWjBTuRhEwKm37g"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: grilling",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_012tXh7SKzagEt2kptzKFZMw",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "domain-modeling"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "cf36da55bc59",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 31,
+        "end": 32,
+        "entry_ids": [
+          "b13fae47-6262-4ff7-92a2-7686a0e35c6f"
+        ],
+        "tool_use_id": "toolu_012tXh7SKzagEt2kptzKFZMw"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_012tXh7SKzagEt2kptzKFZMw"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: domain-modeling",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 8
+  }
+}
