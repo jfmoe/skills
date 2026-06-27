@@ -1,0 +1,33 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "cba6b43dd38a",
+  "strategy": "manual-commit",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 7,
+  "files_touched": [
+    "registry/upstream/brainstorming/meta.yaml",
+    "skills/workflows/brainstorming/SKILL.md",
+    "skills/workflows/brainstorming/scripts/frame-template.html",
+    "skills/workflows/brainstorming/scripts/helper.js",
+    "skills/workflows/brainstorming/scripts/server.cjs",
+    "skills/workflows/brainstorming/scripts/start-server.sh",
+    "skills/workflows/brainstorming/scripts/stop-server.sh",
+    "skills/workflows/brainstorming/spec-document-reviewer-prompt.md",
+    "skills/workflows/brainstorming/visual-companion.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/cb/a6b43dd38a/0/metadata.json",
+      "transcript": "/cb/a6b43dd38a/0/full.jsonl",
+      "content_hash": "/cb/a6b43dd38a/0/content_hash.txt",
+      "prompt": "/cb/a6b43dd38a/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 5841,
+    "cache_creation_tokens": 102673,
+    "cache_read_tokens": 3442849,
+    "output_tokens": 83941,
+    "api_call_count": 44
+  }
+}

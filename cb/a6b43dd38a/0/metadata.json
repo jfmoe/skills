@@ -1,0 +1,260 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "cba6b43dd38a",
+  "session_id": "8573b5e5-d2bc-4b48-861e-341b79a25292",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T13:44:13.7777Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 7,
+  "save_step_count": 7,
+  "files_touched": [
+    "registry/upstream/brainstorming/meta.yaml",
+    "skills/workflows/brainstorming/SKILL.md",
+    "skills/workflows/brainstorming/scripts/frame-template.html",
+    "skills/workflows/brainstorming/scripts/helper.js",
+    "skills/workflows/brainstorming/scripts/server.cjs",
+    "skills/workflows/brainstorming/scripts/start-server.sh",
+    "skills/workflows/brainstorming/scripts/stop-server.sh",
+    "skills/workflows/brainstorming/spec-document-reviewer-prompt.md",
+    "skills/workflows/brainstorming/visual-companion.md"
+  ],
+  "agent": "Claude Code",
+  "model": "",
+  "turn_id": "f159e35209b4",
+  "token_usage": {
+    "input_tokens": 5841,
+    "cache_creation_tokens": 102673,
+    "cache_read_tokens": 3442849,
+    "output_tokens": 83941,
+    "api_call_count": 44
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-grill-with-docs-2026-06-27T13:11:28.910885Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "grill-with-docs"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "2b166b5736e4",
+      "timestamp": "2026-06-27T13:11:28.910885Z",
+      "native": {
+        "command": "/grill-with-docs"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/grill-with-docs",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01LFPPGoodWjBTuRhEwKm37g",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "grilling"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "f159e35209b4",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 20,
+        "end": 21,
+        "entry_ids": [
+          "cca819a3-522d-4344-b61f-1cce81168ba2"
+        ],
+        "tool_use_id": "toolu_01LFPPGoodWjBTuRhEwKm37g"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01LFPPGoodWjBTuRhEwKm37g"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: grilling",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_012tXh7SKzagEt2kptzKFZMw",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "domain-modeling"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "f159e35209b4",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 31,
+        "end": 32,
+        "entry_ids": [
+          "b13fae47-6262-4ff7-92a2-7686a0e35c6f"
+        ],
+        "tool_use_id": "toolu_012tXh7SKzagEt2kptzKFZMw"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_012tXh7SKzagEt2kptzKFZMw"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: domain-modeling",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 7
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-27T13:44:13.765091Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 2560,
+    "human_modified": 135,
+    "human_removed": 0,
+    "total_committed": 2560,
+    "total_lines_changed": 2695,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 2687,
+      "user_lines_removed": 147,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "registry/inventory.json": 20,
+        "registry/third-party.md": 4,
+        "registry/upstream/agents-md-improver/SKILL.md.orig": 179,
+        "registry/upstream/agents-md-improver/meta.yaml": 15,
+        "registry/upstream/agents-md-improver/references/quality-criteria.md": 109,
+        "registry/upstream/agents-md-improver/references/templates.md": 253,
+        "registry/upstream/agents-md-improver/references/update-guidelines.md": 150,
+        "registry/upstream/brainstorming/SKILL.md.orig": 159,
+        "registry/upstream/brainstorming/meta.yaml": 19,
+        "registry/upstream/brainstorming/scripts/frame-template.html": 213,
+        "registry/upstream/brainstorming/scripts/helper.js": 167,
+        "registry/upstream/brainstorming/scripts/server.cjs": 723,
+        "registry/upstream/brainstorming/scripts/start-server.sh": 209,
+        "registry/upstream/brainstorming/scripts/stop-server.sh": 120,
+        "registry/upstream/brainstorming/spec-document-reviewer-prompt.md": 49,
+        "registry/upstream/brainstorming/visual-companion.md": 298
+      },
+      "user_removed_per_file": {
+        "registry/inventory.json": 1,
+        "registry/third-party.md": 1,
+        "skills/coding/land-issues/SKILL.md": 90,
+        "skills/coding/land-issues/references/implementer-prompt.md": 34,
+        "skills/coding/land-issues/references/reviewer-prompt.md": 21
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2687,
+      "agent_lines_removed": 147
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2687,
+      "agent_lines_removed": 147
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2687,
+      "agent_lines_removed": 147
+    },
+    {
+      "checkpoint_number": 5,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2687,
+      "agent_lines_removed": 147
+    },
+    {
+      "checkpoint_number": 6,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 2687,
+      "agent_lines_removed": 147
+    },
+    {
+      "checkpoint_number": 7,
+      "user_lines_added": 31,
+      "user_lines_removed": 0,
+      "agent_lines_added": 3420,
+      "agent_lines_removed": 281,
+      "user_added_per_file": {
+        "CONTEXT.md": 31
+      }
+    },
+    {
+      "checkpoint_number": 8,
+      "user_lines_added": 3425,
+      "user_lines_removed": 282,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "registry/inventory.json": 20,
+        "registry/third-party.md": 4,
+        "registry/upstream/agents-md-improver/SKILL.md.orig": 179,
+        "registry/upstream/agents-md-improver/meta.yaml": 15,
+        "registry/upstream/agents-md-improver/references/quality-criteria.md": 109,
+        "registry/upstream/agents-md-improver/references/templates.md": 253,
+        "registry/upstream/agents-md-improver/references/update-guidelines.md": 150,
+        "registry/upstream/brainstorming/SKILL.md.orig": 159,
+        "registry/upstream/brainstorming/meta.yaml": 45,
+        "registry/upstream/brainstorming/scripts/frame-template.html": 213,
+        "registry/upstream/brainstorming/scripts/helper.js": 167,
+        "registry/upstream/brainstorming/scripts/server.cjs": 723,
+        "registry/upstream/brainstorming/scripts/start-server.sh": 209,
+        "registry/upstream/brainstorming/scripts/stop-server.sh": 120,
+        "registry/upstream/brainstorming/spec-document-reviewer-prompt.md": 49,
+        "registry/upstream/brainstorming/visual-companion.md": 298,
+        "skills/workflows/brainstorming/SKILL.md": 8,
+        "skills/workflows/brainstorming/scripts/frame-template.html": 25,
+        "skills/workflows/brainstorming/scripts/helper.js": 101,
+        "skills/workflows/brainstorming/scripts/server.cjs": 399,
+        "skills/workflows/brainstorming/scripts/start-server.sh": 72,
+        "skills/workflows/brainstorming/scripts/stop-server.sh": 67,
+        "skills/workflows/brainstorming/spec-document-reviewer-prompt.md": 2,
+        "skills/workflows/brainstorming/visual-companion.md": 38
+      },
+      "user_removed_per_file": {
+        "registry/inventory.json": 1,
+        "registry/third-party.md": 1,
+        "skills/coding/land-issues/SKILL.md": 90,
+        "skills/coding/land-issues/references/implementer-prompt.md": 34,
+        "skills/coding/land-issues/references/reviewer-prompt.md": 21,
+        "skills/workflows/brainstorming/SKILL.md": 14,
+        "skills/workflows/brainstorming/scripts/frame-template.html": 26,
+        "skills/workflows/brainstorming/scripts/helper.js": 22,
+        "skills/workflows/brainstorming/scripts/server.cjs": 30,
+        "skills/workflows/brainstorming/scripts/start-server.sh": 11,
+        "skills/workflows/brainstorming/scripts/stop-server.sh": 3,
+        "skills/workflows/brainstorming/spec-document-reviewer-prompt.md": 2,
+        "skills/workflows/brainstorming/visual-companion.md": 27
+      }
+    }
+  ]
+}
