@@ -83,4 +83,7 @@
 
 ## Forks (modified third-party)
 
-_None._
+| Skill | Local Path | Upstream | Ref | Fetched |
+| --- | --- | --- | --- | --- |
+| agents-md-improver | skills/workflows/agents-md-improver | anthropics/claude-plugins-official | main | 2026-06-27 |
+| brainstorming | skills/workflows/brainstorming | obra/superpowers | main | 2026-06-27 |

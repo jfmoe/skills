@@ -422,5 +422,24 @@
     }
   ],
   "projectScanIssues": [],
-  "forks": []
+  "forks": [
+    {
+      "skill": "agents-md-improver",
+      "source": "anthropics/claude-plugins-official",
+      "ref": "main",
+      "commit": "f42c6edab38a90e56b7120a45525c541dee86ecc",
+      "upstreamPath": "plugins/claude-md-management/skills/claude-md-improver",
+      "localPath": "skills/workflows/agents-md-improver",
+      "fetchedAt": "2026-06-27"
+    },
+    {
+      "skill": "brainstorming",
+      "source": "obra/superpowers",
+      "ref": "main",
+      "commit": "896224c4b1879920ab573417e68fd51d2ccc9072",
+      "upstreamPath": "skills/brainstorming",
+      "localPath": "skills/workflows/brainstorming",
+      "fetchedAt": "2026-06-27"
+    }
+  ]
 }
