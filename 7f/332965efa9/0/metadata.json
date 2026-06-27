@@ -1,0 +1,109 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "7f332965efa9",
+  "session_id": "0904ea9f-1aa8-4aab-bab5-510af66c7e1a",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T16:15:00.697794Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "skills/manage-skills/scripts/build-ledger.mjs",
+    "skills/manage-skills/scripts/sync-registry.mjs",
+    "test/build-ledger.test.mjs"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "3c4a666439cf",
+  "checkpoint_transcript_start": 574,
+  "transcript_lines_at_start": 574,
+  "token_usage": {
+    "input_tokens": 294,
+    "cache_creation_tokens": 26076,
+    "cache_read_tokens": 4144809,
+    "output_tokens": 20526,
+    "api_call_count": 18
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-implement-2026-06-27T15:19:22.015921Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "implement"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "f2c5dda6e147",
+      "timestamp": "2026-06-27T15:19:22.015921Z",
+      "native": {
+        "command": "/implement"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/implement",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01VXAPX2eBStNaYJ4vYHU7AV",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "review"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "3c4a666439cf",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 580,
+        "end": 581,
+        "entry_ids": [
+          "dc70a260-be4b-41ce-87de-d444ac662e37"
+        ],
+        "tool_use_id": "toolu_01VXAPX2eBStNaYJ4vYHU7AV"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01VXAPX2eBStNaYJ4vYHU7AV"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: review",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-27T16:15:00.676643Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 469,
+    "human_modified": 10,
+    "human_removed": 0,
+    "total_committed": 469,
+    "total_lines_changed": 924,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 3,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_removed_per_file": {
+        ".cursor/hooks.json": 3
+      }
+    }
+  ]
+}
