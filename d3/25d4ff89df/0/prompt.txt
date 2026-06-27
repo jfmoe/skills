@@ -1,0 +1,103 @@
+<task-notification>
+<task-id>ac70203a616fa90e3</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-jfmoe-Coder-skills/0904ea9f-1aa8-4aab-bab5-510af66c7e1a/tasks/ac70203a616fa90e3.output</output-file>
+<status>completed</status>
+<summary>Agent "Standards review of refactor diff" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I now have everything needed. ADR-0002 still references the old two-output ledger (`third-party.md` + `inventory.json`) — but that's an existing ADR not touched by this diff and ADR-0005 explicitly supersedes the format, so that's fine (ADRs are immutable records). Let me verify the test fixtures placement is at repo-root `test/` (not in a skill folder) — confirmed already. Let me write the report.
+
+# Standards Review — `git diff 03c3357...HEAD`
+
+Scope checked: AGENTS.md, CONTEXT.md, README.md, ADRs 0004–0006, `registry/`, the two new script pairs, and the test layout, against AGENTS.md, CONTEXT.md, the ADRs, and `docs/agents/domain.md`.
+
+## Hard violations
+
+None. The diff is consistent with every documented invariant I checked:
+
+- **Flat tree (ADR-0004 / AGENTS.md §Structure):** all skills moved to `skills/&lt;skill&gt;/`; no category dirs remain. README, CONTEXT, projects.yaml, manage-skills docs, and `meta.yaml` `local_path`s all updated to flat paths.
+- **Installable folders stay clean (AGENTS.md §Structure; ADR-0005 Consequences):** tests and fixtures live in repo-root `test/` with a root `package.json` — never inside a skill folder. The shipped `build-ledger.mjs` is correctly the skill's own code, not management metadata.
+- **Generated ledger is never hand-edited (AGENTS.md §Registry; CONTEXT.md "Ledger"):** `ledger.yaml` carries a `generated_by` header; only `projects.yaml` is hand-maintained.
+- **Zero runtime deps (ADR-0005):** hand-rolled YAML emitter; scripts run on plain `node`; root `package.json` declares no deps. `grok-client.mjs` injects a `transport` seam rather than pulling a client lib.
+- **English in README/AGENTS/skill files:** satisfied.
+- **ADR numbering sequential (0004–0006); no ADR contradicted.** ADR-0004 explicitly reverses the old AGENTS.md category rule and records it — the prior rule "lived in AGENTS.md (never an ADR)," so no ADR conflict.
+- **Glossary vocabulary (`docs/agents/domain.md`):** CONTEXT.md correctly drops the now-defunct `Category` term and redefines `Ledger` as the single `ledger.yaml`. Docs consistently say "ledger," avoiding the `_Avoid_` synonyms (manifest/catalog/index).
+
+## Judgement calls (minor)
+
+1. **`test/fixtures/expected-inventory.json` filename** uses the retired term "inventory." CONTEXT.md's `Ledger` entry now defines the single output, and ADR-0005 collapsed `inventory.json` away. The file is a golden capture *of the pre-refactor inventory records*, so the name is historically accurate and the test comment (`reproduces the pre-refactor inventory records`) frames it that way — defensible, but `expected-ledger-records.json` would track the live glossary better. Not a violation; the term only appears in characterization-test naming, never in shipped output or docs prose.
+
+2. **ADR-0002 still describes the two-output ledger** (`third-party.md` + `inventory.json`). It is untouched by this diff and ADRs are immutable decision records that ADR-0005 supersedes — so this is correct ADR hygiene, not a finding. Flagging only so a future reader isn't misled.
+
+Everything tooling-enforced (formatting/lint) was skipped per brief.</result>
+<usage><subagent_tokens>60787</subagent_tokens><tool_uses>16</tool_uses><duration_ms>72419</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a03662ba13ed0e1ed</task-id>
+<tool-use-id>REDACTED</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-jfmoe-Coder-skills/0904ea9f-1aa8-4aab-bab5-510af66c7e1a/tasks/a03662ba13ed0e1ed.output</output-file>
+<status>completed</status>
+<summary>Agent "Spec review of refactor diff" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>All verified. The remaining `inventory.json` references are in code comments and the fixture filename (intentional — they document the golden-test provenance). CONTEXT.md Ledger term and Category term both updated correctly, ADR-0001 untouched. I have everything for the report.
+
+---
+
+# Spec Review (Issues #1–#4)
+
+All four issues' core acceptance criteria are met. 37 tests pass; `--help` works; flat tree confirmed (`skills/coding/`, `skills/workflows/` gone — remaining matches are in `.entire/tmp/` cache and a fixture's embedded old lock text, both non-source). Forks list as single skills with `SKILL.md.orig` snapshots. Six ADRs present (0004/0005/0006 added). No new runtime deps (zero-dep YAML emitter; fake-transport tests). CONTEXT.md Ledger + Category terms updated; ADR-0001 untouched.
+
+## (a) Missing / partial
+None material. Every checkbox is satisfied.
+
+- Minor: #2 says "First test suite (~11 assertions)" and #4 "~18 assertions"; actuals are 14 + 23 (37 total) — over, not under, so fine.
+
+## (b) Scope creep
+None found. Each commit maps to one issue; changes stay within the stated surfaces. `parseTimeout` / `--format` / `effort-model` validation in grok-client mirror pre-refactor behavior (pure-refactor scope honored).
+
+## (c) Implemented-but-questionable
+
+1. **#2 — golden test asserts records, not a true byte/format diff (acceptable by design).** Criterion: *"`ledger.yaml` records match the pre-refactor inventory (verified by the golden test)."* The fixture `expected-inventory.json` is **not** the literal merge-base `registry/inventory.json` — the fork `localPath`s were updated from `skills/workflows/...` to `skills/agents-md-improver` / `skills/brainstorming`. That divergence is *correct*: #1 (a dependency) flattened those paths, so the golden target is the post-#1 inventory. The issue explicitly says "the golden test is the regression net in place of a byte-for-byte diff." Verdict: correct, but the net only proves the new core reproduces a *hand-captured* snapshot — it never re-runs against live data, so a stale fixture would pass silently. Low risk, by design.
+
+2. **Test script wording.** `package.json` uses `node --test test/*.test.mjs`; criterion literally says `node --test test/`. The glob runs the same suites and passes, satisfying intent. Trivial semantic gap: a future `test/foo.test.mjs` is still picked up, but a non-`.test.mjs` test file would be skipped. Acceptable.
+
+3. **#4 — `resolveConfig` reads `env.GROK_SEARCH_EFFORT_MODEL`** (grok-client.mjs:133), an env fallback not in the issue's enumerated config list. It is consistent with the pre-existing `GROK_SEARCH_EFFORT`/`MODEL` pattern and harmless; not flagged as creep, just noting it's untested.
+
+**buildLedger purity confirmed:** imports only `node:path`, no fs/`process.env`/top-level side effects; `sync-registry.mjs` is the sole IO shell with depth-robust `findRepoRootUpward`. Spec satisfied.</result>
+<usage><subagent_tokens>62242</subagent_tokens><tool_uses>17</tool_uses><duration_ms>98035</duration_ms></usage>
+</task-notification>
+
+---
+
+优化
+
+---
+
+push
+
+---
+
+push并关闭issue
+
+---
+
+我删除的，帮我提交
+
+---
+
+合并
+
+---
+
+合并并push
+
+---
+
+再检查一下 AGENTS.md 和 manage-skill skill，我想把它们精简一下
+
+---
+
+English in README.md, AGENTS.md, skill files. 删掉

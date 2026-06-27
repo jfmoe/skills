@@ -1,0 +1,118 @@
+{
+  "cli_version": "0.7.7",
+  "checkpoint_id": "d325d4ff89df",
+  "session_id": "0904ea9f-1aa8-4aab-bab5-510af66c7e1a",
+  "strategy": "manual-commit",
+  "created_at": "2026-06-27T16:35:15.216238Z",
+  "branch": "feat/skills-management-refactor",
+  "checkpoints_count": 3,
+  "save_step_count": 3,
+  "files_touched": [
+    "AGENTS.md",
+    "skills/manage-skills/SKILL.md"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-8[1m]",
+  "turn_id": "2c9ac729bb92",
+  "token_usage": {
+    "input_tokens": 12188,
+    "cache_creation_tokens": 278407,
+    "cache_read_tokens": 24747286,
+    "output_tokens": 162297,
+    "api_call_count": 165
+  },
+  "skill_events_version": 1,
+  "skill_events": [
+    {
+      "id": "prompt-skill-claude-code-implement-2026-06-27T15:19:22.015921Z",
+      "event_type": "prompt_invocation",
+      "skill": {
+        "name": "implement"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "prompt_slash_command",
+        "confidence": "explicit"
+      },
+      "turn_id": "f2c5dda6e147",
+      "timestamp": "2026-06-27T15:19:22.015921Z",
+      "native": {
+        "command": "/implement"
+      },
+      "collapse": {
+        "target": "user_message",
+        "label": "/implement",
+        "default_collapsed": true
+      }
+    },
+    {
+      "id": "claude-skill-toolu_01VXAPX2eBStNaYJ4vYHU7AV",
+      "event_type": "tool_invocation",
+      "skill": {
+        "name": "review"
+      },
+      "source": {
+        "agent": "claude-code",
+        "signal": "skill_tool_use",
+        "confidence": "explicit"
+      },
+      "turn_id": "2c9ac729bb92",
+      "transcript_anchor": {
+        "unit": "line",
+        "start": 580,
+        "end": 581,
+        "entry_ids": [
+          "dc70a260-be4b-41ce-87de-d444ac662e37"
+        ],
+        "tool_use_id": "toolu_01VXAPX2eBStNaYJ4vYHU7AV"
+      },
+      "native": {
+        "tool_name": "Skill",
+        "tool_use_id": "toolu_01VXAPX2eBStNaYJ4vYHU7AV"
+      },
+      "collapse": {
+        "target": "tool_pair",
+        "label": "Skill: review",
+        "default_collapsed": true
+      }
+    }
+  ],
+  "session_metrics": {
+    "turn_count": 8
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-06-27T16:35:15.193863Z",
+    "agent_lines": 12,
+    "agent_removed": 52,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 12,
+    "total_lines_changed": 64,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 12,
+      "agent_lines_removed": 51
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 12,
+      "agent_lines_removed": 52
+    }
+  ]
+}
