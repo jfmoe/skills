@@ -2,7 +2,7 @@ source: obra/superpowers
 ref: main
 commit: 896224c4b1879920ab573417e68fd51d2ccc9072
 upstream_path: skills/brainstorming
-local_path: skills/workflows/brainstorming
+local_path: skills/brainstorming
 fetched_at: 2026-06-27
 notes: |
   Local modifications — re-apply these whenever updating from upstream:
@@ -32,7 +32,7 @@ notes: |
   4. Fixed an internal path reference for the fork's layout: SKILL.md points to
      the visual companion guide as `visual-companion.md` (its own sibling), not
      upstream's repo-root `skills/brainstorming/visual-companion.md`, which does
-     not resolve under skills/workflows/brainstorming/ or after install.
+     not resolve from the installed skill folder.
 
   Reconciled to the upstream commit above on 2026-06-27: took scripts/,
   visual-companion.md, and spec-document-reviewer-prompt.md from upstream

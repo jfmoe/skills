@@ -2,7 +2,7 @@
 
 A **fork** is a third-party skill you modified. It has two copies:
 
-- **Installable, modified copy** — `skills/<category>/<skill>/SKILL.md`. Kept clean: no
+- **Installable, modified copy** — `skills/<skill>/SKILL.md`. Kept clean: no
   upstream files, no management metadata. `npx skills` copies the whole skill folder into
   every project that installs it, so nothing extra belongs here.
 - **Pristine upstream snapshot** — `registry/upstream/<skill>/` (this directory). The
@@ -24,7 +24,7 @@ source: owner/repo                 # upstream github source (or URL)
 ref: main                          # branch or tag fetched
 commit: <sha>                      # exact commit fetched
 upstream_path: path/in/source      # skill subpath inside the source repo
-local_path: skills/coding/<skill>  # the modified copy in this repo
+local_path: skills/<skill>         # the modified copy in this repo
 fetched_at: 2026-06-27             # fetch date
 notes: |
   - what was changed / removed

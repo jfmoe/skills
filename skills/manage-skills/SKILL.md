@@ -30,8 +30,7 @@ git -C ~/Coder/skills pull --ff-only
 
 ```text
 skills/                 Installable skills (copied verbatim into projects)
-  workflows/            Non-coding, general agent workflows
-  coding/               Coding-related skills
+  <skill>/              One folder per skill — flat, no category directories
 registry/               Management metadata (never installed)
   projects.yaml         Hand-maintained: project paths to scan
   upstream/<skill>/     Pristine upstream snapshots for forks
@@ -39,16 +38,14 @@ registry/               Management metadata (never installed)
   inventory.json        Generated: machine-readable ledger
 ```
 
-- Self-created skills: `skills/<category>/<skill-name>/SKILL.md`.
+- Self-created skills: `skills/<skill-name>/SKILL.md` — one flat level, no category directories (see ADR-0004).
 - `<skill-name>` is lowercase kebab-case (e.g. `manage-skills`, `macos-maintenance`).
-- Only categories are `workflows` and `coding`; do not add others.
-- For ops skills: general macOS maintenance/troubleshooting goes to `workflows/`; writing shell/launchd/automation/CI code goes to `coding/`.
 - Three skill classes: **original** (self-created), **fork** (modified third-party — see Forking), **third-party** (installed unmodified, tracked only in the registry).
-- Never put management metadata inside `skills/<category>/<skill>/`; everything there is copied into projects on install.
+- Never put management metadata inside `skills/<skill>/`; everything there is copied into projects on install.
 
 ## Creating or Editing a Skill
 
-Only edit `~/Coder/skills/skills/<category>/<skill>/SKILL.md` when the user is creating or modifying a skill.
+Only edit `~/Coder/skills/skills/<skill>/SKILL.md` when the user is creating or modifying a skill.
 
 Each SKILL.md needs valid YAML frontmatter:
 
@@ -102,13 +99,13 @@ source: owner/repo
 ref: main
 commit: <sha>
 upstream_path: path/in/source
-local_path: skills/<category>/<skill>
+local_path: skills/<skill>
 fetched_at: YYYY-MM-DD
 notes: |
   - what changed
 ```
 
-4. Copy the upstream into `skills/<category>/<skill>/SKILL.md` as the starting point and apply your changes.
+4. Copy the upstream into `skills/<skill>/SKILL.md` as the starting point and apply your changes.
 5. Validate: `npx skills add ~/Coder/skills --list` must show the fork as ONE skill (the snapshot must not appear).
 6. Regenerate the ledger (below).
 
@@ -116,7 +113,7 @@ To update a fork from upstream — three-way compare:
 
 - A = freshly fetched upstream (temp)
 - B = `registry/upstream/<skill>/` (old pristine)
-- C = `skills/<category>/<skill>/SKILL.md` (your modified copy)
+- C = `skills/<skill>/SKILL.md` (your modified copy)
 
 Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite B with A and bump `commit` / `fetched_at` / `notes` in `meta.yaml`. Regenerate the ledger.
 
@@ -128,7 +125,7 @@ Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite 
 - Regenerate after any third-party install/remove/fork or after editing `projects.yaml`:
 
 ```bash
-node skills/workflows/manage-skills/scripts/sync-registry.mjs
+node skills/manage-skills/scripts/sync-registry.mjs
 ```
 
 - Data sources: global lock `~/.agents/.skill-lock.json`, each project's `skills-lock.json`, and fork `meta.yaml` files. Self-created skills (`jfmoe/skills` / local to this repo) are excluded.

@@ -2,7 +2,7 @@ source: anthropics/claude-plugins-official
 ref: main
 commit: f42c6edab38a90e56b7120a45525c541dee86ecc
 upstream_path: plugins/claude-md-management/skills/claude-md-improver
-local_path: skills/workflows/agents-md-improver
+local_path: skills/agents-md-improver
 fetched_at: 2026-06-27
 notes: |
   - Renamed from claude-md-improver to agents-md-improver.
