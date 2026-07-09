@@ -1,0 +1,66 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "720e9b062d87",
+  "session_id": "019f472e-10ee-7b42-8bf1-1559ced960f2",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-09T14:08:12.773609Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "save_step_count": 2,
+  "files_touched": [
+    "registry/ledger.yaml",
+    "registry/upstream/agents-md-improver/meta.yaml",
+    "registry/upstream/brainstorming/meta.yaml",
+    "registry/upstream/brainstorming/visual-companion.md",
+    "skills/brainstorming/visual-companion.md"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.5",
+  "turn_id": "6316d44b7f2b",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 91979,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 424192,
+    "output_tokens": 9789,
+    "api_call_count": 18
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-09T14:08:12.762784Z",
+    "agent_lines": 25,
+    "agent_removed": 24,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 25,
+    "total_lines_changed": 49,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 25,
+      "agent_lines_removed": 24
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 25,
+      "agent_lines_removed": 24
+    }
+  ]
+}

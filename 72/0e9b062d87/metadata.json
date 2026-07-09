@@ -1,0 +1,30 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "720e9b062d87",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "registry/ledger.yaml",
+    "registry/upstream/agents-md-improver/meta.yaml",
+    "registry/upstream/brainstorming/meta.yaml",
+    "registry/upstream/brainstorming/visual-companion.md",
+    "skills/brainstorming/visual-companion.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/72/0e9b062d87/0/metadata.json",
+      "transcript": "/72/0e9b062d87/0/full.jsonl",
+      "compact_transcript": "/72/0e9b062d87/0/transcript.jsonl",
+      "content_hash": "/72/0e9b062d87/0/content_hash.txt",
+      "prompt": "/72/0e9b062d87/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 91979,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 424192,
+    "output_tokens": 9789,
+    "api_call_count": 18
+  }
+}
