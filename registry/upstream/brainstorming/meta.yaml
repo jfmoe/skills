@@ -1,9 +1,9 @@
 source: obra/superpowers
 ref: main
-commit: 896224c4b1879920ab573417e68fd51d2ccc9072
+commit: d884ae04edebef577e82ff7c4e143debd0bbec99
 upstream_path: skills/brainstorming
 local_path: skills/brainstorming
-fetched_at: 2026-06-27
+fetched_at: 2026-07-09
 notes: |
   Local modifications — re-apply these whenever updating from upstream:
 
@@ -43,3 +43,7 @@ notes: |
   node was upstream's all along (introduced in obra/superpowers and later removed
   there), NOT a local modification — an earlier note here claimed otherwise and was
   wrong.
+
+  Reconciled to the upstream commit above on 2026-07-09: took upstream's deletion
+  of the Gemini CLI launch section from visual-companion.md, preserving the local
+  manual-only and .brainstorm path changes.
