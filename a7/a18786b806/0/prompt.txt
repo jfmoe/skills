@@ -1,0 +1,3 @@
+https://github.com/trailofbits/skills/blob/main/plugins/gh-cli/skills/gh-cli/SKILL.md
+
+[$writing-great-skills](/Users/jfmoe/.agents/skills/writing-great-skills/SKILL.md) 写一个skill，查看任何github远程内容时，都参考这个skill的建议，如果是要分析repo，先浅拷贝到临时目录

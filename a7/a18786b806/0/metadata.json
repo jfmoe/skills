@@ -1,0 +1,61 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "a7a18786b806",
+  "session_id": "019f8010-5d38-7a03-be82-8920b65f33e6",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-20T15:26:20.748277Z",
+  "branch": "main",
+  "checkpoints_count": 5,
+  "save_step_count": 1,
+  "files_touched": [
+    "skills/inspect-github/SKILL.md"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.6-sol",
+  "turn_id": "40fb83598e4c",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 177698,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 2754048,
+    "output_tokens": 18166,
+    "api_call_count": 42
+  },
+  "session_metrics": {
+    "turn_count": 5
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-20T15:26:20.722921Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 10,
+    "human_removed": 76,
+    "total_committed": 45,
+    "total_lines_changed": 86,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 5,
+      "user_lines_removed": 43,
+      "agent_lines_added": 50,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "skills/inspect-github/SKILL.md": 5
+      },
+      "user_removed_per_file": {
+        "skills/inspect-github/SKILL.md": 43
+      }
+    }
+  ]
+}
