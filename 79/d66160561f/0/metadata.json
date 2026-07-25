@@ -1,0 +1,89 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "79d66160561f",
+  "session_id": "019f99ca-47a9-7693-b313-fe385023d2e6",
+  "strategy": "manual-commit",
+  "created_at": "2026-07-25T15:27:48.75056Z",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "save_step_count": 3,
+  "files_touched": [
+    "skills/rust-code-quality/SKILL.md",
+    "skills/rust-code-quality/references/chapter_01.md",
+    "skills/rust-code-quality/references/chapter_02.md",
+    "skills/rust-code-quality/references/chapter_03.md",
+    "skills/rust-code-quality/references/chapter_04.md",
+    "skills/rust-code-quality/references/chapter_05.md",
+    "skills/rust-code-quality/references/chapter_06.md",
+    "skills/rust-code-quality/references/chapter_07.md",
+    "skills/rust-code-quality/references/chapter_08.md",
+    "skills/rust-code-quality/references/chapter_09.md",
+    "skills/rust-code-quality/references/chapter_10.md"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.6-sol",
+  "turn_id": "4d8e26b2bbc5",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 345629,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 10723840,
+    "output_tokens": 42116,
+    "api_call_count": 109
+  },
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-07-25T15:27:48.693505Z",
+    "agent_lines": 2858,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 46,
+    "human_removed": 8,
+    "total_committed": 2903,
+    "total_lines_changed": 2912,
+    "agent_percentage": 98.1456043956044,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 89,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "skills/review-rust-code/SKILL.md": 85,
+        "skills/review-rust-code/agents/openai.yaml": 4
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 118,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 3071,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 4,
+      "user_lines_added": 1,
+      "user_lines_removed": 5,
+      "agent_lines_added": 2912,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "skills/rust-code-quality/SKILL.md": 1
+      },
+      "user_removed_per_file": {
+        "skills/rust-code-quality/SKILL.md": 5
+      }
+    }
+  ]
+}

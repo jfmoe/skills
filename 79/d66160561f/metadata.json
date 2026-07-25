@@ -1,0 +1,36 @@
+{
+  "cli_version": "0.8.42",
+  "checkpoint_id": "79d66160561f",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "files_touched": [
+    "skills/rust-code-quality/SKILL.md",
+    "skills/rust-code-quality/references/chapter_01.md",
+    "skills/rust-code-quality/references/chapter_02.md",
+    "skills/rust-code-quality/references/chapter_03.md",
+    "skills/rust-code-quality/references/chapter_04.md",
+    "skills/rust-code-quality/references/chapter_05.md",
+    "skills/rust-code-quality/references/chapter_06.md",
+    "skills/rust-code-quality/references/chapter_07.md",
+    "skills/rust-code-quality/references/chapter_08.md",
+    "skills/rust-code-quality/references/chapter_09.md",
+    "skills/rust-code-quality/references/chapter_10.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/79/d66160561f/0/metadata.json",
+      "transcript": "/79/d66160561f/0/full.jsonl",
+      "compact_transcript": "/79/d66160561f/0/transcript.jsonl",
+      "content_hash": "/79/d66160561f/0/content_hash.txt",
+      "prompt": "/79/d66160561f/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 345629,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 10723840,
+    "output_tokens": 42116,
+    "api_call_count": 109
+  }
+}

@@ -1,0 +1,20 @@
+https://www.skills.sh/apollographql/skills/rust-best-practices
+https://www.skills.sh/wshobson/agents/rust-async-patterns
+
+把这两个skill合成一个skill，触发条件是 review 时必须阅读并审查代码质量
+
+---
+
+触发条件修改一下，在编写、修改或review rust 代码时触发
+
+---
+
+原文这么多内容，你怎么都删掉了？
+
+---
+
+别tm放无关的东西
+
+---
+
+你以 rust-best-practices 的架构为主，然后补上rust-async-patterns的内容
