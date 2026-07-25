@@ -18,3 +18,7 @@ https://www.skills.sh/wshobson/agents/rust-async-patterns
 ---
 
 你以 rust-best-practices 的架构为主，然后补上rust-async-patterns的内容
+
+---
+
+提交代码
