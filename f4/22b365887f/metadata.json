@@ -1,0 +1,28 @@
+{
+  "cli_version": "0.9.0",
+  "checkpoint_id": "f422b365887f",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "skills/implement-tickets-with-workers/NEW_SESSION_PROMPT.md",
+    "skills/implement-tickets-with-workers/SKILL.md",
+    "skills/implement-tickets-with-workers/agents/openai.yaml"
+  ],
+  "sessions": [
+    {
+      "metadata": "/f4/22b365887f/0/metadata.json",
+      "transcript": "/f4/22b365887f/0/full.jsonl",
+      "compact_transcript": "/f4/22b365887f/0/transcript.jsonl",
+      "content_hash": "/f4/22b365887f/0/content_hash.txt",
+      "prompt": "/f4/22b365887f/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 56190,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 182272,
+    "output_tokens": 4293,
+    "api_call_count": 8
+  }
+}

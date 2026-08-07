@@ -1,0 +1,46 @@
+{
+  "cli_version": "0.9.0",
+  "checkpoint_id": "f422b365887f",
+  "session_id": "019fda0d-812c-7011-a150-9d398ccd0bae",
+  "strategy": "manual-commit",
+  "created_at": "2026-08-07T02:31:01.004654Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "skills/implement-tickets-with-workers/NEW_SESSION_PROMPT.md",
+    "skills/implement-tickets-with-workers/SKILL.md",
+    "skills/implement-tickets-with-workers/agents/openai.yaml"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.6-sol",
+  "turn_id": "447d0081f5d2",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 56190,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 182272,
+    "output_tokens": 4293,
+    "api_call_count": 8
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-08-07T02:31:00.995735Z",
+    "agent_lines": 80,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 80,
+    "total_lines_changed": 80,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    }
+  ]
+}

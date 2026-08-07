@@ -1,0 +1,1 @@
+[$implement-tickets-with-workers](/Users/jfmoe/.codex/skills/implement-tickets-with-workers/SKILL.md) 把这个skill上传到当前仓库
