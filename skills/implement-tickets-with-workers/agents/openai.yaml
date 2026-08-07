@@ -1,0 +1,7 @@
+interface:
+  display_name: "Implement Tickets with Workers"
+  short_description: "串行编排 worker subagent 实现依赖 tickets"
+  default_prompt: "Use $implement-tickets-with-workers to implement these tickets serially with worker subagents."
+
+policy:
+  allow_implicit_invocation: false
