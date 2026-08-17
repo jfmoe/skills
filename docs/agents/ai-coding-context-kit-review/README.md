@@ -13,7 +13,7 @@ Review and approve this folder as one unit before promoting any artifact into it
 - `user/`: disabled candidate user-level defaults and their source record.
 - `project/`: disabled candidate project/subtree AGENTS files, hook, CI, config, verifier, and adjacent source records.
 - `skills/`: five candidate Skills, disabled for discovery by the `.review` suffix.
-- `registry/upstream/`: proposed pristine fork snapshots and metadata.
+- `registry/upstream/`: proposed pristine upstream snapshots and fork metadata, including the complete preset file that owns the extracted plan-mode prompt.
 - `SOURCE_CATALOG.md`: complete inspected-source inventory and include/adapt/exclude decisions.
 
 ## Suggested review order
@@ -22,7 +22,7 @@ Review and approve this folder as one unit before promoting any artifact into it
 2. Review `user/` and `project/` for always-on versus scoped prompt placement.
 3. Review each disabled candidate under `skills/` together with its `references/upstream-sources.md`.
 4. Review `project/scripts/`, `.githooks/`, `.github/`, and the config as one mechanical unit.
-5. Compare fork candidates with their exact pristine copies under `registry/upstream/`.
+5. Compare every source-derived candidate with its exact pristine source under `registry/upstream/`.
 
 The kit separates concerns by enforcement strength:
 
@@ -43,6 +43,8 @@ The kit separates concerns by enforcement strength:
 | [`review-code-prose`](skills/review-code-prose/SKILL.md.review) | Contract-preserving review of docs, comments, prompts, diagnostics, and visible strings. |
 
 Each candidate contains `references/upstream-sources.md` covering its future `SKILL.md`, wrapper, bundled references, commit-pinned source locations, verbatim/adapted status, portable changes, and the upstream MIT notice.
+
+Portable extraction is verbatim-first: retain upstream wording when the rule applies to general repositories; adapt only product names, repository paths, commands, tools, fixed policy, and domain contracts that would be false or unavailable elsewhere.
 
 [`SOURCE_CATALOG.md`](SOURCE_CATALOG.md) records every non-fixture `AGENTS.md`, repository Skill, and shipped Agent preset inspected at the pinned commit, including material intentionally excluded from the portable kit.
 

@@ -6,7 +6,7 @@ This skill is a portable fork of DeepSeek Harness `dsh-code-review`. Upstream re
 
 | Skill material | Upstream source and position | Preservation |
 |---|---|---|
-| Live range, surrounding context, and review priority | `.agents/skills/dsh-code-review/SKILL.md`, line 8 | Substantially verbatim; the DeepSeek `change-scope` command is generalized. |
+| Guidance boundary, live range, surrounding context, and review priority | `.agents/skills/dsh-code-review/SKILL.md`, line 8 | The guidance sentence and review-priority sentence are verbatim; the DeepSeek `change-scope` command and PR-only nouns are generalized. |
 | Semantic review axes | Same file, lines 31-45 | Most bullet wording is verbatim. Cordis, Loader-export, invariant, Agent Note, transcript, and bilingual specifics are removed or generalized. |
 | Prose review | Same file, lines 20-27 | Semantic-review requirement retained without repository-specific documentation tiers. |
 | Finding contract | Same file, lines 47-49 | First four sentences are substantially verbatim; GitHub-thread mechanics removed. |

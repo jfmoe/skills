@@ -5,6 +5,8 @@ description: Reviews a branch, pull request, commit range, or working-tree diff 
 
 # Review Code Changes
 
+**This skill is guidance, not a complete checklist.**
+
 Verify the live base and exact head, inspect the complete change scope, and read enough surrounding code to understand the design. A change-scope report identifies paths but does not replace semantic review. Re-establish the range after a retarget, merge, or rebase. Prioritize correctness, lifecycle, security, and broken required behavior over style; a short review with one substantiated blocker is better than a list of nits.
 
 ## Establish authority

@@ -5,7 +5,7 @@ description: Finds evidence-backed opportunities to remove, fold, demote, or rep
 
 # Audit Code Simplifications
 
-Turn a broad simplification request into a few well-proven candidates rather than a pile of thin guesses. Length or complexity alone is not a defect.
+This skill helps turn a broad "find things to simplify" request into evidence-backed candidates that remove or collapse existing code and design surface. It is guidance, not a checklist: follow the code, keep judgment active, and prefer a few well-proven candidates over a pile of thin guesses.
 
 ## Establish context
 
@@ -21,13 +21,19 @@ A strong simplification removes, folds, or demotes something real and has clear 
 - Tests or docs are the only consumers, and the behavior they pin is not load-bearing.
 - Two representations mirror the same fact.
 - A seam has methods every implementation must support but no consumer uses.
-- A separate package exists only for test, demo, or support code and adds publish or dependency overhead.
+- A separate package exists only for test/demo/support code and adds publish or dependency overhead.
 - A feature implements speculative product generality with no current product owner.
 - An invariant, rollback path, set of expected outputs, or special-case test exists only to protect an unused API.
-- Hand-rolled code reimplements what a well-maintained dependency or runtime builtin already provides, and the swap deletes the implementation plus its dedicated tests.
+- Hand-rolled code reimplements what a well-maintained external package or a runtime builtin already provides, and the swap would delete the implementation plus its dedicated tests.
 - The simplified behavior may differ slightly, but the new behavior is still reasonable and easier to explain.
 
-Reject “this looks complex” without call-site proof. Tiny local cleanups may be valid work but are not durable simplification findings.
+Thin candidates are usually not enough: deleting one typo, running an unused-code tool once, removing an intentionally documented implementation, or flagging "this looks complex" without call-site proof.
+
+## Survey broadly
+
+Survey the whole requested scope before stopping. Do not let the first good candidate stop the survey.
+
+Start with the largest production-code deltas. A broad simplification audit that stops after obvious unused symbols can miss the files where duplicated lifecycle or defensive machinery carries most of the cost.
 
 ## Classify consumers
 
@@ -37,20 +43,31 @@ For every symbol or behavior, classify consumers before reporting it:
 - Non-production: tests, docs, snapshots, fixtures, generated expected outputs, and comments.
 - Ambiguous: examples, scripts, dynamic registrations, public exports, reflection, and protocol strings that require inspection.
 
-Search exact symbols, event and wire names, package names, configuration keys, method calls, and dynamic registration paths. Then read the call sites. Static unused-code tools can help, but they do not replace understanding public interfaces and dynamic loading.
+Use repository search first. Good searches include the exact symbol, event name, package name, config key, method name, and any wire strings. Then read the call sites. Static unused-code tools can help, but they are not a substitute for understanding public interfaces, dynamic names, tests, docs, and loader paths.
 
 Reject or downgrade a candidate when:
 
 - A production caller exists and the simplification would be a feature decision rather than a cleanup.
-- A current decision or defensive pattern justifies the design, and the new evidence does not beat that reason.
-- The removal forces unrelated churn without reducing the public API or required behavior.
-- A dependency wrapper relocates the same complexity instead of producing net deletion.
+- The API is explicitly justified by a current decision or hard-won defensive pattern, and the new evidence does not beat that reason.
+- The removal would force unrelated churn without actually reducing the public API or required behavior.
+- The idea is correct but tiny and belongs in a targeted local note rather than a durable simplification finding.
 
 ## Audit ownership and lifecycle
 
-For every defensive copy, freeze, validator, and callback capture, name where the value came from and who owns it next. Validate at parser, configuration, model/tool JSON, durable-file, worker, process, and wire boundaries; do not invent hostile-input contracts at typed same-process boundaries.
+For every defensive copy, freeze, validator, and callback capture, name where the value came from and who owns it next. Same-process typed calls ordinarily borrow readonly values; parsers, config loaders, queues, model/tool JSON, durable files, workers, processes, and wire decoders own or validate their data. Tests built around hostile getters, fake typed objects, callback replacement, or mutation after a same-process handoff are evidence of a potentially speculative contract, not automatic justification for keeping it.
 
-For complex asynchronous code, draw the ownership graph and map each sentinel, readiness promise, cancellation path, disposer, and state flag to a distinct owner or transition. When several mechanisms mirror the same liveness or settlement fact, propose one transaction or lifecycle controller instead. Preserve separate machinery where it protects publication and rollback, callback containment, first-terminal-outcome arbitration, worker/process ownership, or dispose-to-quiescence.
+For complex asynchronous code, draw the ownership graph and map each sentinel, readiness promise, cancellation path, disposer, and state flag to a distinct owner or transition. When several mechanisms mirror the same liveness or settlement fact, propose one transaction or lifecycle controller instead. Preserve separate machinery where it protects synchronous publication and rollback, callback containment, first-terminal-outcome arbitration, worker/process ownership, or dispose-to-quiescence.
+
+## Hand-rolled code versus a dependency
+
+Introducing a dependency is a valid simplification move, not a policy exception. When surveying protocol parsers, framers, retry/backoff loops, glob matchers, diff engines, and similar infrastructure, ask whether a well-maintained package or runtime builtin already does this.
+
+Prove a dependency-swap candidate like any other, plus:
+
+- Read the hand-rolled implementation and name the exact surface the package covers; residual semantics the package does not cover count against the swap.
+- Check the package's health honestly—maintenance, adoption, and transitive footprint—and prefer builtins when the supported runtime provides them.
+- Check current decision records first; a swap that collapses a settled seam needs to beat the recorded rationale, not just cite a dependency preference.
+- Weigh net deletion: implementation plus dedicated tests plus docs, minus the glue that remains. A wrapper that relocates the same complexity is not a win.
 
 ## Report
 

@@ -1,6 +1,6 @@
 # Async and Lifecycle Rules
 
-- Report orthogonal outcomes independently. A result can be several things at once; surface each independent fact on its own instead of nesting one outcome inside another's branch.
+- Report orthogonal outcomes independently. A result can be several things at once. Surface each independent fact on its own; never nest one flag's report inside another's branch, or a caller reads a cut-short run as a clean success.
 - Honor public contracts on both sides. Normalize multiple internal representations of one outcome before returning through the public API, document the normalized contract where its type is defined, and exercise every source form through the real consumer.
 - Async state is not synchronous per-operation state. Define the interval an owner controls explicitly, and handle the “nothing to wait for” branch so waits cannot hang.
 - Represent one asynchronous operation with one lifecycle controller or transaction. Separate readiness, cancellation, disposal, reservation, or sentinel state requires an independent owner or settlement point; otherwise fold it while preserving rollback, callback containment, and quiescence.

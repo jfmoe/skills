@@ -6,18 +6,19 @@ This skill is a portable fork of DeepSeek Harness `dsh-prose-standard`, suppleme
 
 | Skill material | Upstream source and position | Preservation |
 |---|---|---|
-| Objective and definition of contract | `.agents/skills/dsh-prose-standard/SKILL.md`, lines 8-12 | Opening paragraph and comment rule are verbatim. |
-| Scope, write authority, and derivative exclusions | Same file, lines 14-26 | Authority semantics retained; DeepSeek paths and bilingual workflow removed. |
-| Complete proposition | Same file, lines 28-42 | Core list is preserved with related result and safe-use facts coalesced. |
+| Objective, terminology, and definition of contract | `.agents/skills/dsh-prose-standard/SKILL.md`, lines 8-12 | Contract definition, terminology test, comment rule, and “guidance, not a script” boundary are verbatim; links to sibling DeepSeek skills are removed. |
+| Scope, operating mode, write authority, and derivative exclusions | Same file, lines 14-26 | Scope, automatic/interactive behavior, and write-authority wording are substantially verbatim; DeepSeek paths and bilingual workflow are removed or generalized. |
+| Complete proposition | Same file, lines 28-42 | The upstream proposition list and preservation rules are verbatim; behavior/result and safe-use orientation are retained as additional sourced facts. |
 | Prose surfaces | Same file, lines 38-61 | General semantic requirements retained; DeepSeek document names and links generalized. |
 | One home per fact and current-state prose | `docs/AGENTS.md`, lines 15-45 | Semantic placement rules retained; formatting, budgets, bilingual pairing, and exact document taxonomy excluded. |
 | Reasoning transcript leakage | `docs/AGENTS.md`, lines 59-71; `.agents/skills/dsh-trim-cot-leakage/SKILL.md`, lines 8-23 and 39-45 | Examples generalized while retaining the keep-contract/delete-derivation distinction. |
-| Distilled calibration examples | `.agents/skills/dsh-prose-standard/references/examples.md`, lines 1-167 | Example body retained verbatim; only a navigation table was added. |
+| Workflow and borderline decisions | Same file, lines 63-81 | General workflow, classification, learning, and borderline-decision wording is verbatim or minimally generalized; DeepSeek commands, fixed paths, vendor-only verification, and PR inline-comment mechanics are removed. |
+| Distilled calibration examples | `.agents/skills/dsh-prose-standard/references/examples.md`, lines 1-167 | All general example wording is verbatim. A navigation table is added; `Agent Note` and `ctx.shell` terminology is minimally generalized for portable use. |
 | OpenAI wrapper | `.agents/skills/dsh-prose-standard/agents/openai.yaml`, lines 1-4 | Thin-wrapper pattern retained with the portable Skill name and scope substituted. |
 
 Pinned source links:
 
-- <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-prose-standard/SKILL.md#L8-L61>
+- <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-prose-standard/SKILL.md#L8-L81>
 - <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/AGENTS.md#L15-L45>
 - <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-trim-cot-leakage/SKILL.md#L8-L45>
 - <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-prose-standard/references/examples.md#L1-L167>
@@ -25,7 +26,7 @@ Pinned source links:
 
 ## Portable changes
 
-Removed Markdown layout, word budgets, exact document tiers, bilingual pairing, Agent Note lifecycle, and DeepSeek paths. Kept semantic completeness, single ownership, current-state documentation, Skill-scope requirements, prose-surface coverage, reasoning-transcript rules, and the upstream calibration examples.
+Removed Markdown layout, word budgets, exact document tiers, bilingual pairing, Agent Note lifecycle, and DeepSeek paths from the workflow. Kept general upstream wording for semantic completeness, single ownership, current-state documentation, Skill scope, prose-surface coverage, workflow, borderline decisions, reasoning-transcript rules, and calibration examples. Generalized only product-specific terms inside the examples.
 
 `agents/openai.yaml` preserves the upstream thin-wrapper pattern from `.agents/skills/dsh-prose-standard/agents/openai.yaml`, lines 1-4, with the portable Skill name and scope substituted.
 

@@ -5,11 +5,11 @@ Upstream: `deepseek-ai/deepseek-harness` at `47f943859bef60e4160492346772ded9b24
 | Prompt block | Source and position | Preservation |
 |---|---|---|
 | Current owner and public-choice evidence | `packages/AGENTS.md`, lines 11-12 | Substantially verbatim; “plugin or service” generalized to “module or service”. |
-| Dependency, misconfiguration, typed boundaries, obvious comments, tests | Root `AGENTS.md`, lines 110-121 | Dependency, misconfiguration, obvious-comment, and test sentences are verbatim; TypeScript-specific wording is generalized to static types. |
+| Dependency, misconfiguration, typed boundaries, obvious comments, tests | Root `AGENTS.md`, lines 110-121 | Dependency, misconfiguration, and obvious-comment sentences are verbatim; the test sentence preserves the upstream rule with “PR” generalized, and TypeScript-specific wording is generalized to static types. |
 | Enforcement, commit-point publication, complete bounds | `packages/AGENTS.md`, lines 14-16 | Substantially verbatim with alternate UI callers added. |
 | Interface review | `.agents/skills/dsh-code-review/SKILL.md`, lines 31-35 | Adapted into an implementation invariant. |
 | Testing strength and real entry | `docs/testing.md`, lines 21-35 | Generalized; DeepSeek Loader and package examples removed. |
-| Documentation semantics | `docs/AGENTS.md`, lines 15-45; `.agents/skills/dsh-prose-standard/SKILL.md`, lines 28-60 | Formatting and bilingual requirements excluded. |
+| Documentation semantics | `docs/AGENTS.md`, lines 15-45; `.agents/skills/dsh-prose-standard/SKILL.md`, lines 28-60 | One-home, current-state, complete-contract, and reasoning-transcript sentences are retained verbatim where general; formatting and bilingual requirements are excluded. |
 | Conditional Skill pointers | Portable skills in this repository | Original routing text. |
 
 Pinned links:

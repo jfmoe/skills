@@ -20,11 +20,12 @@ Read the repository's architecture, domain, decision, and testing documents befo
 
 ## Documentation and tests
 
-- Tests describe behavior, not correctness. Change obsolete behavior with its tests and explain why in the change description.
+- Tests describe behavior, not correctness. Change obsolete behavior with its tests; explain why in the change description.
 - Every behavior change needs the narrowest test or purpose-built check that would fail for its regression. Use a real entry path when internal mounting can hide integration, packaging, resolution, or startup defects.
 - Verify external state rather than trusting a program or agent's self-report. Tests own and release the resources they create.
-- Update affected public documentation and code contracts with behavior, defaults, errors, side effects, timing, ownership, and safe-use facts. Keep one authoritative home per fact and describe current state rather than change history.
-- Do not comment on facts obvious from code. Keep non-obvious contracts and rationale; remove control-flow narration, test walkthroughs, review history, and code restatement.
+- Each maintained fact has one authoritative home; elsewhere, link there. Update affected public documentation and code contracts with behavior, defaults, errors, side effects, timing, ownership, and safe-use facts.
+- Document current state, not change history. Avoid "previously/now/no longer", PRs, commits, and stack positions in durable prose; name the live mechanism.
+- Comments and JSDoc state complete contracts, not reasoning transcripts. Do not comment on facts obvious from code. Keep non-obvious contracts and rationale; remove control-flow narration, test walkthroughs, and code restatement.
 - Edit canonical sources, then regenerate derivative artifacts. Treat vendored and frozen historical content according to its owning workflow.
 
 ## Conditional workflows

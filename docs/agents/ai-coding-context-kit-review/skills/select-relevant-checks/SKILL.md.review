@@ -9,10 +9,17 @@ Run relevant local evidence once. Match verification to the behavior and outgoin
 
 ## Inspect the change
 
-1. Confirm the repository, branch, worktree state, live comparison base, and exact head.
-2. Inspect committed, staged, unstaged, and untracked paths that belong to the requested change.
-3. Read the affected implementation, public surface, tests, build entries, generated projections, and project testing instructions.
-4. After a changed base, merge, or rebase, reassess the combined scope and rerun only checks invalidated by that change.
+1. Confirm the checkout and branch.
+
+```sh
+git status --short --branch
+git rev-parse --show-toplevel
+```
+
+2. Verify the live comparison base and exact head, then inspect the complete scope against them.
+3. Inspect committed, staged, unstaged, and untracked paths that belong to the requested change.
+4. Read the affected implementation, public surface, tests, build entries, generated projections, and project testing instructions.
+5. After a changed base, merge, or rebase, reassess which behavior the combined scope can affect and rerun only checks invalidated by that change.
 
 ## Select relevant evidence
 
@@ -42,7 +49,14 @@ Coverage proves lines ran, not that a feature works as shipped. A green command 
 
 ## Handle failures and report
 
-Stop on a relevant failure. Determine whether it is a product failure, pre-existing failure, or demonstrated environment limitation; do not disable hooks, lower thresholds, skip tests, or claim CI will differ without evidence.
+If a relevant check fails, stop and fix or explain the blocker. Do not publish and hope CI differs.
+
+If a failure looks environment-specific, prove it:
+
+- Record the exact command, failing test, and platform-specific mismatch.
+- Confirm the relevant non-platform evidence.
+- Prefer fixing cross-platform nondeterminism when the check is required.
+- Do not disable hooks, lower thresholds, or skip tests; report the exact failure and why another environment is expected to differ.
 
 Report:
 

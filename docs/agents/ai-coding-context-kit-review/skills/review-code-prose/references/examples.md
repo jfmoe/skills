@@ -13,7 +13,7 @@ Use these examples to identify the governing principle, not as text templates. �
 - [Public JSDoc includes failures](#public-jsdoc-includes-failures)
 - [Keep a concise implementation mapping](#keep-a-concise-implementation-mapping)
 - [Link rationale while keeping the local contract](#link-rationale-while-keeping-the-local-contract)
-- [Implemented Agent Notes retain verification contracts](#implemented-agent-notes-retain-verification-contracts)
+- [Implemented decision records retain verification contracts](#implemented-decision-records-retain-verification-contracts)
 - [A security boundary may need one concrete example](#a-security-boundary-may-need-one-concrete-example)
 - [Delete reasoning transcripts entirely](#delete-reasoning-transcripts-entirely)
 - [Configuration comments explain what the tree cannot](#configuration-comments-explain-what-the-tree-cannot)
@@ -76,7 +76,7 @@ Event order and its current-request consequence are caller-visible behavior, not
 
 **Over-trimmed:** “Worker realm support.”
 
-**Balanced:** “Owns the worker realm and its host bridge. Realm initialization is single-shot; disposal terminates the worker and rejects later calls. See the worker-isolation Agent Note for the protocol rationale.”
+**Balanced:** “Owns the worker realm and its host bridge. Realm initialization is single-shot; disposal terminates the worker and rejects later calls. See the worker-isolation decision record for the protocol rationale.”
 
 **Over-detailed:** A paragraph-by-paragraph preview of the classes and helper functions below.
 
@@ -104,17 +104,17 @@ Keep mapping details that explain where an adapter drops or changes information.
 
 ## Link rationale while keeping the local contract
 
-**Over-trimmed:** “Disposal is documented in the lifecycle Agent Note.”
+**Over-trimmed:** “Disposal is documented in the lifecycle decision record.”
 
-**Balanced:** “Disposal aborts the run and waits for provider quiescence. See the lifecycle Agent Note for ownership and race handling.”
+**Balanced:** “Disposal aborts the run and waits for provider quiescence. See the lifecycle decision record for ownership and race handling.”
 
-**Over-detailed:** Repeating the Agent Note's promise choreography and rejected ownership models beside every disposer.
+**Over-detailed:** Repeating the decision record's promise choreography and rejected ownership models beside every disposer.
 
 Keep the behavior and completion guarantee where callers need them. Link aggressively for the algorithm and rationale; a link cannot replace the local contract.
 
-## Implemented Agent Notes retain verification contracts
+## Implemented decision records retain verification contracts
 
-**Over-trimmed:** Deleting the entire Testing section because the Agent Note has already shipped.
+**Over-trimmed:** Deleting the entire Testing section because the decision has already shipped.
 
 **Balanced:** “Unit tests cover cancellation before and after publication, disposal quiescence, and provider reload. A built-entry smoke covers the real loader path; snapshot coverage is deferred because the transport is process-specific.”
 
@@ -126,7 +126,7 @@ Remove migration tasks and test narration. Keep the tiers, behaviors they pin, r
 
 **Over-trimmed:** “Mounted plugins share the host's authority.”
 
-**Balanced:** “Mounted plugins share the host's authority; for example, access to `ctx.shell` permits commands with the host executor's privileges.”
+**Balanced:** “Mounted plugins share the host's authority; for example, access to a host command service permits commands with the host executor's privileges.”
 
 **Over-detailed:** A list of every service a plugin could misuse and every hypothetical exploit.
 
@@ -182,6 +182,6 @@ Know what the generator extracts. That fragment must preserve the contract neede
 
 **Over-detailed:** Listing private helper cleanup and unused test-only accessors with no caller or maintainer consequence.
 
-**Balanced:** “Provider selection is cached for the plugin lifetime; installing or repairing a provider requires reload.” Keep ordinary cleanup in its TODO or Agent Note.
+**Balanced:** “Provider selection is cached for the plugin lifetime; installing or repairing a provider requires reload.” Keep ordinary cleanup in its TODO or decision record.
 
 Retain gaps and non-obvious constraints that affect use or safe maintenance. A package README is not a backlog dump.

@@ -1,0 +1,9 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: 47f943859bef60e4160492346772ded9b24f765a
+upstream_path: apps/cli/config/agent-presets/standard
+local_path: skills/plan-code-changes
+fetched_at: 2026-08-16
+notes: |
+  - Derived the portable planning workflow from the plan-mode prompt in agent.cordis.yml lines 113-124.
+  - Preserved general prompt wording verbatim and removed product-only tool, cache, and runtime-composition mechanics.

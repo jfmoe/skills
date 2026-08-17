@@ -4,7 +4,7 @@ Upstream: `deepseek-ai/deepseek-harness` at `47f943859bef60e4160492346772ded9b24
 
 | Rule | Source and position | Preservation |
 |---|---|---|
-| Orthogonal outcomes | `docs/defensive-patterns.md`, lines 7-9 | Condensed while retaining the original rule. |
+| Orthogonal outcomes | `docs/defensive-patterns.md`, lines 7-9 | General sentences are retained verbatim; only the process-specific example is omitted. |
 | Public contract normalization | Same file, lines 11-13 | First and final instructions preserved; DeepSeek LLM example removed. |
 | Async interval and no-wait branch | Same file, lines 15-17 | Generalized from Agent-specific examples. |
 | One lifecycle controller | `packages/AGENTS.md`, line 9 | Verbatim. |

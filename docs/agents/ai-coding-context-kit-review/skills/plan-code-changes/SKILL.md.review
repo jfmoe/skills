@@ -38,4 +38,4 @@ Return one self-contained plan containing:
 - focused tests and final acceptance checks;
 - explicit assumptions, user decisions, risks, and intentional exclusions.
 
-Do not append implementation work, patches, or a generic request to proceed. Use the environment's explicit plan-approval mechanism when one exists; otherwise present the plan and wait for the user's next instruction.
+Do not append implementation work, patches, or a generic request to proceed. Use the environment's explicit plan-approval mechanism when one exists; otherwise present the plan and wait for the user's next instruction. Implementation begins only in a later step after approval. If review rejects it, incorporate the feedback and present again.

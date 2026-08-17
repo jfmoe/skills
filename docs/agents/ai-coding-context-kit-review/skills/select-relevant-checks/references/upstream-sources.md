@@ -6,16 +6,17 @@ This skill is a portable fork of DeepSeek Harness `dsh-pre-push-checks`, supplem
 
 | Skill material | Upstream source and position | Preservation |
 |---|---|---|
-| Inspect the outgoing change | `.agents/skills/dsh-pre-push-checks/SKILL.md`, lines 10-25 | Workflow preserved; exact Git and DeepSeek `change-scope` commands are generalized. |
+| Inspect the outgoing change | `.agents/skills/dsh-pre-push-checks/SKILL.md`, lines 10-25 | Generic Git commands and workflow wording are verbatim; the DeepSeek `change-scope` command and stack-specific mechanics are generalized. |
 | Narrowest relevant evidence | Same file, lines 27-37 | Opening rule and check classes are substantially verbatim with package names removed. |
 | Coverage selection | Same file, lines 39-60 | Core distinction and anti-bypass rule retained without Vitest-specific commands. |
-| Full local rehearsal | Same file, lines 62-64 | Verbatim except the removed DeepSeek aggregate name. |
+| Full local rehearsal | Same file, lines 62-64 | The general opening sentence is verbatim; the removed DeepSeek aggregate and repository-script inventory are excluded. |
+| Failure evidence | Same file, lines 83-92 | Generic stop, evidence, and platform-mismatch wording is verbatim or minimally generalized; the post-sync exception and hook-bypass permission are excluded. |
 | Real implementation, world verification, and real entry | `docs/testing.md`, lines 21-35 | Principles preserved and generalized. |
 | Snapshot requirement | `docs/testing.md`, lines 47-49 | Converted from a universal project mandate into conditional evidence selection. |
 
 Pinned source links:
 
-- <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-pre-push-checks/SKILL.md#L10-L64>
+- <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/.agents/skills/dsh-pre-push-checks/SKILL.md#L10-L92>
 - <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/testing.md#L7-L49>
 - <https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/AGENTS.md#L86-L92>
 

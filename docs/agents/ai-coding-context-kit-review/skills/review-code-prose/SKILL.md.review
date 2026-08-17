@@ -5,13 +5,17 @@ description: Reviews, writes, trims, or repairs semantic prose in code repositor
 
 # Review Code Prose
 
-Write enough to preserve the contract, then remove reasoning transcripts, repetition, and decoration. A contract is an obligation, invariant, precondition, postcondition, or compatibility promise that a caller, callee, implementer, producer, or consumer relies on.
+Write enough to preserve the contract, then remove reasoning transcripts, repetition, and decoration. A contract is an obligation, invariant, precondition, postcondition, or compatibility promise that a caller, callee, implementer, producer, or consumer relies on. It is guidance, not a script.
+
+Treat `contract`, `boundary`, `shape`, `surface`, `seam`, `gate`, and `vocabulary` as terms to check before use, not banned words. First ask whether the exact rule, API, field set, type, validation, timing point, component split, or failure states the fact better. Keep a term when it names the exact technical subject, including caller/callee contracts and security/process boundaries.
 
 Comments describe non-obvious contracts or rationale that code cannot express; they do not restate what code already implies.
 
 ## Establish scope and authority
 
-Require an explicit scope. Do not infer a repository-wide audit from a local request. Review and audit tasks report findings without editing; explicitly requested write, fix, or trim tasks apply clear changes.
+Require an explicit scope. If it is missing, report the required input and stop; do not infer a repository-wide scope or begin an interview.
+
+Accept automatic or interactive operation; default to automatic. Enter interactive operation only when the user explicitly requests questions or calibration. This choice controls questions, not write authority. Review and audit tasks report findings without editing; explicitly requested write, fix, or trim tasks apply clear changes.
 
 Read applicable project instructions and the owning code or behavior. Exclude vendored, generated, archived, frozen, fixture, and snapshot content unless the user explicitly places an exact artifact in scope. Edit the owning source first, then regenerate derivative material.
 
@@ -25,7 +29,8 @@ Before editing, identify every proposition in the passage. Preserve each relevan
 - condition, timing, and ordering;
 - modality such as must, may, or never;
 - negative guarantee and exception;
-- behavior, result, failure, side effect, ownership, and consequence;
+- behavior and result;
+- ownership, side effect, failure mode, and consequence;
 - non-obvious orientation needed to use the API, process, or feature safely.
 
 Remove adjectives, repetition, and narration only when every factual clause survives and the result is clearer. A smaller word count alone is not an improvement.
@@ -60,6 +65,26 @@ Preserve searchable mechanism names and meaningful modal, temporal, or negative 
 Delete the path used to derive a result when readers only need the resulting contract or durable rationale. Typical leakage includes step-by-step implementation narration, proofs of obvious branches, test execution walkthroughs, rejected local alternatives, review conversation, and status commentary that will rot.
 
 Do not erase the strongest counterargument, trade-off, compatibility promise, security reason, or failure consequence when it remains necessary to prevent a future mistake.
+
+## Workflow
+
+1. Confirm the scope, operating mode, current branch or comparison base, and applicable repository instructions. Do not inspect unrelated branches.
+2. Read the owning code or behavior and any applicable documentation standard before judging a passage. For calibration or unfamiliar cases, read [the distilled examples](references/examples.md).
+3. Inspect the requested scope, not only the largest files. Use searches and word counts to find candidates, then judge passages semantically.
+4. Classify each candidate as keep, add, trim, restore, restructure, or defer. Apply clear changes only when the task authorizes edits; do not manufacture edits to satisfy a deletion target.
+5. Update the owner before derivative artifacts. Re-check analogous passages after learning a new rule.
+6. Run the narrow relevant checks, documentation gates, diff checks, and behavior tests for visible strings.
+7. Report the inspected scope, clear changes, deliberate keeps, deferred cases, and checks actually run.
+
+## Borderline decisions
+
+A case is borderline only when at least two versions satisfy the complete-proposition rule but trade accepted principles, and this skill does not already resolve the tradeoff. A rewrite with one proposition-preserving answer is not borderline.
+
+In automatic operation, apply clear edits when authorized and report genuine borderline cases without asking questions. Do not weaken a proposition to make progress.
+
+In interactive operation, group analogous passages under the governing principle. Present two or three viable versions, recommend one, and state the factual or structural difference. Do not offer inferior distractors.
+
+After the user decides, distill the principle and versions into [the examples](references/examples.md), without review history or reviewer narration, and apply the learned rule to every analogous passage in scope.
 
 ## Report
 

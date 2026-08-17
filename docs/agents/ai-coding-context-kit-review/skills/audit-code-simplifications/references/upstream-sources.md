@@ -6,10 +6,11 @@ This skill is a portable fork of DeepSeek Harness `dsh-find-simplifications`. Up
 
 | Skill material | Upstream source and position | Preservation |
 |---|---|---|
-| Objective and evidence threshold | `.agents/skills/dsh-find-simplifications/SKILL.md`, lines 8 and 17-31 | Core sentences and most candidate bullets are verbatim; DeepSeek-specific examples and Agent Note thresholds are removed. |
+| Objective and evidence threshold | `.agents/skills/dsh-find-simplifications/SKILL.md`, lines 8 and 17-31 | Guidance and evidence-threshold sentences and most candidate bullets are verbatim; only DeepSeek-specific nouns, examples, links, and Agent Note thresholds are removed or generalized. |
+| Survey breadth | Same file, lines 33-45 | The stop condition and production-delta warning are verbatim; the DeepSeek subsystem inventory and unconditional subagent routing are excluded. |
 | Consumer classification and proof | Same file, lines 64-80 | Classification and reject conditions are preserved with repository path names generalized. |
-| Trust and lifecycle audit | Same file, lines 47-51 | Ownership-graph paragraph is substantially verbatim; the boundary list is combined with `AGENTS.md` line 115. |
-| Dependency as simplification | Same file, lines 53-62 | Net-deletion standard retained; DeepSeek-settled dependencies and packages removed. |
+| Trust and lifecycle audit | Same file, lines 47-51 | Both paragraphs are substantially verbatim; service/plugin names and DeepSeek boundary examples are generalized. |
+| Dependency as simplification | Same file, lines 53-62 | The dependency proof and net-deletion standard are substantially verbatim; DeepSeek-settled dependencies, package manager, engine floor, and Agent Notes are generalized. |
 | Current owner and consumer requirement | `packages/AGENTS.md`, lines 9-12 | Preserved as evidence requirements. |
 
 Pinned source links:
@@ -20,7 +21,7 @@ Pinned source links:
 
 ## Portable changes
 
-Removed DeepSeek-specific protected twin adapters/backends, Agent Note creation and consolidation, PR folding, exact repository paths, and local validation commands. Added an explicit read-only authority rule and portable output classes.
+Removed DeepSeek-specific protected twin adapters/backends, Agent Note creation and consolidation, PR folding, exact repository paths, and local validation commands. Retained general survey, trust/lifecycle, dependency-proof, consumer-proof, and reject-condition wording wherever it remains true outside DeepSeek. Added an explicit read-only authority rule and portable output classes.
 
 `agents/openai.yaml` was generated from this portable skill. There is no upstream wrapper for `dsh-find-simplifications`; the new one-sentence `$audit-code-simplifications` prompt is original and intentionally contains no workflow duplication.
 

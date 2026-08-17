@@ -1,6 +1,6 @@
 # Upstream sources
 
-This skill is an original portable extraction from DeepSeek Harness agent-preset instructions. Source repository: `deepseek-ai/deepseek-harness`, commit `47f943859bef60e4160492346772ded9b24f765a`.
+This skill is a portable fork of the plan-mode prompt in DeepSeek Harness's standard Agent preset. Source repository: `deepseek-ai/deepseek-harness`, commit `47f943859bef60e4160492346772ded9b24f765a`. The complete pristine `agent.cordis.yml` that owns the prompt is retained under `registry/upstream/plan-code-changes/`.
 
 ## Source map
 
@@ -8,7 +8,7 @@ This skill is an original portable extraction from DeepSeek Harness agent-preset
 |---|---|---|
 | Read-only plan mode and repository exploration | `apps/cli/config/agent-presets/standard/agent.cordis.yml`, lines 113-120 | The “Use non-mutating reads…” paragraph is verbatim. The discoverable-facts paragraph is preserved except that the product-specific `ask_user_question` tool name is generalized. |
 | Decision-complete plan | `apps/cli/config/agent-presets/standard/agent.cordis.yml`, line 122 | Verbatim except that the introductory imperative is moved into the section heading. |
-| Explicit plan approval and no implementation during planning | `apps/cli/config/agent-presets/standard/agent.cordis.yml`, lines 113-124 | Semantics retained; `exit_plan_mode` and `todo_write` are generalized because they are not portable tools. |
+| Explicit plan approval and no implementation during planning | `apps/cli/config/agent-presets/standard/agent.cordis.yml`, lines 113-124 | General approval and later-implementation sentences are verbatim; `exit_plan_mode`, `todo_write`, and cache-stability mechanics are generalized or removed because they are not portable tools. |
 | Prefer current owners, consumers, and existing patterns | `packages/AGENTS.md`, lines 9-12; `.agents/skills/dsh-code-review/SKILL.md`, lines 31-35 | Adapted into planning questions. |
 
 Pinned source links:
