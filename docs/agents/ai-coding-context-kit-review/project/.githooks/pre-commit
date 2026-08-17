@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+repo_root=$(git rev-parse --show-toplevel)
+
+git diff --cached --check
+node "$repo_root/scripts/verify-agent-guardrails.mjs" --staged

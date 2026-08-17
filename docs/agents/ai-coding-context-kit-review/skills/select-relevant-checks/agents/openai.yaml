@@ -1,0 +1,4 @@
+interface:
+  display_name: "Select Relevant Checks"
+  short_description: "Choose the narrowest sufficient verification"
+  default_prompt: "Use $select-relevant-checks to choose and run the relevant checks for this change."

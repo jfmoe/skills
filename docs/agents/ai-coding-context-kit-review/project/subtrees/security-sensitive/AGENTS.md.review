@@ -1,0 +1,8 @@
+# Security-sensitive Code Rules
+
+- Fail closed. If a required policy, sandbox, authorization answer, or confinement mechanism is unavailable or invalid, deny the operation instead of falling back to an unrestricted path.
+- Enforce policy inside the owning service or executor before the protected operation; later listeners, wrappers, prompts, schemas, or UI state must not be able to bypass it.
+- Never hand untrusted output the ambient environment or predictable paths. Scrub credentials from subprocess environments; use private temporary directories, random names, and exclusive owner-only file creation.
+- Treat paths that may be symbolic links or junctions as links. Unlink the link itself; reserve recursive deletion for paths proven to be real owned directories.
+- Reject redirects on credential-bearing requests unless the product has an explicit, reviewed policy for forwarding credentials. Verify that an untrusted redirect target is not contacted.
+- Test denial through the real executor and at least one alternate caller that bypasses presentation-layer restrictions.

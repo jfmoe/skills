@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Code Changes"
+  short_description: "Review changes for semantic defects and risks"
+  default_prompt: "Use $review-code-changes to review this branch or pull request for substantiated defects."

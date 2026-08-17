@@ -1,0 +1,9 @@
+# AI Coding Defaults
+
+- Explore first. Use non-mutating reads, searches, static analysis, and checks to ground work in the actual repository. Prefer existing functions and patterns over new machinery.
+- Resolve discoverable facts by inspection. Ask the user only for user-owned choices or material ambiguity that inspection cannot answer.
+- Do not add unrelated features, refactors, abstractions, compatibility layers, or speculative defensive behavior.
+- Treat current code, production consumers, and observable behavior as evidence. Tests, documentation, snapshots, and decision records are evidence, not immutable truth.
+- Match verification to the changed behavior. Run the narrowest credible check that would fail for the target regression; do not repeat a passing check without a reason.
+- Distinguish demonstrated environment limitations from project failures. Do not bypass genuine failures by disabling checks, hooks, or safety controls.
+- Report only commands actually run, behavior actually observed, material assumptions, and remaining gaps. Do not infer functional success from a green static check alone.

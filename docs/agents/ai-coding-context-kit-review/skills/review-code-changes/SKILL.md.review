@@ -1,0 +1,37 @@
+---
+name: review-code-changes
+description: Reviews a branch, pull request, commit range, or working-tree diff for substantiated semantic defects. Use when a user asks for code review, PR review, branch review, review since a fixed point, or an independent correctness and risk assessment. Review is read-only unless the user explicitly asks to fix findings.
+---
+
+# Review Code Changes
+
+Verify the live base and exact head, inspect the complete change scope, and read enough surrounding code to understand the design. A change-scope report identifies paths but does not replace semantic review. Re-establish the range after a retarget, merge, or rebase. Prioritize correctness, lifecycle, security, and broken required behavior over style; a short review with one substantiated blocker is better than a list of nits.
+
+## Establish authority
+
+Read the applicable project instructions, originating issue or specification, architecture and decision records, testing policy, and defensive-pattern documentation. Treat tests, docs, and decision records as evidence, not automatic vetoes; verify them against current code and production consumers.
+
+Review only the requested range. Do not edit files, post comments, change PR state, or run destructive commands unless the user explicitly requests those actions.
+
+## Review semantic risks
+
+- **Intent and interface contracts:** trace both sides of every changed interface. Confirm the implementation matches the request and current decisions, including errors, cancellation, ownership, and disposal.
+- **Lifecycle and concurrency:** check races before publication, cancellation during awaits, independent error reporting, callback containment, ownership before reentry, complete detach cleanup, and quiescent disposal.
+- **Capability and consumer fit:** trace every current consumer. Flag consumer-specific behavior leaking into a generic interface and public API expansion whose only caller is one internal consumer.
+- **Scope, ownership, and necessity:** map each abstraction, state machine, option, defensive copy, and compatibility path to its current contract, production consumer, and owning module or service. Challenge unrelated features and speculative generality.
+- **Configuration and public choices:** ask what current-consumer evidence or prior art supports each default, public operation set, format, or imported external concept. Require an explicit choice or deferral when that evidence is absent.
+- **User or model perspective:** inspect the exact prompts, schemas, results, diagnostics, protocol output, and UI text the affected consumer receives. Flag implementation vocabulary that does not belong in the consumer's task.
+- **Enforcement:** follow every denial path to the operation that executes it. Exercise direct and alternate callers that can bypass schemas, prompts, facades, wrappers, UI state, or listener ordering.
+- **Borrowed and derived state:** determine whether each retained value is borrowed or owned, then trace notifications and every cache, prompt, UI echo, replay, and query view to the documented success point and authoritative source.
+- **Bounds:** locate the owner of the complete emitted or retained result, including wrappers and metadata. Probe tiny and exact limits, oversized single chunks, and multibyte text for byte limits.
+- **Real entry path:** confirm tests exercise the shipped loader, binary, worker, bridge, process, or public API where relevant, rather than only hand-mounted internals.
+- **Test strength:** require assertions that fail on the intended regression and verify external state, logs, events, output, or disposal rather than restating the implementation or trusting a program's self-report. Coverage is necessary but not evidence that the scenario is correct.
+- **Prose semantics:** review every changed public document, JSDoc, comment, prompt, description, diagnostic, and visible string for required coverage, accuracy, placement, and editorial quality. Automated checks do not establish those properties.
+
+Do not report style preferences already enforced by a passing formatter or lint gate. Do not invent a finding merely to avoid an empty review.
+
+## Report findings
+
+State the defect, location, impact, and evidence. Place a localized defect on the tightest relevant line range; use a review-level finding for cross-cutting architecture, scope, or semantics. Separate blockers from suggestions and omit issues already enforced by a green gate.
+
+Order findings by severity. Include a concise residual-risk or testing-gap summary after the findings. If no actionable finding survives verification, say so explicitly and name any material validation gaps.

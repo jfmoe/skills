@@ -1,0 +1,55 @@
+---
+name: select-relevant-checks
+description: Selects and runs the smallest credible set of tests and checks for a code or documentation change. Use before pushing, marking work ready, claiming checks pass, diagnosing which verification is required, or after a rebase or merge changes the outgoing diff. Do not use as permission to publish or mutate remote state.
+---
+
+# Select Relevant Checks
+
+Run relevant local evidence once. Match verification to the behavior and outgoing diff rather than reflexively running every repository check.
+
+## Inspect the change
+
+1. Confirm the repository, branch, worktree state, live comparison base, and exact head.
+2. Inspect committed, staged, unstaged, and untracked paths that belong to the requested change.
+3. Read the affected implementation, public surface, tests, build entries, generated projections, and project testing instructions.
+4. After a changed base, merge, or rebase, reassess the combined scope and rerun only checks invalidated by that change.
+
+## Select relevant evidence
+
+There is no universal local baseline beyond project hooks. Every behavior change needs the narrowest available test or purpose-built check that would fail for its regression; add broader checks only for surfaces the diff actually reaches.
+
+- **Module or package behavior:** run the owning test file or focused test name. Add adjacent tests when a shared contract changes.
+- **Documentation, catalogs, generated references, or doc-linked comments:** run the owning documentation or freshness gate.
+- **Model-, editor-, CLI-, protocol-, terminal-, or user-visible output:** run the focused snapshot or real runnable scenario that owns the output.
+- **Package manifests, public exports, build configuration, worker or binary entries, or built runtime paths:** run the relevant build, hygiene checks, and built-artifact smoke.
+- **External provider or integration behavior:** run the narrowest real integration or end-to-end target when its credentials and dependencies are available; never print secrets.
+- **UI behavior:** start the real application when practical and exercise the changed user path; static checks do not prove interactive behavior.
+
+Test selection and coverage selection are separate. A test filter chooses which tests run; a coverage filter chooses which affected source must be exercised. Do not narrow either merely to hide an uncovered affected path.
+
+Do not manually repeat a passing check merely because commit or push follows. Run the complete local approximation only when the user explicitly requests it, while diagnosing a CI failure, or when the change spans the repository so broadly that no narrower set is credible.
+
+## Judge evidence strength
+
+- Prefer edge cases, error paths, event ordering, concurrency races, and permanent tests for contract regressions.
+- Mock only the expensive or nondeterministic boundary; keep downstream shipping code real.
+- Verify the world, not a program or agent's self-report. Re-read files, rerun commands, inspect durable state, and assert untouched files remain unchanged when relevant.
+- Exercise the real entry path and published artifact when source-only execution could hide resolution, packaging, or startup defects.
+- Prove a new guard by introducing the intended regression, observing failure, and reverting the probe when that can be done safely in the local worktree.
+- Ensure tests own and release their processes, servers, listeners, temporary files, and other resources on failure and timeout.
+
+Coverage proves lines ran, not that a feature works as shipped. A green command is evidence only for the behavior its assertions and execution path actually cover.
+
+## Handle failures and report
+
+Stop on a relevant failure. Determine whether it is a product failure, pre-existing failure, or demonstrated environment limitation; do not disable hooks, lower thresholds, skip tests, or claim CI will differ without evidence.
+
+Report:
+
+- the behavior and changed surface considered;
+- each exact command run and its result;
+- why each check covers the target regression;
+- skipped checks and the precise missing dependency or credential;
+- residual semantic, platform, UI, integration, or coverage gaps.
+
+Do not push, merge, mark ready, or otherwise mutate remote state unless the user explicitly requested that separate action.

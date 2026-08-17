@@ -1,0 +1,75 @@
+---
+name: review-code-prose
+description: Reviews, writes, trims, or repairs semantic prose in code repositories, including Markdown, README and API documentation, JSDoc and comments, prompts, tool descriptions, diagnostics, and CLI or UI strings. Use when prose must remain concise without losing behavior, failure, timing, ownership, side effects, exceptions, or other contracts. Review and audit requests are read-only unless the user explicitly asks to edit.
+---
+
+# Review Code Prose
+
+Write enough to preserve the contract, then remove reasoning transcripts, repetition, and decoration. A contract is an obligation, invariant, precondition, postcondition, or compatibility promise that a caller, callee, implementer, producer, or consumer relies on.
+
+Comments describe non-obvious contracts or rationale that code cannot express; they do not restate what code already implies.
+
+## Establish scope and authority
+
+Require an explicit scope. Do not infer a repository-wide audit from a local request. Review and audit tasks report findings without editing; explicitly requested write, fix, or trim tasks apply clear changes.
+
+Read applicable project instructions and the owning code or behavior. Exclude vendored, generated, archived, frozen, fixture, and snapshot content unless the user explicitly places an exact artifact in scope. Edit the owning source first, then regenerate derivative material.
+
+For calibration or unfamiliar cases, read [the distilled examples](references/examples.md). Use them to identify governing principles, not as text templates.
+
+## Preserve the complete proposition
+
+Before editing, identify every proposition in the passage. Preserve each relevant:
+
+- actor and action;
+- condition, timing, and ordering;
+- modality such as must, may, or never;
+- negative guarantee and exception;
+- behavior, result, failure, side effect, ownership, and consequence;
+- non-obvious orientation needed to use the API, process, or feature safely.
+
+Remove adjectives, repetition, and narration only when every factual clause survives and the result is clearer. A smaller word count alone is not an improvement.
+
+Keep a complete local contract at the point of use: behavior, failure, ownership, and consequence that a caller or maintainer needs there. Aggressively link to the owning document for architecture, rationale, algorithms, history, or extended examples. One explanation has one home; essential contract facts may repeat locally.
+
+Keep non-obvious rationale when omitting it could plausibly cause misuse or an incorrect simplification. Otherwise state the consequence and link the rationale home.
+
+## Review each prose surface
+
+This is not a one-way shortening pass. Add or restore prose when code, types, and structure do not communicate a required contract below. Do not add a comment when those facts are already obvious locally.
+
+- **Public JSDoc:** document caller-visible return distinctions, throws or rejections, side effects, ownership, timing, cancellation, and durability.
+- **Internal comments:** orient non-local structure and obviously complicated local structure, including invariants, race ordering, ownership, security boundaries, and surprising failure behavior. Delete control-flow narration and code restatement.
+- **Module comments:** state the module's role, dependencies, responsibilities, and non-obvious architecture choices; link architecture choices to their owning explanation.
+- **Tests:** explain only non-obvious test design—why a fixture, assertion, platform accommodation, real entry path, or indirect observation is necessary. Delete walkthroughs and inventories.
+- **Cookbooks:** include prerequisites, required actions, the real entry path, observable verification, and concise warnings.
+- **READMEs:** include the consumer contract: configuration, semantics, failures, limitations, extension points, and model-visible effects. Quote stable model-visible text owned by the package; link generated catalogs and cross-module owners. Keep durable gaps and maintainer traps, not ordinary cleanup inventories.
+- **Decision records:** retain unique rationale, mechanisms, alternatives, consequences, shipped verification evidence, and named coverage gaps. Implemented records state shipped reality in the present tense; remove planning checklists, not evidence of what pins the decision.
+- **Postmortems:** retain the incident sequence, evidence, causal chain, impact, and prevention. Remove repeated persuasion or implementation detail that does not establish causality.
+- **Skills and agent instructions:** state behavioral guardrails and explicit scope limitations such as “guidance, not a script/checklist.” Keep the workflow concise and link its source of truth.
+- **Examples and configuration comments:** explain access limits, non-obvious wiring or load order, security stance, replay behavior, exceptions, and likely misuse. Do not narrate entries that the configuration already shows.
+- **Prompts, tool descriptions, and visible strings:** treat wording as behavior. Inspect generated output and run behavior validation or state why no snapshot applies.
+- **Diagnostics:** name the failing subject or path, violated rule, and correction when it is non-obvious. Remove internal execution narration.
+
+Use direct, concrete names. Prefer the exact type, operation, field, validation, timing point, or failure over broad metaphors. Do not delete a necessary technical term merely because it sounds abstract; verify that it names the exact subject.
+
+Preserve searchable mechanism names and meaningful modal, temporal, or negative emphasis. Normalize decorative emphasis only.
+
+## Remove reasoning-transcript leakage
+
+Delete the path used to derive a result when readers only need the resulting contract or durable rationale. Typical leakage includes step-by-step implementation narration, proofs of obvious branches, test execution walkthroughs, rejected local alternatives, review conversation, and status commentary that will rot.
+
+Do not erase the strongest counterargument, trade-off, compatibility promise, security reason, or failure consequence when it remains necessary to prevent a future mistake.
+
+## Report
+
+For audits, report:
+
+- scope and excluded derivative or frozen material;
+- missing or weakened propositions;
+- duplicated facts and their recommended single owner;
+- reasoning-transcript or code-restatement findings;
+- exact passages that should remain unchanged;
+- proposed edits and any meaning intentionally deferred.
+
+For write tasks, summarize changed contracts, retained wording, relocated ownership, and semantic checks performed. Do not claim semantic correctness from a formatter, link checker, or generated-file gate alone.

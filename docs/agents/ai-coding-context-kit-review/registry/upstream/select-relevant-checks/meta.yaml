@@ -1,0 +1,10 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: 47f943859bef60e4160492346772ded9b24f765a
+upstream_path: .agents/skills/dsh-pre-push-checks
+local_path: skills/select-relevant-checks
+fetched_at: 2026-08-16
+notes: |
+  - Generalized diff-driven evidence selection and combined it with portable testing-policy principles.
+  - Retained the upstream thin OpenAI wrapper in the pristine snapshot.
+  - Removed DeepSeek commands, fixed coverage thresholds, stack rewriting, and remote-push procedures.

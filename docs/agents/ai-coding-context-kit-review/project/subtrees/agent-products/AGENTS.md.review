@@ -1,0 +1,8 @@
+# Agent Product Rules
+
+- Write model-facing contracts from the model's perspective. Prompts, tool schemas, results, and diagnostics contain only task-relevant concepts, not UI, transport, or implementation vocabulary.
+- Inspect the exact assembled prompts, tool schemas, results, diagnostics, and runtime context the model receives in every affected mode; do not review only intermediate source fragments.
+- Pin stable model-visible text verbatim and dynamic behavior through snapshots or end-to-end coverage.
+- Treat prompts, tool descriptions, diagnostics, and visible strings as behavior. Preserve their exact conditions, actions, consequences, recovery information, and negative guarantees.
+- Enforce permissions and policy in the operation that executes them. Prompt wording and schema visibility are not security boundaries.
+- Verify model-driven work by checking external state, not by matching the model's self-report.

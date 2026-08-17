@@ -1,0 +1,36 @@
+# AI Coding Project Rules
+
+Read the repository's architecture, domain, decision, and testing documents before changing the code they govern. Use the nearest scoped `AGENTS.md` for directory-specific constraints.
+
+## Design and scope
+
+- Require a current owner and need. Tie each abstraction, state machine, option, defensive copy, and compatibility path to a current contract or production consumer, and keep behavior in its owning module or service.
+- Require evidence for public choices. Configurability does not justify an unsupported default, public operation set, format, or imported external concept. Use current-consumer evidence or relevant prior art; otherwise require an explicit value or defer the choice.
+- Prefer maintained dependencies over hand-rolling when they genuinely delete owned code and tests.
+- Misconfiguration fails loud at load when self-contained, otherwise at the earliest resolvable point; never silently skip a missing referent.
+- Do not add task-external features, refactors, abstractions, fallback paths, compatibility shims, or validation for impossible internal states.
+
+## Interfaces, state, and enforcement
+
+- Trace both sides of every changed interface, including errors, cancellation, ownership, disposal, and current consumers.
+- Enforce a decision in the operation that makes it. Schema omission, prompt filtering, facades, wrappers, UI state, and listener order are not enforcement when direct or alternate callers can bypass them; test denial through the executor.
+- Publish state only at its commit point. Emit each notification and update derived state only after the operation succeeds; derive caches, prompts, UI echoes, replay, and query views from one authoritative source.
+- Apply bounds to the complete result. Enforce byte, token, item, and time limits where the complete emitted or retained value, including wrappers and metadata, is known; test tiny and exact limits, oversized single chunks, and multibyte byte limits.
+- Trust static types at typed same-process boundaries. Validate user input, parsed configuration, model or tool JSON, durable files, queues, workers, processes, and wire data at their actual system boundaries.
+
+## Documentation and tests
+
+- Tests describe behavior, not correctness. Change obsolete behavior with its tests and explain why in the change description.
+- Every behavior change needs the narrowest test or purpose-built check that would fail for its regression. Use a real entry path when internal mounting can hide integration, packaging, resolution, or startup defects.
+- Verify external state rather than trusting a program or agent's self-report. Tests own and release the resources they create.
+- Update affected public documentation and code contracts with behavior, defaults, errors, side effects, timing, ownership, and safe-use facts. Keep one authoritative home per fact and describe current state rather than change history.
+- Do not comment on facts obvious from code. Keep non-obvious contracts and rationale; remove control-flow narration, test walkthroughs, review history, and code restatement.
+- Edit canonical sources, then regenerate derivative artifacts. Treat vendored and frozen historical content according to its owning workflow.
+
+## Conditional workflows
+
+- Use `$plan-code-changes` for non-trivial design and implementation planning.
+- Use `$audit-code-simplifications` for evidence-backed simplification audits.
+- Use `$review-code-changes` for branch, PR, commit-range, and working-tree review.
+- Use `$select-relevant-checks` before claiming verification is sufficient.
+- Use `$review-code-prose` for semantic review of documentation, comments, prompts, diagnostics, and visible strings.
