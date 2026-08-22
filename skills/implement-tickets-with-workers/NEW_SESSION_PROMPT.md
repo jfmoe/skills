@@ -23,19 +23,23 @@
 
 完整读取该 ticket、它引用的父规格、相关评论和 blocking edges，实现该 ticket 所描述的工作。
 
-尽可能在预先约定的接缝处使用 `$tdd`。定期运行类型检查和单个测试文件，完整测试套件只在最后运行一次。
+可执行行为变更尽可能在预定接缝使用 `$tdd`；纯文档或提示词只做适用的产物检查。仅运行当前 ticket 相关的测试和局部检查，完整测试套件留给主 Agent 收尾。
 
 完成后使用 `$code-review` 审查工作，你已获明确授权，可遵循 `$code-review` 流程继续派生 reviewer subagent，但不得将探索或实现工作委派给下级 subagent。
 
 修改前记录当前 HEAD 作为 fixed point。实现和测试后，review fixed point 到当前工作区的全部未提交改动，包括 staged、unstaged 和 untracked 内容；处理 review 结果后，将工作提交到当前分支并关闭该 ticket。
 ```
 
-等待当前 worker 及其下级 subagents 完整返回后，默认信任其产物、验证结果与 commit。commit 缺失、测试或 review 报告失败，或产物明确违背 ticket 验收项时，让同一 worker subagent 续接补完；如果 ticket 因为客观原因无法完成、或明确需要人来验收或参与，停止并向用户报告，否则进入下一 ticket。
+等待当前 worker 及其下级 subagents 完整返回后，只确认 commit 存在、报告的验证和 review 成功且无 blocker，记录结果后进入下一 ticket；diff 审查、复测和逐项验收留到全部 worker 完成后。未通过交接门槛时，让同一 worker 续接补完；ticket 客观上无法完成或需人参与时，停止并报告。
 
-完成标准：每个 directive 均由固定模板生成且没有未替换字段；每个 ticket 均由 worker 按上述内嵌实现流程完成并提交，执行顺序与 blocking edges 一致，且下一 worker 仅在前一 worker 完整返回后启动。
+完成标准：每个 directive 均由固定模板生成且没有未替换字段；每个 ticket 均由 worker 按上述内嵌实现流程完成并提交，执行顺序与 blocking edges 一致；下一 worker 仅在前一 worker 完整返回并通过交接门槛后启动，主 Agent 在 worker 间仅执行该门槛。
 
 ## 4. 主 Agent 收尾
 
-汇总每个 ticket 的 commit、worker 验证结果和遗留风险，确认 commit 链及仓库状态。以 worker 的 review 和全量测试为验收证据；证据缺失或存在高风险疑点时补充验证。向用户报告并停在验收点，把合并或清理留到用户验收后的下一步。
+全部 worker 完成后，主 Agent 审查初始 Git 基线后的最终 diff，逐 ticket 对照已读取的输入和验收项，检查最终行为、跨 ticket 集成、commit 链和仓库状态；worker 报告仅作线索。
 
-完成标准：报告能逐 ticket 追溯 commit 和验证结果，仓库未提交状态与新会话创建前一致，用户拥有验收所需信息。
+发现问题由主 Agent 直接修复、针对性验证并提交，不再交还 worker。已知问题解决后运行完整测试套件；失败则修复并重跑至通过。
+
+汇总各 ticket 的 commit、验证结果和遗留风险，向用户报告并停在验收点；合并或清理留到用户验收后。
+
+完成标准：主 Agent 已验收每个 ticket 及跨 ticket 行为，修复已提交，完整测试通过，未提交状态恢复到新会话前，且报告可逐 ticket 追溯 commit 和验证结果。
