@@ -1,0 +1,8 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_path: .agents/skills/dsh-trim-cot-leakage
+local_path: skills/trim-cot-leakage
+fetched_at: 2026-08-22
+notes: |
+  - Preserved the Skill independently with the complete taxonomy, exceptions, examples, and recall batteries; generalized only project paths and gates.

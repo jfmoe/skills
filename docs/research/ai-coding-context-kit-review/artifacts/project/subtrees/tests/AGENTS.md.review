@@ -1,0 +1,13 @@
+# Candidate instructions for tests
+
+- Every behavior change needs the narrowest test or purpose-built check that would fail for its regression. Coverage proves lines ran; it does not prove the feature works as shipped.
+- Tests describe behavior, not correctness, and do not make behavior required. When current contract and consumer evidence shows behavior is obsolete, change or delete the behavior and its tests together. Do not preserve code solely to keep an obsolete test green.
+- Before adding a test only to cover an uncovered line or branch, establish its current contract and consumer. Delete dead code and its dedicated tests instead of manufacturing coverage.
+- At a typed same-process boundary, test values allowed by the declared interface rather than impossible hostile inputs. Put validation and hostile-input tests at actual parser, configuration, model or tool JSON, durable-file, worker, process, and wire boundaries.
+- Prefer the real implementation. Mock only expensive or nondeterministic boundaries such as an external model, network, or clock; keep downstream behavior real.
+- Verify the world, not the system's self-report. Re-read files, query external state, inspect events, or observe disposal directly.
+- Test the real entry path when loading, packaging, subprocess, worker, CLI, or assembled composition can differ from a hand-mounted unit.
+- A guard only guards when the intended regression makes it fail. Prove the negative control when the rule is new or its effectiveness is uncertain.
+- Tests own resources: create them in the test and dispose them on success, failure, retry, and timeout.
+- Match evidence to the surface: unit behavior, assembled snapshots for model or user output, built smokes for published paths, and real-provider tests for provider behavior.
+- Text documents and prompts do not receive unit tests for wording. Test code behavior, generated structure, or observable model/user output instead.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "清理 CoT 泄漏"
+  short_description: "保留事实并删除泄漏的推理过程"
+  default_prompt: "使用 $trim-cot-leakage 审计指定文字中的推理过程泄漏，并在不丢失事实条款的前提下修复每个段落。"

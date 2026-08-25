@@ -1,0 +1,8 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_path: .agents/skills/dsh-doc-standards
+local_path: skills/apply-documentation-standards
+fetched_at: 2026-08-22
+notes: |
+  - Retained semantic placement and audit rules; removed formatting, budgets, bilingual layout, and repository-specific hierarchy.

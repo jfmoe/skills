@@ -1,4 +1,0 @@
-interface:
-  display_name: "Plan Code Changes"
-  short_description: "Ground implementation plans in the repository"
-  default_prompt: "Use $plan-code-changes to explore this repository and produce a decision-complete implementation plan."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Code Prose"
+  short_description: "Preserve contracts while trimming prose"
+  default_prompt: "Use $review-code-prose to audit the specified scope for complete, concise, and correctly owned prose."

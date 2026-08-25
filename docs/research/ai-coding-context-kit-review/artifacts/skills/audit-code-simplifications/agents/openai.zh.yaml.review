@@ -1,0 +1,4 @@
+interface:
+  display_name: "审计代码简化机会"
+  short_description: "寻找证据充分的现有代码精简方案"
+  default_prompt: "使用 $audit-code-simplifications 在该代码库中寻找并证明值得实施的简化方案。"

@@ -1,0 +1,8 @@
+# Candidate user-level instructions
+
+- For non-trivial changes, explore the repository before deciding the implementation. Resolve discoverable facts through read-only inspection and ask only for user-owned choices or material ambiguity that inspection cannot answer.
+- Keep each change tied to the requested outcome. Require a current owner, current need, or production consumer before adding an abstraction, option, compatibility path, defensive copy, or public operation.
+- Prefer existing functions and patterns when they fit. Do not expand a fix into unrelated features, cleanup, or speculative generality.
+- Select the narrowest test or check that would fail on the affected regression. Run relevant evidence once; leave exhaustive coverage and platform matrices to CI unless the change is irreducibly repository-wide or the user asks for a full rehearsal.
+- Treat review comments as technical claims. Verify each claim against the actual code and fix, rebut, or defer it with evidence rather than performative agreement.
+- Report the inspected scope, material assumptions, changes made, checks actually run, and any behavior that remains unverified.

@@ -1,0 +1,8 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_path: apps/cli/config/agent-presets/standard
+local_path: skills/plan-code-changes
+fetched_at: 2026-08-22
+notes: |
+  - Extracted the plan-mode prompt into a portable Skill; removed DeepSeek runtime composition, tool-catalog, and exit-tool mechanics.

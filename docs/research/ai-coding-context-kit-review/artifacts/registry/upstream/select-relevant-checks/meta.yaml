@@ -1,0 +1,8 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_path: .agents/skills/dsh-pre-push-checks
+local_path: skills/select-relevant-checks
+fetched_at: 2026-08-22
+notes: |
+  - Kept diff-driven evidence selection and removed push, stack rewrite, and repository-specific command mechanics.

@@ -1,6 +1,6 @@
 ---
 name: manage-skills
-description: Create, update, install, synchronize, and record personal agent skills in ~/Coder/skills. Use when the user asks to create, edit, install, update, sync, or list personal skills, or to record a third-party skill.
+description: Create, update, install, synchronize, and fork personal agent skills in ~/Coder/skills. Use when the user asks to create, edit, install, update, sync, list, or fork personal skills.
 ---
 
 # Manage Skills
@@ -31,14 +31,12 @@ git -C ~/Coder/skills pull --ff-only
 ```text
 skills/                 Installable skills (copied verbatim into projects)
   <skill>/              One folder per skill — flat, no category directories
-registry/               Management metadata (never installed)
-  projects.yaml         Hand-maintained: project paths to scan
-  upstream/<skill>/     Pristine upstream snapshots for forks
-  ledger.yaml           Generated: cross-project third-party + fork ledger
+registry/
+  upstream/<skill>/     Pristine upstream snapshot and provenance for a fork
 ```
 
 - `<skill-name>` is lowercase kebab-case (e.g. `manage-skills`, `macos-maintenance`); flat, no category directories (ADR-0004).
-- Three classes: **original** (self-created), **fork** (modified third-party — see Forking), **third-party** (installed unmodified, tracked only in the registry).
+- Repository-managed skills have two classes: **original** (self-created) and **fork** (modified third-party — see Forking). Unmodified third-party skills stay outside this repository.
 - Never put management metadata inside `skills/<skill>/`; everything there is copied into projects on install.
 
 ## Creating or Editing a Skill
@@ -103,11 +101,10 @@ notes: |                           # human provenance: what changed and why
   - what changed
 ```
 
-   `notes` is human provenance, not inventory data — it is intentionally absent from the generated ledger. Do not "fix" that.
+   `notes` records human provenance for future upstream comparisons.
 
 4. Copy the upstream into `skills/<skill>/SKILL.md` as the starting point and apply your changes.
 5. Validate: `npx skills add ~/Coder/skills --list` must show the fork as ONE skill (the snapshot must not appear).
-6. Regenerate the ledger (below).
 
 To update a fork from upstream — three-way compare:
 
@@ -115,22 +112,7 @@ To update a fork from upstream — three-way compare:
 - B = `registry/upstream/<skill>/` (old pristine)
 - C = `skills/<skill>/SKILL.md` (your modified copy)
 
-Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite B with A and bump `commit` / `fetched_at` / `notes` in `meta.yaml`. Regenerate the ledger.
-
-## Registry (generated)
-
-`registry/ledger.yaml` is GENERATED — never hand-edit it.
-
-- The only hand-maintained input is `registry/projects.yaml` (project paths to scan). Add/remove paths there as the user installs third-party skills into projects.
-- Regenerate after any third-party install/remove/fork or after editing `projects.yaml`:
-
-```bash
-node skills/manage-skills/scripts/sync-registry.mjs
-```
-
-- Data sources: global lock `~/.agents/.skill-lock.json`, each project's `skills-lock.json`, and fork `meta.yaml` files. Self-created skills (`jfmoe/skills` / local to this repo) are excluded.
-- Per-project reproducibility belongs to each project's `skills-lock.json` (`npx skills experimental_install` restores from it); the ledger is only a cross-project overview.
-- Review the git diff after regenerating; output is deterministic, so a clean run yields no spurious changes.
+Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite B with A and bump `commit` / `fetched_at` / `notes` in `meta.yaml`.
 
 ## Rules
 

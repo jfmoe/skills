@@ -8,23 +8,15 @@ Personal source repository for user-created agent skills (Cursor and Claude Code
 AGENTS.md            Repository-level rules (CLAUDE.md is a symlink to this)
 skills/              Installable skills (copied verbatim into projects on install)
   <skill>/           One folder per skill — flat, no category directories
-registry/            Management metadata (never installed)
-  projects.yaml      Hand-maintained: project paths to scan
-  upstream/          Pristine upstream snapshots for forks
-  ledger.yaml        Generated: cross-project third-party + fork ledger
+registry/
+  upstream/          Pristine upstream snapshots and provenance for forks
 ```
 
-Skills come in three classes:
+Repository-managed skills come in two classes:
 
 - **Original** — purely self-created, at `skills/<skill>/SKILL.md`.
 - **Fork** — a modified third-party skill. Installable copy at `skills/<skill>/`; pristine upstream snapshot at `registry/upstream/<skill>/` (see `registry/upstream/README.md`).
-- **Third-party** — installed unmodified via `npx skills`; tracked only in the registry.
-
-The registry ledger is generated, not hand-written:
-
-```bash
-node skills/manage-skills/scripts/sync-registry.mjs
-```
+Unmodified third-party skills are installed directly from their upstream source and stay outside this repository.
 
 ## Validation
 

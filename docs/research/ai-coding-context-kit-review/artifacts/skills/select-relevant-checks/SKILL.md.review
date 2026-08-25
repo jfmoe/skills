@@ -1,0 +1,75 @@
+---
+name: select-relevant-checks
+description: Select and run the narrowest credible tests and quality checks for a diff before claiming validation, committing, pushing, or handing off, without reflexively running the full repository suite.
+---
+
+# Select Relevant Checks
+
+Run relevant local evidence once for the changed behavior. Hooks should stay narrow; CI owns exhaustive coverage and the platform matrix.
+
+This skill selects evidence. It does not authorize commit, push, history rewrite, remote mutation, or bypassing a failed check.
+
+## Inspect the change
+
+Confirm the repository, current branch or detached state, and exact scope: committed range, staged, unstaged, and untracked paths. Verify the live base when the task involves a branch or PR; do not guess it.
+
+Read enough code and configuration to map changed paths to behaviors, entry points, owners, consumers, generated outputs, and platform effects. A path list alone cannot select semantic evidence.
+
+After a base merge, retarget, or rebase, recompute the scope and rerun only evidence invalidated by the changed base.
+
+## Select relevant evidence
+
+There is no universal local baseline beyond configured hooks. Every behavior change needs the narrowest available test or purpose-built check that would fail for its regression; add broader checks only for surfaces the diff actually reaches.
+
+- **Module or script behavior:** run the owning test file or focused test name. Add adjacent tests when a shared contract changes.
+- **Documentation, decision records, generated catalogs, or doc-linked comments:** run the repository's documentation checks and verify semantic accuracy against the owner.
+- **Model-, editor-, protocol-, CLI-, terminal-, or user-visible output:** run the focused snapshot or real runnable scenario that owns the assembled output.
+- **Package manifests, public exports, build configuration, worker or executable entries, or built runtime paths:** run the build, relevant package hygiene, and the owning built-artifact smoke.
+- **Real external-provider behavior:** run the relevant integration or e2e target when credentials and authorization are available; never print secrets.
+- **UI behavior:** exercise the real user path in a browser or equivalent client, including the main path and material boundary states.
+
+Do not manually repeat a passing check merely because commit, push, or handoff follows.
+
+## Unit coverage
+
+Test selection and coverage selection are separate. A test filter chooses which tests run; coverage must name the affected source surface that those tests are expected to prove.
+
+Use the repository's supported focused-coverage mechanism. Include every affected source file or package whose behavior the selected tests exercise. Do not lower thresholds, hide uncovered affected files, or use a no-tests-success option to manufacture a green result.
+
+Dependency-graph test discovery cannot find behavior reached only through configuration, dynamic loading, subprocesses, workers, built artifacts, plugins, or external providers. Select those owning scenarios explicitly.
+
+Coverage is necessary when the project requires it, never sufficient. It proves lines ran, not that the feature works as shipped.
+
+Before adding a test only to cover an uncovered line or branch, trace its current contract and consumers. An uncovered branch with no live obligation is a deletion candidate; remove dead code and its dedicated tests instead of manufacturing coverage.
+
+## Test strength
+
+Prefer the real implementation and mock only expensive or nondeterministic boundaries. Verify external state rather than the system's or model's self-report. Use the real loader, executable, subprocess, worker, package artifact, or assembled application when those surfaces can diverge from a hand-mounted unit.
+
+A new guard only counts as evidence when the intended regression makes it fail. Prove a negative control when effectiveness is not already established.
+
+Tests own their resources and clean them up on success, failure, retry, and timeout.
+
+At a typed same-process boundary, exercise values allowed by the declared interface rather than impossible hostile inputs. Select validation and hostile-input cases at actual parser, configuration, model or tool JSON, durable-file, worker, process, and wire boundaries.
+
+## Full local rehearsal
+
+Run the complete local approximation only when the user explicitly requests it, while diagnosing a CI failure, or when the change spans the repository so broadly that no narrower set is credible. Use current project scripts and workflow files as the inventory; do not recreate an undocumented aggregate.
+
+## Failures and reporting
+
+If a relevant check fails, stop the action whose readiness depends on it. Diagnose the failure or report the blocker; do not weaken the check or assume CI will differ.
+
+A failing test is a technical claim, not authority. Determine whether the implementation regressed or the test pins deliberately retired behavior. When current contract and consumer evidence shows the behavior is obsolete, update or remove the test with the behavior instead of restoring obsolete code merely to regain a green result.
+
+If a failure appears environment-specific, record the exact command, failure, platform condition, and relevant evidence that still passed. Prove the environment distinction before classifying it.
+
+Report:
+
+- changed behaviors and selected evidence;
+- exact commands or manual paths run;
+- pass, fail, skip, and pending results;
+- why each broader check was omitted;
+- remaining platform, credential, UI, or external-state gaps.
+
+Do not claim “all checks pass” when required evidence is skipped, unavailable, pending, or unrun.

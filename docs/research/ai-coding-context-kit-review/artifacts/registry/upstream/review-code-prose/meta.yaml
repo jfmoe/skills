@@ -1,0 +1,8 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_path: .agents/skills/dsh-prose-standard
+local_path: skills/review-code-prose
+fetched_at: 2026-08-22
+notes: |
+  - Generalized protected paths and project-specific document forms; retained complete-proposition rules and examples.

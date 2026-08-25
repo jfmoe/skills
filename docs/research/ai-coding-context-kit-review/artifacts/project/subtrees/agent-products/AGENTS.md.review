@@ -1,0 +1,8 @@
+# Candidate instructions for agent-facing products
+
+- Write prompts, tool schemas, results, diagnostics, and runtime context from the model's task perspective. Keep UI, transport, and implementation vocabulary out unless the model must act on it.
+- Anything that reaches a model request must be reconstructable from the authoritative session or request record.
+- Treat wording as behavior. Pin stable model-visible text verbatim; verify dynamic assembly through a real runnable path, snapshot, or end-to-end scenario.
+- Enforce permissions and denials in the executor or owning operation, not only in prompts, schemas, wrappers, or presentation.
+- Keep business results in execution. Rendering and presentation may transform only what the model or user sees.
+- Test the assembled request and observable outcome. A unit test of a prompt fragment does not prove the shipped composition.

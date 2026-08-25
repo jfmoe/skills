@@ -19,4 +19,4 @@ Before this, the procedure and schema were restated across three documents. That
 
 ## Scope guard
 
-This consolidates only the *procedural* duplication. `CONTEXT.md` (the glossary) and ADR-0001 (the `.orig` rationale) are deliberately left untouched — that what / why / how split is intentional. The `notes` field being present in `meta.yaml` but absent from the generated ledger is also intentional (human provenance, not inventory data), not a defect.
+This consolidates only the *procedural* duplication. `CONTEXT.md` (the glossary) and ADR-0001 (the `.orig` rationale) are deliberately left untouched — that what / why / how split is intentional.

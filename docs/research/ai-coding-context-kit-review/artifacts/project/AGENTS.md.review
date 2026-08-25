@@ -1,0 +1,31 @@
+# Candidate project instructions
+
+## Scope and ownership
+
+- Read the repository's actual architecture, scripts, configuration, and applicable subtree instructions before changing behavior. Inspect the real interface instead of inferring it from a name, example, or remembered schema.
+- Tie every abstraction, state machine, option, compatibility path, and public operation to a current contract or production consumer. Keep behavior in its owning module or service.
+- Experimental code follows the same engineering, security, documentation, lifecycle, and testing obligations as stable code unless an explicit project rule says otherwise.
+
+## Change contract
+
+- Update behavior, tests, public documentation, and non-obvious API contracts together. Comments explain hidden obligations, ownership, timing, failure, or rationale that code cannot express; they do not narrate control flow, tests, or review history.
+- Change canonical sources before generated projections. Do not edit generated files, vendored sources, frozen records, or other protected paths unless the owning workflow explicitly authorizes the change.
+- Enforce a decision in the operation that makes it. Prompt filtering, schemas, wrappers, listener order, and UI hiding are not enforcement when an alternate caller can bypass them.
+- Publish state only after the operation's commit point. Apply byte, token, item, and time bounds to the complete emitted or retained result, including wrappers and metadata.
+
+## Evidence
+
+- Select checks from the changed behavior. Focused tests own the local signal; CI owns exhaustive coverage and the platform matrix.
+- Existing tests describe current behavior; they do not establish that the behavior is still required. When current contract and consumer evidence shows behavior is obsolete, change or delete the behavior and its tests together. Before adding coverage for an uncovered branch, determine whether the branch is live or dead.
+- Trust declared typed same-process interfaces. Put hostile-input validation and tests at actual parser, configuration, model or tool JSON, durable-file, worker, process, and wire boundaries.
+- Treat model-, protocol-, CLI-, editor-, and user-visible wording as behavior. Pin stable text exactly and cover dynamic assembled behavior through snapshots or end-to-end tests.
+- Convert mechanically decidable invariants into an executed hook or CI gate. Keep semantic judgment in review rather than encoding prose policy as brittle text matching.
+
+## Conditional workflows
+
+- For implementation planning, use `plan-code-changes`.
+- For simplification audits, use `audit-code-simplifications`.
+- For semantic change review, use `review-code-changes`.
+- For test and check selection, use `select-relevant-checks`.
+- For documentation placement, use `apply-documentation-standards`.
+- For prose review, use `review-code-prose`; use `trim-cot-leakage` when the problem is reasoning-transcript leakage.

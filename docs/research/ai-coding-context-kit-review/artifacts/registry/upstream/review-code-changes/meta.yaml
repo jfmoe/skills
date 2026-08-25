@@ -1,0 +1,8 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_path: .agents/skills/dsh-code-review
+local_path: skills/review-code-changes
+fetched_at: 2026-08-22
+notes: |
+  - Generalized DeepSeek-specific contracts and commands while retaining semantic review checks and findings guidance.

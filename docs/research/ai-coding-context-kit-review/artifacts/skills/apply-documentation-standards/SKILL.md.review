@@ -1,0 +1,70 @@
+---
+name: apply-documentation-standards
+description: Decide where documentation belongs and review its semantic structure when writing, moving, auditing, or simplifying tutorials, references, READMEs, API docs, decision records, or generated documentation; excludes formatting and style-guide enforcement.
+---
+
+# Apply Documentation Standards
+
+The standard is semantic, not typographic. Decide what the document owns, how readers use it, and which facts belong elsewhere. This skill intentionally does not impose line wrapping, word counts, heading style, bilingual layout, punctuation, or other formatting policy.
+
+Use `review-code-prose` for complete-contract and editorial judgment. Use `trim-cot-leakage` when the problem is reasoning-transcript leakage.
+
+## Review structure before prose
+
+Apply this order to every human-facing document in scope:
+
+1. Locate the document in the repository and navigation tree. State its own subject and identify its direct children.
+2. Set the permitted detail. Keep full detail about the document's subject, summarize direct children by purpose, responsibility, and high-level behavior, and move deeper explanations to their owning descendants with links.
+3. Classify the document from its intended use:
+   - a **tutorial** leads through ordered work to an observable outcome and introduces only what each step needs;
+   - a **reference** supports lookup within an explicit scope and describes current behavior without requiring sequential reading.
+4. For a tutorial, identify the reader's starting knowledge and each concept's prerequisites. Establish prerequisites before dependent concepts and move optional advanced material later.
+5. Split substantial tutorial and reference content. A small secondary form may remain in a clearly named section.
+
+A document type does not widen its scope. A reference may be exhaustive only about its own subject. Testing mechanisms, fixtures, and harnesses belong at the lowest owning level; higher documents link there.
+
+## One home per fact
+
+Each fact has one home: the document whose job is to own it. Elsewhere, link there.
+
+Use the repository's actual hierarchy, but preserve these semantic roles:
+
+- standing instructions hold only rules an agent needs in context;
+- architecture explains composition, ownership, and extension points;
+- subsystem or API references define types and current semantics;
+- decision records preserve rationale, alternatives, consequences, and required verification;
+- incident records preserve chronology and causal evidence;
+- procedures lead through actions and observable verification;
+- package or module references state the consumer contract;
+- generated references are regenerated from authoritative sources.
+
+Before moving a document, find inbound links and update the move atomically. Generated documents are never hand-edited; change their source or generator.
+
+## Audit semantic slop
+
+Hunt these semantically; search patterns are only discovery aids:
+
+- the same rule stated in more than one home;
+- narrated repository history instead of current behavior;
+- implementation-status annotations that the repository tree or manifests already answer;
+- hand-restated catalogs, inventories, source types, tests, or generated data;
+- reasoning transcripts, control-flow narration, test walkthroughs, review choreography, and rejected local alternatives;
+- rationale repeated beside siblings instead of once at the owning capability;
+- a higher-level document carrying descendant-owned implementation detail;
+- durable prose that cites an unresolvable session, draft, review round, or temporary plan.
+
+Keep every load-bearing rule and contract. Do not create a new explanation merely to relocate disposable reasoning.
+
+If removing prose changes promised behavior rather than its explanation, treat it as a product or design change and route it through the project's decision process.
+
+## Current-state accuracy
+
+Verify every claim against the owning code, configuration, generated source, public interface, or observed behavior. Update stale paths, symbols, defaults, mechanisms, and failure behavior in the same change that alters them.
+
+Rewrite stale facts in place. Do not append change history. A reversal of a durable decision requires a new decision record or explicit supersession, not a silent rewrite of its rationale.
+
+## Validation
+
+Run the target repository's relevant documentation checks, link checks, generators, and behavior tests. Automated checks establish structure and freshness only; review still owns semantic accuracy, completeness, placement, and clarity.
+
+Report the inspected scope, moves or ownership changes, deliberate keeps, removed duplication or narration, sources verified, and checks actually run.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "应用文档标准"
+  short_description: "按语义所有权放置并审查文档"
+  default_prompt: "使用 $apply-documentation-standards 审查该文档的归属位置和语义结构。"

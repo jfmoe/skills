@@ -1,0 +1,36 @@
+---
+name: plan-code-changes
+description: Explore a repository read-only and produce a decision-complete implementation plan when the user asks for planning, design, an implementation strategy, or a change plan without authorizing implementation.
+---
+
+# Plan Code Changes
+
+This skill is plan-only. Imperative language to implement changes means plan the implementation, not execute it, while this skill is active.
+
+## Explore first
+
+Use non-mutating reads, searches, static analysis, and checks to ground the plan in the actual repository. Do not edit or write files, change configuration, run formatters or code generation that rewrites tracked files, commit, or otherwise carry out the plan. Prefer existing functions and patterns over new machinery.
+
+Resolve discoverable facts by inspection. Ask the user only for user-owned choices or material ambiguity that inspection cannot answer. Do not ask where code lives or how current behavior works when the repository can answer.
+
+Trace the affected entry points, owners, consumers, data flow, tests, documentation, and applicable instructions. Record assumptions only where evidence cannot decide them.
+
+## Make the plan decision-complete
+
+State the goal and verifiable success criteria. Group implementation changes by subsystem and order them by dependency.
+
+Identify:
+
+- files or modules likely to change and why;
+- public API, schema, persistence, configuration, and data-flow changes;
+- ownership and lifecycle effects;
+- compatibility or migration decisions;
+- edge cases and failure modes;
+- the narrow tests, integration paths, snapshots, or manual acceptance checks that prove the result;
+- explicit assumptions, user-owned decisions, risks, and non-goals.
+
+Keep the plan concise enough to review but detailed enough that another engineer can implement it without making design decisions.
+
+## Completion
+
+Return the complete plan and remain read-only. If a required fact is genuinely unavailable, name the missing evidence and the exact decision it blocks. Implementation begins only after separate authorization.

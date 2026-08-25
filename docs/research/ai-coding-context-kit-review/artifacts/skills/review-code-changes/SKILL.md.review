@@ -1,0 +1,54 @@
+---
+name: review-code-changes
+description: Review a pull request, branch, commit range, or working-tree diff for correctness, lifecycle, security, contract, documentation, and test-evidence defects when the user asks for semantic code review.
+---
+
+# Review Code Changes
+
+This skill is guidance, not a complete checklist. Verify the live base and exact head or define the working-tree boundary before reading the diff. Then read enough surrounding code, applicable instructions, tests, documentation, and decision records to understand the design. A change-scope report identifies paths and dirty layers but does not replace semantic review.
+
+Prioritize correctness, lifecycle, security, data loss, and broken required behavior over style. A short review with one substantiated blocker is better than a list of nits.
+
+## Establish the review contract
+
+Identify:
+
+- the requested behavior or originating specification;
+- the exact base, head, staged, unstaged, and untracked scope being reviewed;
+- applicable root and subtree instructions;
+- current architecture and durable decisions;
+- public interfaces and every current consumer affected by the change;
+- checks already enforced mechanically, so the review does not duplicate a green gate.
+
+Re-establish the base and rerun scope discovery after a retarget, rebase, or merge.
+
+## Blocking requirements
+
+1. **Intent and interface contracts match.** Trace both sides of every changed interface. Confirm errors, cancellation, ownership, timing, disposal, persistence, and compatibility behavior match the requested change.
+2. **New prose receives semantic review.** Critically review every added or changed Markdown passage, JSDoc, comment, prompt, description, diagnostic, and visible string. Automated checks do not establish accuracy, placement, completeness, or editorial quality.
+3. **Docs match the code.** Configuration, defaults, errors, wire fields, events, and public behavior update their owning README, API docs, and non-obvious JSDoc in the same change.
+4. **Registrations and resources clean up.** Verify every new listener, registry contribution, worker, process, timer, temporary path, and subscription has an owner and observable disposal.
+5. **Required evidence exists.** Verify the selected tests and checks cover the changed behavior and that CI owns the remaining exhaustive matrix.
+6. **Enforcement is at the operation.** Follow every denial path to the operation that executes it; direct or alternate callers must not bypass policy through a different schema, prompt, facade, wrapper, or listener order.
+
+## Manual checks
+
+- **Lifecycle and concurrency:** check races before publication, cancellation during awaits, independent outcome reporting, callback containment, ownership before reentry, complete detach cleanup, and disposal quiescence.
+- **Capability and consumer fit:** trace every current consumer. Flag consumer-specific behavior leaking into a generic interface and generic public methods whose only caller needs a private capability.
+- **Scope, ownership, and necessity:** map each abstraction, state machine, option, defensive copy, and compatibility path to a current contract, production consumer, and owner. Challenge unrelated features and speculative generality.
+- **Configuration and public choices:** require current-consumer evidence or relevant prior art for defaults, operation sets, formats, and imported concepts. Otherwise require an explicit choice or deferral.
+- **Model perspective:** inspect the exact prompts, tool schemas, results, diagnostics, and runtime context the model receives. Remove implementation concepts outside its task.
+- **Borrowed and derived state:** determine whether each retained value is borrowed or owned. Trace notifications, caches, prompts, UI echoes, replay, and query views to the authoritative source and documented success point.
+- **Complete bounds:** locate the owner of the full emitted or retained result, including wrappers and metadata. Probe tiny and exact limits, oversized single chunks, and multibyte text for byte limits.
+- **Real entry path:** require a shipped loader, executable, worker, subprocess, package artifact, or assembled application test where hand-mounted units can hide failures.
+- **Test strength:** assertions must fail on the intended regression and verify external state, events, logs, cleanup, or user-visible behavior instead of trusting the implementation's or model's report.
+- **Test necessity and boundary realism:** existing tests describe behavior but do not prove that it remains required. When current contract and consumer evidence shows behavior is obsolete, review the implementation and tests together instead of preserving obsolete code for a green suite. Treat uncovered code with no live obligation as a deletion candidate, and require hostile-input tests only at actual untrusted boundaries rather than typed same-process interfaces.
+- **Negative controls:** when a new guard's effectiveness is not already established, prove the intended invalid case fails through the real runner.
+- **Transcript changes:** editor-, protocol-, model-, or user-visible changes update the owning snapshot or explain why no snapshot applies. Review expected-output diffs as behavior changes, not formatting noise.
+- **Generated and protected material:** change the owner before the projection; do not normalize a frozen record or casually edit protected sources.
+
+## Findings
+
+State the defect, location, impact, and evidence. Place a localized defect on the tightest relevant range; use a review-level finding for cross-cutting architecture, scope, or synthesis. Separate blockers from suggestions and omit issues already enforced by a green gate.
+
+When receiving review, verify each claim and fix, rebut, or defer it on technical grounds. A reviewer, automation adapter, or delegated agent report is evidence to inspect, not authority. Put a fix on the change that introduced the defect, then revalidate the actual resulting tree.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apply Documentation Standards"
+  short_description: "Place and review documentation by semantic ownership"
+  default_prompt: "Use $apply-documentation-standards to review where this documentation belongs and whether its semantic structure is sound."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Code Changes"
+  short_description: "Explore read-only and produce an implementation-ready plan"
+  default_prompt: "Use $plan-code-changes to explore this repository and write a decision-complete implementation plan."

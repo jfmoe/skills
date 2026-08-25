@@ -1,0 +1,4 @@
+interface:
+  display_name: "选择相关检查"
+  short_description: "为差异选择最小可信证据"
+  default_prompt: "使用 $select-relevant-checks 为该改动选择并运行最小可信检查。"

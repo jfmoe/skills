@@ -1,9 +1,0 @@
-source: deepseek-ai/deepseek-harness
-ref: master
-commit: 47f943859bef60e4160492346772ded9b24f765a
-upstream_path: .agents/skills/dsh-code-review
-local_path: skills/review-code-changes
-fetched_at: 2026-08-16
-notes: |
-  - Preserved the semantic review axes and finding contract while making the workflow repository-neutral.
-  - Removed Cordis, Agent Note, bilingual documentation, exact test lane, and GitHub thread mechanics.

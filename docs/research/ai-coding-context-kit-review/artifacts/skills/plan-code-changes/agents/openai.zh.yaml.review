@@ -1,0 +1,4 @@
+interface:
+  display_name: "规划代码改动"
+  short_description: "只读探索并产出可直接实施的计划"
+  default_prompt: "使用 $plan-code-changes 探索该仓库，并编写一份决策完备的实现计划。"

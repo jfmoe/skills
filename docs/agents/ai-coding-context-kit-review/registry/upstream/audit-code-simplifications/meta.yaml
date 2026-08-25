@@ -1,9 +1,0 @@
-source: deepseek-ai/deepseek-harness
-ref: master
-commit: 47f943859bef60e4160492346772ded9b24f765a
-upstream_path: .agents/skills/dsh-find-simplifications
-local_path: skills/audit-code-simplifications
-fetched_at: 2026-08-16
-notes: |
-  - Generalized the evidence-backed simplification audit for arbitrary repositories.
-  - Removed DeepSeek-specific Agent Notes, protected twin implementations, PR folding, paths, and commands.

@@ -1,0 +1,8 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_path: .agents/skills/dsh-find-simplifications
+local_path: skills/audit-code-simplifications
+fetched_at: 2026-08-22
+notes: |
+  - Generalized repository names, Agent Note output, commands, and protected architecture while retaining the evidence bar and taxonomy.

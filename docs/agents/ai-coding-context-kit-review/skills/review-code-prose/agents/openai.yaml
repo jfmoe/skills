@@ -1,4 +1,0 @@
-interface:
-  display_name: "Review Code Prose"
-  short_description: "Preserve contracts while trimming code prose"
-  default_prompt: "Use $review-code-prose to audit documentation, comments, prompts, diagnostics, and visible strings."

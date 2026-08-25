@@ -1,0 +1,10 @@
+# Candidate instructions for documentation
+
+- Give each fact one owning document. Elsewhere, link to that owner instead of restating it.
+- A document's subject and tree position define its scope. Describe its own subject fully, summarize direct children by purpose and high-level behavior, and link to lower-level owners for detail.
+- Classify a document by use: a tutorial leads through ordered work to an observable outcome; a reference supports lookup within an explicit scope.
+- Document current behavior, not the history of how it changed. Put rationale in the durable decision record and incident chronology in the incident record.
+- Change generated documentation at its source or generator, then regenerate it.
+- Preserve complete contracts: behavior, failure, timing, ownership, exceptions, consequences, and safe-use facts. Remove control-flow narration, test walkthroughs, review choreography, and duplicated rationale.
+- Verify documentation against the owning code and behavior. Automated Markdown checks do not establish semantic accuracy.
+- This candidate intentionally imposes no line wrapping, word budget, heading style, bilingual layout, or other formatting policy.

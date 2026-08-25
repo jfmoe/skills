@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Code Changes"
+  short_description: "Find semantic defects in a change set"
+  default_prompt: "Use $review-code-changes to review this change set for substantiated correctness, lifecycle, security, and evidence defects."

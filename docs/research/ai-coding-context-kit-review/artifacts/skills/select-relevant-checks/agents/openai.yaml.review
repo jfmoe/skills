@@ -1,0 +1,4 @@
+interface:
+  display_name: "Select Relevant Checks"
+  short_description: "Choose the narrowest credible evidence for a diff"
+  default_prompt: "Use $select-relevant-checks to select and run the smallest credible checks for this change."

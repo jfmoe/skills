@@ -13,9 +13,6 @@ registry/upstream/<skill>/
   meta.yaml         # provenance (schema lives in the canonical home — see below)
 ```
 
-The `meta.yaml` files here are scanned to surface forks in the generated ledger
-(`registry/ledger.yaml`).
-
 ## See also
 
 - **Fork procedure (create + update) and the `meta.yaml` schema** — the `manage-skills`

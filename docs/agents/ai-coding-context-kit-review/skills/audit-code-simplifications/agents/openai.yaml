@@ -1,4 +1,0 @@
-interface:
-  display_name: "Audit Code Simplifications"
-  short_description: "Find evidence-backed simplification candidates"
-  default_prompt: "Use $audit-code-simplifications to find and rank evidence-backed simplification candidates."

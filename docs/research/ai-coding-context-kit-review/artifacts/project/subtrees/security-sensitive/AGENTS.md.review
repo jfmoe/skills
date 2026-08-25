@@ -1,0 +1,9 @@
+# Candidate instructions for security-sensitive code
+
+- Fail closed. If authorization, confinement, validation, or enforcement is unavailable or non-conforming, deny the action instead of using an unconfined fallback.
+- Only an explicit outcome for the specific action grants it. Missing, cancelled, rejected, throwing, or malformed decisions do not grant permission.
+- Enforce policy at the operation that performs the effect and test denial through direct and alternate callers.
+- Credential-bearing requests do not follow redirects automatically. Prove the redirect target is not contacted.
+- Scrub secrets from child-process environments. Use private directories, random names, and exclusive owner-only creation for temporary or spill files.
+- Treat a path that may be a symlink or junction as link-shaped: inspect it without following and unlink the link rather than recursively deleting through it.
+- Keep protected or vendored source changes coupled to their explicit owning metadata and workflow.

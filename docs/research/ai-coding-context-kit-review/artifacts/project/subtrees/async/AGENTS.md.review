@@ -1,0 +1,8 @@
+# Candidate instructions for lifecycle and asynchronous code
+
+- Report orthogonal outcomes independently; do not hide timeout, signal, cancellation, or exit facts behind another result branch.
+- Do not treat an asynchronous status as the result of one request. Define the owned interval and observe the events or promises that actually settle it.
+- Represent one asynchronous operation with one lifecycle controller or transaction unless separate state has a genuinely independent owner or settlement point.
+- Disposal reaches quiescence: stop new notifications, request cancellation, await owned children, then resolve cleanup.
+- Contain user callback failures in the dispatcher so one subscriber cannot reject core lifecycle work or starve later subscribers.
+- Publish state only after success and preserve rollback, callback containment, cancellation, and teardown ordering in tests.

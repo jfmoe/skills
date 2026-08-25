@@ -1,0 +1,71 @@
+---
+name: review-code-prose
+description: Write, review, restore, trim, or audit prose in codebases—including Markdown, JSDoc, comments, prompts, descriptions, diagnostics, configuration comments, and visible strings—while preserving complete contracts.
+---
+
+# Review Code Prose
+
+Write enough to preserve the contract, then remove reasoning transcripts, repetition, and decoration. A contract is an obligation, invariant, precondition, postcondition, or compatibility promise that a caller, callee, implementer, producer, or consumer relies on.
+
+This skill owns editorial judgment and required prose coverage. Use `apply-documentation-standards` for documentation placement and structure, and `trim-cot-leakage` for the independent reasoning-transcript taxonomy, examples, and recall batteries. It is guidance, not a script.
+
+Treat `contract`, `boundary`, `shape`, `surface`, `seam`, `gate`, and `vocabulary` as terms to check before use, not banned words. Ask whether the exact rule, API, field set, type, validation, timing point, component split, or failure states the fact better. Keep a term when it names the exact technical subject.
+
+Comments describe non-obvious contracts or rationale that code cannot express; they do not restate what code already implies.
+
+## Scope and authority
+
+Use the files named by the user, the current diff, or another explicit path set as the scope. If none of those establishes a safe boundary, request one rather than inferring a repository-wide audit.
+
+Review and audit tasks report findings without editing. Explicit write, fix, restore, or trim requests authorize clear changes inside the stated scope.
+
+Honor applicable protected paths, generated-file ownership, frozen records, and third-party-source rules. Treat generated catalogs, snapshots, and fixtures as derivative: edit the owning source or scenario first, then regenerate the artifact.
+
+## Preserve the complete proposition
+
+Before editing, identify every proposition in the passage. Preserve each relevant:
+
+- actor and action;
+- condition, timing, and ordering;
+- modality such as must, may, or never;
+- negative guarantee and exception;
+- ownership, side effect, failure mode, and consequence.
+
+Remove adjectives, repetition, and narration only when every factual clause survives and the result is clearer. A smaller word count alone is not an improvement.
+
+Keep a complete local contract at the point of use: behavior, failure, ownership, and consequence that a caller or maintainer needs there. Link to the owning document for architecture, rationale, algorithms, history, or extended examples. One explanation has one home; essential contract facts may repeat locally.
+
+Keep non-obvious rationale when omitting it could plausibly cause misuse or an incorrect simplification. Otherwise state the consequence and link the rationale home.
+
+## Required coverage by prose location
+
+This is not a one-way shortening pass. Add or restore prose when code, types, and structure do not communicate a required contract. Do not add a comment when those facts are already obvious locally.
+
+- **Public API docs:** caller-visible return distinctions, throws or rejections, side effects, ownership, timing, cancellation, and durability.
+- **Internal comments:** non-local structure and complicated local invariants, races, ownership, security boundaries, and surprising failure behavior. Delete control-flow narration and code restatement.
+- **Module comments:** role, dependencies, responsibilities, and non-obvious architecture choices; link the owning rationale.
+- **Tests:** only non-obvious test design—why a fixture, assertion, platform accommodation, real entry path, or indirect observation is necessary. Delete walkthroughs and inventories.
+- **Procedures:** prerequisites, required actions, real entry path, observable verification, and concise warnings.
+- **READMEs:** consumer contract—configuration, semantics, failures, limitations, extension points, and model-visible effects. Link generated catalogs and cross-module owners.
+- **Decision records:** unique rationale, mechanisms, alternatives, consequences, verification evidence, and named coverage gaps. Describe shipped reality as current state.
+- **Incident records:** incident sequence, evidence, causal chain, impact, and prevention.
+- **Skills and agent instructions:** behavioral guardrails, completion criteria, and explicit scope limitations such as “guidance, not a script.”
+- **Examples and configuration comments:** access limits, non-obvious wiring or load order, security stance, replay behavior, exceptions, and likely misuse. Do not narrate visible entries.
+- **Prompts and visible strings:** wording is behavior. Inspect generated output and run behavior validation or state why no snapshot applies.
+- **Diagnostics:** failing subject or path, violated rule, and correction when non-obvious. Remove internal execution narration.
+
+Preserve searchable mechanism names and meaningful modal, temporal, or negative emphasis. Normalize decorative emphasis only.
+
+For calibrated decisions, read [the distilled examples](references/examples.md).
+
+## Workflow
+
+1. Confirm the scope, write authority, current diff boundary, and applicable instructions.
+2. Read the owning code or document before judging a passage.
+3. Inspect the requested scope, not only the largest files. Searches and word counts find candidates; semantic judgment decides them.
+4. Classify each candidate as keep, add, trim, restore, restructure, or defer. Do not manufacture edits to satisfy a deletion target.
+5. Update the owner before derivative artifacts. Re-check analogous passages after learning a new rule.
+6. Run narrow relevant checks and behavior tests for visible strings. Confirm the final diff contains no protected path.
+7. Report inspected scope, clear changes, deliberate keeps, deferred cases, and checks actually run.
+
+A case is borderline only when at least two versions preserve every proposition but trade accepted principles. A rewrite with one proposition-preserving answer is not borderline. Present genuine alternatives with their factual or structural differences; do not weaken a proposition to make progress.
