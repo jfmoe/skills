@@ -65,7 +65,7 @@ npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
 # Install one repository skill globally
 npx skills add ~/Coder/skills -g -a codex claude-code --skill manage-skills -y
 
-# Codex only
+# Shared global directory (~/.agents/skills)
 npx skills add ~/Coder/skills -g -a codex --skill '*' -y
 
 # One third-party skill

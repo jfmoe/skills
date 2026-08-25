@@ -45,9 +45,11 @@ npx skills add ~/Coder/skills --list
 
 Default targets are `-a codex claude-code`. Project scope is the CLI default; `-g` selects global scope. Select every repository skill with `--skill '*'`; `--all` instead targets every skill and every supported agent.
 
-With both default targets, non-interactive installation keeps the canonical copy in `.agents/skills` and links Claude Code to it:
+At global scope, `~/.agents/skills` serves every agent except Claude Code and Hermes Agent. The `codex` target populates this shared directory; the `claude-code` target links Claude Code's directory to it. Target `hermes-agent` separately when requested.
 
-| Scope | Canonical / Codex | Claude Code |
+With both default targets, non-interactive installation uses this layout:
+
+| Scope | Shared directory | Claude Code |
 | --- | --- | --- |
 | Project | `.agents/skills/` | `.claude/skills/` → canonical |
 | Global | `~/.agents/skills/` | `~/.claude/skills/` → canonical |
@@ -106,4 +108,4 @@ Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite 
 
 ## Rules
 
-- Do not manually edit runtime install directories: `~/.agents/skills`, `~/.claude/skills`, or project `.agents/skills`.
+- Do not manually edit runtime install directories: `~/.agents/skills`, `~/.claude/skills`, `~/.hermes/skills`, or project `.agents/skills`.
