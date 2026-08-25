@@ -1,6 +1,6 @@
 ---
 name: manage-skills
-description: Create, update, install, synchronize, and fork personal agent skills in ~/Coder/skills. Use when the user asks to create, edit, install, update, sync, list, or fork personal skills.
+description: Use when the user asks to create, edit, install, update, sync, list, or fork personal skills.
 ---
 
 # Manage Skills
@@ -17,14 +17,8 @@ Before working on skills, ensure the source repo is present and current:
 git clone https://github.com/jfmoe/skills ~/Coder/skills
 ```
 
-2. If it exists and is a clean git repo, update it:
-
-```bash
-git -C ~/Coder/skills pull --ff-only
-```
-
-3. If it has local changes, do NOT pull. Continue with local content and report the dirty state.
-4. If the path exists but is not a git repo, do not overwrite it; stop and report.
+2. If it has local changes, do NOT pull. Continue with local content and report the dirty state.
+3. If the path exists but is not a git repo, do not overwrite it; stop and report.
 
 ## Repository Layout
 
@@ -35,24 +29,11 @@ registry/
   upstream/<skill>/     Pristine upstream snapshot and provenance for a fork
 ```
 
-- `<skill-name>` is lowercase kebab-case (e.g. `manage-skills`, `macos-maintenance`); flat, no category directories (ADR-0004).
 - Repository-managed skills have two classes: **original** (self-created) and **fork** (modified third-party — see Forking). Unmodified third-party skills stay outside this repository.
-- Never put management metadata inside `skills/<skill>/`; everything there is copied into projects on install.
 
 ## Creating or Editing a Skill
 
 Only edit `~/Coder/skills/skills/<skill>/SKILL.md` when the user is creating or modifying a skill.
-
-Each SKILL.md needs valid YAML frontmatter:
-
-```markdown
----
-name: skill-name
-description: <what it does and when to use it, third person>
----
-```
-
-Add extra directories (scripts, examples, templates) only when the skill actually needs them.
 
 After creating or editing, run read-only validation:
 
@@ -62,7 +43,16 @@ npx skills add ~/Coder/skills --list
 
 ## Installing and Syncing
 
-Default target is `-a codex claude-code`: `codex` writes `.agents/skills` (read by Cursor and Codex), `claude-code` writes `.claude/skills`. Let the `skills` CLI manage symlinks; do not write a custom symlink script. See [skills-cli.md](skills-cli.md) for how the target choice affects copy vs symlink mode.
+Default targets are `-a codex claude-code`. Project scope is the CLI default; `-g` selects global scope. Select every repository skill with `--skill '*'`; `--all` instead targets every skill and every supported agent.
+
+With both default targets, non-interactive installation keeps the canonical copy in `.agents/skills` and links Claude Code to it:
+
+| Scope | Canonical / Codex | Claude Code |
+| --- | --- | --- |
+| Project | `.agents/skills/` | `.claude/skills/` → canonical |
+| Global | `~/.agents/skills/` | `~/.claude/skills/` → canonical |
+
+`--copy` writes independent copies. A single unique target directory also uses copy mode because no link is needed; a failed link falls back to a copy.
 
 Global (self-created):
 
@@ -78,7 +68,7 @@ npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
 
 Run install/update commands automatically when the user asks to install or update skills. If scope is ambiguous, ask whether they mean global or project-level — unless context clearly indicates personal global setup.
 
-For the full set of CLI commands and options (`add`, `list`, `remove`, `update`, `find`, `init`), see [skills-cli.md](skills-cli.md).
+For CLI sources, discovery, commands, and options, see [skills-cli.md](skills-cli.md).
 
 ## Forking a Third-Party Skill
 
@@ -116,5 +106,4 @@ Diff A↔B for the upstream delta, port the wanted parts into C, then overwrite 
 
 ## Rules
 
-- Do not manually edit runtime install directories: `~/.agents/skills`, `~/.claude/skills`, `~/.cursor/skills`, or project `.agents/skills`.
-- Always read the relevant skill's content before acting on a skill-specific workflow.
+- Do not manually edit runtime install directories: `~/.agents/skills`, `~/.claude/skills`, or project `.agents/skills`.
