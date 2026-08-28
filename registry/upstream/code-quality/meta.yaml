@@ -1,0 +1,35 @@
+source: ruokee/ruokee-agent-kit
+ref: main
+commit: e2c85f98cca5e5b42c8528d7292dcc1054402da6
+upstream_path: skills/code-quality
+local_path: skills/code-quality
+fetched_at: 2026-08-28
+notes: |
+  Primary upstream of this fork. MIT license; LICENSE copied from the upstream
+  repository root into both this snapshot and the installable copy.
+
+  This fork has a SECOND upstream: cursor/plugins
+  thermos/skills/thermo-nuclear-code-quality-review (snapshot and provenance at
+  registry/upstream/thermo-nuclear-code-quality-review/). The Thermo contribution
+  is confined to one new file, so ruokee syncs stay mechanical.
+
+  Local modifications — re-apply these whenever updating from upstream:
+
+  1. Added workflow/thermo-pressure.md — a Thermo pressure pass that runs only
+     after a Full review of the same target. New file; cannot conflict with
+     upstream. Content is derived from the Thermo rules (rewritten, not copied)
+     and constrained by the five-part blocker evidence framework from
+     docs/research/thermo-code-quality-review-integration.md in the fire repo.
+     It additionally absorbs three evidence techniques from the
+     audit-code-simplifications research artifact
+     (docs/research/ai-coding-context-kit-review/artifacts/, itself derived
+     from DeepSeek's dsh-find-simplifications): consumer classification
+     (production / non-production / ambiguous) in check surface 1, net-deletion
+     accounting in blocker field 3, and the obsolete-behavior test rule in
+     check surface 7.
+  2. SKILL.md Mode Selection: added one routing row — an explicit
+     "thermonuclear / thermo-nuclear / extremely strict structural review"
+     request routes to Full review followed by workflow/thermo-pressure.md.
+     Fast and Analysis semantics are unchanged.
+  3. SKILL.md description: appended one sentence naming the thermonuclear
+     trigger words so explicit strict-review requests select this skill.

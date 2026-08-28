@@ -1,0 +1,20 @@
+source: cursor/plugins
+ref: main
+commit: 5102244dabd626b101cff40accbe7f7d1eeefa15
+upstream_path: thermos/skills/thermo-nuclear-code-quality-review
+local_path: skills/code-quality/workflow/thermo-pressure.md
+fetched_at: 2026-08-28
+notes: |
+  Second upstream of the code-quality fork — not a standalone fork. There is no
+  installable copy of this skill in this repository; its rules are rewritten
+  (not copied) into skills/code-quality/workflow/thermo-pressure.md.
+
+  Upstream consists of a single SKILL.md. The pinned commit is the last commit
+  touching that path (verified via the commits API); its content matches the
+  version analyzed in docs/research/thermo-code-quality-review-integration.md
+  (fire repo), which read it at bdf7aa355337897f167153e05069aca505dae17c.
+
+  When checking for Thermo updates: fetch the upstream SKILL.md, diff against
+  SKILL.md.orig here, and port rule changes into
+  skills/code-quality/workflow/thermo-pressure.md while keeping that file's
+  Full-review precondition and evidence framework intact.
