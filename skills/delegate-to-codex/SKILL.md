@@ -62,7 +62,7 @@ Done when:
 
 完成标准：prompt 已送出。
 
-全权限：`--dangerously-bypass-approvals-and-sandbox`。一次性委派覆盖 `-c model_reasoning_effort="high"`。当前 workspace 新建 tab。
+全权限：`--dangerously-bypass-approvals-and-sandbox`。一次性委派覆盖 `-c model_reasoning_effort="medium"`。当前 workspace 新建 tab。
 
 ```bash
 herdr agent list
@@ -72,7 +72,7 @@ herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd "$PWD" --label <codex-r
 从返回 JSON 读取 root pane 的 pane id。name 用 `codex-review` / `codex-explore` / `codex-research`，须匹配 `[a-z][a-z0-9_-]{0,31}`；与 list 撞名则加后缀。
 
 ```bash
-herdr agent start <name> --kind codex --pane <root-pane-id> -- --dangerously-bypass-approvals-and-sandbox -c model_reasoning_effort="high"
+herdr agent start <name> --kind codex --pane <root-pane-id> -- --dangerously-bypass-approvals-and-sandbox -c model_reasoning_effort="medium"
 herdr agent prompt <name> "$(cat "$BRIEF_FILE")"
 ```
 
