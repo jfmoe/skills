@@ -43,7 +43,9 @@ npx skills add ~/Coder/skills --list
 
 ## Installing and Syncing
 
-Default targets are `-a codex claude-code`. Project scope is the CLI default; `-g` selects global scope. Select every repository skill with `--skill '*'`; `--all` instead targets every skill and every supported agent.
+An explicitly named single agent is a private target: verify its native skill directory and install only there. Never fall back to project or global `.agents/skills`; use those only for shared multi-agent installs or explicit requests. If the native target is unknown, stop and report.
+
+When the user does not name an agent, default targets are `-a codex claude-code`. Project scope is the CLI default; `-g` selects global scope. Select every repository skill with `--skill '*'`; `--all` instead targets every skill and every supported agent.
 
 At global scope, `~/.agents/skills` serves every agent except Claude Code and Hermes Agent. The `codex` target populates this shared directory; the `claude-code` target links Claude Code's directory to it. Target `hermes-agent` separately when requested.
 
