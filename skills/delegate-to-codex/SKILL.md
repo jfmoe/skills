@@ -11,7 +11,7 @@ review / explore / research 的 spawn 走 Codex
 
 完成标准：已分成 **worker** 或 **launcher**，且 launcher 已确认 `HERDR_ENV=1`。
 
-本轮 brief 已含填实的产物路径和交接步骤 → **worker**：用自己的工具做完，写产物，按交接退出。
+本轮 brief 已含填实的产物路径和交接步骤 → **worker**：自己执行任务，写产物，按交接退出。
 
 否则，任务是 review / explore / research 委派 → **launcher**。先：
 
@@ -43,7 +43,7 @@ Goal:
 Context:
 <原上下文>
 Constraints:
-用自己的工具做完。禁止 spawn subagent，禁止把任务再委派出去。
+自己执行，禁止把任务再委派出去。
 产物: <artifact>
 Done when:
 <原任务可观察的完成标准>
@@ -86,7 +86,7 @@ prompt 送出即收束本轮，回到 idle 接回呼。并行则 N 个 tab、N �
 
 以 `交接` 开头的回呼走本节。`交接 DONE`：产物非空则读完再裁定/接回。`交接 FAILED`：以回呼一行为结果，产物存在则补读。然后关本次 tab。
 
-review 由主 agent 逐条裁定是否采纳。采纳真实缺陷、规格缺口，以及能提高代码质量的建议。过度设计、为小概率场景加的防御性编程默认不采纳。
+review 结果由 **launcher** 逐条裁定，积极采纳真实缺陷，规格缺口，有利于代码质量、可读性、降低复杂度的建议。不采纳过度设计、罕见场景的防御性编程。
 
 ## 清理
 
@@ -95,5 +95,3 @@ review 由主 agent 逐条裁定是否采纳。采纳真实缺陷、规格缺口
 ```bash
 herdr tab close <tab_id>
 ```
-
-并行则逐个消费、逐个关对应 tab。
