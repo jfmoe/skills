@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kimi Datasource"
+  short_description: "使用 Kimi Code OAuth 查询 25 类结构化数据源"
+  default_prompt: "使用 $kimi-datasource 选择一个最匹配的数据源，优先读取缓存接口说明，有 schema 证据时刷新，需要时先完成发现调用，再取数并总结结果。"

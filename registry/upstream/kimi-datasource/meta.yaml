@@ -1,0 +1,13 @@
+source: MoonshotAI/kimi-code
+ref: main
+commit: 03dcfcf6d08a4b8f0c00432dfe400ed8d9d9868a
+upstream_path: plugins/official/kimi-datasource
+local_path: skills/kimi-datasource
+fetched_at: 2026-08-30
+notes: |
+  - Adapt the official MCP plugin into a standalone CLI skill for Codex and Claude Code.
+  - Preserve the official skill behavior while replacing MCP calls with CLI commands.
+  - Reuse Kimi Code OAuth and preserve safe local file handling.
+  - Remove the upstream watchlist feature from the installable fork.
+  - Remove the upstream prohibition on investment advice and its disclaimer requirement.
+  - Prefer cached datasource schemas and refresh them only when schema evidence exists.
