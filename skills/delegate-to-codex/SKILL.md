@@ -5,27 +5,25 @@ description: 即将 spawn reviewer、explorer 或 researcher 时使用
 
 # 委派 Codex
 
-review / explore / research 的 spawn 走 Codex
-
 ## 判定
 
 完成标准：已分成 **worker** 或 **launcher**，且 launcher 已确认 `HERDR_ENV=1`。
 
 本轮 brief 已含填实的产物路径和交接步骤 → **worker**：自己执行任务，写产物，按交接退出。
 
-否则，任务是 review / explore / research 委派 → **launcher**。先：
+否则是 review / explore / research 委派 → **launcher**。先：
 
 ```bash
 test "${HERDR_ENV:-}" = 1
 ```
 
-失败则停，说明本 skill 只在 Herdr 中可用。通过则进入下一步。
+失败则停：本 skill 只在 Herdr 中可用。
 
 ## 产物路径
 
 完成标准：一条绝对路径。
 
-原 skill 或用户已指定则用它。research 且仓库已有 notes 约定则走约定。否则：
+原 skill 或用户已指定则用它；research 且仓库已有 notes 约定则走约定。否则：
 
 ```bash
 mktemp /tmp/codex.XXXXXX
@@ -35,7 +33,7 @@ mktemp /tmp/codex.XXXXXX
 
 完成标准：Goal / Context / Constraints / Done when 写全，交接填好。交接协议以本节为唯一来源。
 
-Brief = 原本要给 subagent 的内容 + 产物路径 + 下列模板。写入 `mktemp /tmp/codex-brief.XXXXXX`，再交给启动命令。
+Brief = 原本要给 subagent 的内容 + 产物路径 + 下列模板，写入 `mktemp /tmp/codex-brief.XXXXXX`：
 
 ```text
 Goal:
@@ -56,37 +54,40 @@ Done when:
      进程仍在则 SIGTERM 父进程
 ```
 
-`<kind>` 为 `review` / `explore` / `research`。`<PARENT_PANE>` 为启动时的 `$HERDR_PANE_ID`。
+`<kind>` 为 `review` / `explore` / `research`；`<PARENT_PANE>` 为启动时的 `$HERDR_PANE_ID`。
+
+review 类 brief 加「评审口径」段：每条发现标注类型（事实冲突 / 规格缺口 / 改进建议）+ 证据（权威来源原文）；只报「不改会出错或返工」的，风格与可选增强单列「可选」区；修法聚焦实质改进（正确性、可读性、降复杂度），不带既定决策外的新机制。
 
 ## 启动
 
 完成标准：prompt 已送出。
 
-全权限：`--dangerously-bypass-approvals-and-sandbox`。一次性委派覆盖 `-c model_reasoning_effort="medium"`。当前 workspace 新建 tab。
+全权限 `--dangerously-bypass-approvals-and-sandbox`；一次性委派覆盖 `-c model_reasoning_effort="medium"`。当前 workspace 新建 tab：
 
 ```bash
 herdr agent list
 herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd "$PWD" --label <codex-review|codex-explore|codex-research> --no-focus
 ```
 
-从返回 JSON 读取 root pane 的 pane id。name 用 `codex-review` / `codex-explore` / `codex-research`，须匹配 `[a-z][a-z0-9_-]{0,31}`；与 list 撞名则加后缀。
+从返回 JSON 取 root pane id；name 用 `codex-review` / `codex-explore` / `codex-research`（匹配 `[a-z][a-z0-9_-]{0,31}`，撞名加后缀）。
 
 ```bash
 herdr agent start <name> --kind codex --pane <root-pane-id> -- --dangerously-bypass-approvals-and-sandbox -c model_reasoning_effort="medium"
 herdr agent prompt <name> "$(cat "$BRIEF_FILE")"
 ```
 
-`tab create` 之后立刻记下 `tab_id`。`agent start` 或 `prompt` 失败则 `herdr tab close <tab_id>`，报告 stderr 并停。
-
-prompt 送出即收束本轮，回到 idle 接回呼。并行则 N 个 tab、N 个产物、N 条 ping。记下 tab / name / artifact，消费后关 tab。
+记下 `tab_id` / name / artifact 供消费定位；`agent start` 或 `prompt` 失败则 `herdr tab close <tab_id>`，报告 stderr 并停。prompt 送出即收束本轮，回 idle 接回呼；并行则 N 个 tab、产物、ping。
 
 ## 消费
 
-完成标准：产物已读；review 已逐条裁定；其余 kind 已接回原 workflow。
+完成标准：产物已读；review 已逐条裁定且裁定表已向用户汇报；其余 kind 已接回原 workflow。
 
-以 `交接` 开头的回呼走本节。`交接 DONE`：产物非空则读完再裁定/接回。`交接 FAILED`：以回呼一行为结果，产物存在则补读。然后关本次 tab。
+以 `交接` 开头的回呼走本节。`交接 DONE`：产物非空则读完再裁定/接回；`交接 FAILED`：以回呼一行为结果，产物存在则补读。然后关本次 tab。
 
-对于 review 结果，由 **launcher** 逐条裁定，积极采纳常见路径缺陷，规格缺口，提高代码质量、可读性、降低复杂度的建议。不采纳过度设计、罕见场景的防御性编程。
+review 结果由 **launcher** 逐条裁定——reviewer 只产候选：
+
+1. **先核验，再裁定**：finding 的事实主张先对权威来源（票 resolution、CONTEXT.md、代码）核验，不过则整条驳回。
+2. **发现与修法分离**：发现属实 ≠ 修法照收。提高代码可读性、降复杂度的修法积极采纳；夹带新机制/新抽象、过度设计、罕见场景防御的降级（发现照收、修法从简）或驳回。
 
 ## 清理
 
