@@ -23,11 +23,11 @@
 
 完整读取该 ticket、它引用的父规格、相关评论和 blocking edges，实现该 ticket 所描述的工作。
 
-可执行行为变更尽可能在预定接缝使用 `$tdd`；纯文档或提示词只做适用的产物检查。仅运行当前 ticket 相关的测试和局部检查，完整测试套件留给主 Agent 收尾。
+可执行行为变更在预定接缝使用 `$tdd`；纯文档或提示词只做适用的产物检查。仅运行当前 ticket 相关的测试和局部检查，不运行完整测试套件。
 
 完成后使用 `$code-review` 审查工作，你已获明确授权，可遵循 `$code-review` 流程继续派生 reviewer subagent，但不得将探索或实现工作委派给下级 subagent。
 
-修改前记录当前 HEAD 作为 fixed point。实现和测试后，review fixed point 到当前工作区的全部未提交改动，包括 staged、unstaged 和 untracked 内容；处理 review 结果后，将工作提交到当前分支并关闭该 ticket。
+修改前记录当前 HEAD 作为 fixed point。实现和测试后，review fixed point 到当前工作区的全部未提交改动，包括 staged、unstaged 和 untracked 内容；最后将工作提交到当前分支并关闭该 ticket。
 ```
 
 等待当前 worker 及其下级 subagents 完整返回后，只确认 commit 存在、报告的验证和 review 成功且无 blocker，记录结果后进入下一 ticket；diff 审查、复测和逐项验收留到全部 worker 完成后。未通过交接门槛时，让同一 worker 续接补完；ticket 客观上无法完成或需人参与时，停止并报告。
