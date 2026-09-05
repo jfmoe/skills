@@ -1,0 +1,29 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: d347e703908d0406b7a7ef80e3a0e594d86b2215
+upstream_path: .agents/skills/dsh-trim-cot-leakage
+local_path: skills/trim-cot-leakage
+fetched_at: 2026-09-05
+notes: |
+  Fork of dsh-trim-cot-leakage, generalized for any repository. Seed content
+  comes from the portable review bundle at
+  docs/research/ai-coding-context-kit-review/artifacts/skills/trim-cot-leakage/
+  (based on upstream commit b150a551), updated to this snapshot by porting the
+  upstream delta from b150a551..d347e703.
+
+  Local modifications — re-apply these whenever updating from upstream:
+
+  1. Removed DeepSeek-specific surface names: dsh-prose-standard /
+     dsh-translate-docs / dsh-doc skill cross-references, verify-* gate
+     commands, docs/AGENTS.md writing-rules links, and fixed repository
+     exclusions (vendor/, .agents/notes/archived/) generalized to
+     "protected, dependency, frozen-record, fixture, and snapshot paths".
+  2. Replaced the review-code-prose cross-reference with a self-contained
+     statement of the complete-proposition rule (that skill is not installed
+     here).
+  3. "HEAD" generalized to "the current repository state".
+  4. examples.md keeps upstream prose; the one example link to an owning
+     note stays commit-pinned to the upstream repo so it still resolves.
+  5. Added agents/openai.yaml interface metadata (no upstream counterpart).
+  6. English only; the research bundle's zh translations were not carried
+     into the installable copy.

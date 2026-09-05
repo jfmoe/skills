@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trim CoT Leakage"
+  short_description: "Remove leaked reasoning while preserving facts"
+  default_prompt: "Use $trim-cot-leakage to audit the specified prose for leaked reasoning transcripts and repair each passage without losing factual clauses."
