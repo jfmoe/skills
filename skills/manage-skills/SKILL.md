@@ -41,6 +41,14 @@ After creating or editing, run read-only validation:
 npx skills add ~/Coder/skills --list
 ```
 
+## Chinese Review Mirrors
+
+An English-authored skill gets a Chinese review mirror under `reviews/zh/<skill>/`, mirroring the source layout: `SKILL.md` becomes `SKILL.zh.md` (any literal `SKILL.md` in the repo registers as installable); other files keep their names. Chinese-authored skills have no mirror.
+
+- Mirrors are plain translations — no annotations or provenance headers. Regenerate them from source; never hand-edit.
+- After creating or editing an English skill's `.md` files, regenerate its mirror files in the same commit. The post-edit `--list` validation must show an unchanged skill set.
+- Review feedback given in Chinese is applied to the English source; the source stays canonical.
+
 ## Installing and Syncing
 
 An explicitly named single agent is a private target: verify its native skill directory and install only there. Never fall back to project or global `.agents/skills`; use those only for shared multi-agent installs or explicit requests. If the native target is unknown, stop and report.

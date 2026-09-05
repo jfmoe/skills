@@ -7,6 +7,7 @@ This repository is the personal source repository for user-created agent skills.
 - Self-created skills live flat at `skills/<skill>/SKILL.md`.
 - Repository-managed skills have two classes: **Original** (self-created) and **Fork** (modified third-party — installable copy in `skills/<skill>/`, pristine snapshot in `registry/upstream/<skill>/`). Unmodified third-party skills stay outside this repository.
 - `registry/upstream/<skill>/` holds pristine fork snapshots and provenance metadata, never installable skills.
+- `reviews/zh/<skill>/` holds Chinese review mirrors of English-authored skills, regenerated on each source edit (see `manage-skills`).
 
 ## Operations
 
