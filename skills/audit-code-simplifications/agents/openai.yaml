@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Code Simplifications"
+  short_description: "Find evidence-backed reductions in existing code"
+  default_prompt: "Use $audit-code-simplifications to find and prove worthwhile simplifications in this codebase."

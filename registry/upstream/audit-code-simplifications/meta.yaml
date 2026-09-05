@@ -1,0 +1,28 @@
+source: deepseek-ai/deepseek-harness
+ref: master
+commit: d347e703908d0406b7a7ef80e3a0e594d86b2215
+upstream_path: .agents/skills/dsh-find-simplifications/SKILL.md
+local_path: skills/audit-code-simplifications
+fetched_at: 2026-09-05
+notes: |
+  Fork of dsh-find-simplifications, generalized for any repository. Seed
+  content comes from the portable review bundle at
+  docs/research/ai-coding-context-kit-review/artifacts/skills/audit-code-simplifications/
+  (based on upstream commit b150a551), updated to this snapshot by porting the
+  upstream delta from b150a551..d347e703.
+
+  Local modifications — re-apply these whenever updating from upstream:
+
+  1. Removed DeepSeek-specific surface names: Agent Notes, knip, Cordis
+     loader paths, dual-adapter / persistence-backend protections, package
+     README requirements, and fixed repository links; decision-record and
+     documentation references generalized to repository-neutral wording.
+  2. Replaced the dsh-prose-standard cross-reference with a self-contained
+     statement of the complete-proposition rule (that skill is not installed
+     here).
+  3. Agent Note output converted into a repository-neutral evidence report.
+  4. Added license, security, and platform support to dependency health
+     checks.
+  5. Added agents/openai.yaml interface metadata (no upstream counterpart).
+  6. English only; the research bundle's zh translation was not carried into
+     the installable copy.
