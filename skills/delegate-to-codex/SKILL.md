@@ -77,6 +77,8 @@ review 类 brief 加「评审口径」段：每条发现标注类型（事实冲
 
 全权限 `--dangerously-bypass-approvals-and-sandbox`；一次性委派覆盖 `-c model_reasoning_effort="medium"`。
 
+模型按委派类型固定：`review` 使用 `gpt-6-astra`；`explore` 和 `research` 使用 `gpt-5.6-sol`。以下命令中的 `<model>` 必须按此映射填入，不继承默认模型。
+
 ### Herdr 分支
 
 当前 workspace 新建 tab：
@@ -89,7 +91,7 @@ herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd "$PWD" --label <codex-r
 从返回 JSON 取 root pane id；name 用 `codex-review` / `codex-explore` / `codex-research`（匹配 `[a-z][a-z0-9_-]{0,31}`，撞名加后缀）。
 
 ```bash
-herdr agent start <name> --kind codex --pane <root-pane-id> -- --dangerously-bypass-approvals-and-sandbox -c model_reasoning_effort="medium"
+herdr agent start <name> --kind codex --pane <root-pane-id> -- --dangerously-bypass-approvals-and-sandbox --model <model> -c model_reasoning_effort="medium"
 herdr agent prompt <name> "$(cat "$BRIEF_FILE")"
 ```
 
@@ -101,6 +103,7 @@ herdr agent prompt <name> "$(cat "$BRIEF_FILE")"
 
 ```bash
 codex exec -C "$PWD" --dangerously-bypass-approvals-and-sandbox \
+  --model <model> \
   -c model_reasoning_effort="medium" \
   -o <artifact>.last - < "$BRIEF_FILE"
 ```
