@@ -5,7 +5,7 @@ description: Use when the user asks to create, edit, install, update, sync, list
 
 # Manage Skills
 
-Personal skill source repository: `~/Coder/skills` (remote `https://github.com/jfmoe/skills`). All source edits happen here; never hand-edit runtime install directories.
+Personal skill source repository: `~/Coder/skills` (remote `https://github.com/jfmoe/skills`). All source edits happen here; runtime copies are synchronized from it.
 
 ## Repository Setup
 
@@ -52,6 +52,8 @@ An English-authored skill gets a Chinese review mirror under `reviews/zh/<skill>
 ## Installing and Syncing
 
 An explicitly named single agent is a private target: verify its native skill directory and install only there. Never fall back to project or global `.agents/skills`; use those only for shared multi-agent installs or explicit requests. If the native target is unknown, stop and report.
+
+For a Kimi-only skill, do not use `-a kimi-code-cli`: its adapter writes to shared `~/.agents/skills`. Synchronize the repository copy to `$KIMI_CODE_HOME/skills/<skill>/` (default: `~/.kimi-code/skills/<skill>/`), verify `SKILL.md` matches, and remove only its same-named shared copy.
 
 When the user does not name an agent, default targets are `-a codex claude-code`. Project scope is the CLI default; `-g` selects global scope. Select every repository skill with `--skill '*'`; `--all` instead targets every skill and every supported agent.
 
