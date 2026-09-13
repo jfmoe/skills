@@ -1,0 +1,16 @@
+source: earendil-works/pi-review
+ref: main
+commit: f1de050504936046c0f85b21fec0e0a93ef394eb
+upstream_path: .
+local_path: skills/review-findings
+fetched_at: 2026-09-13
+notes: |
+  Pi extension ported to a skill. The snapshot contains the upstream extension,
+  not an upstream skill. All 11 prompt constants retain their runtime text.
+  Chinese workflow instructions adapt the extension to general agents.
+  Review, summary, and repair run in the current conversation without Pi
+  session navigation, UI, or message queues. Project guidelines use the Git
+  root as the search boundary instead of a .pi directory. The MIT license
+  is retained.
+  The adapter accepts quoted paths with spaces, validates the repository in
+  PR URLs, and binds repair summaries to the reviewed repository and scope.
