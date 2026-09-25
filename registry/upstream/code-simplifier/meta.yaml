@@ -1,0 +1,26 @@
+source: anthropics/claude-plugins-official
+ref: main
+commit: 3deb821cb71ccfaaf2ffa9935e977df314ce5cd5
+upstream_path: plugins/code-simplifier/agents/code-simplifier.md
+local_path: skills/code-simplifier
+fetched_at: 2026-09-12
+notes: |
+  The upstream source is an agent definition, stored unchanged as
+  code-simplifier.md in this snapshot. The adapted execution prompt is
+  skills/code-simplifier/references/simplifier.md.
+  LICENSE is copied unchanged from plugins/code-simplifier/LICENSE into
+  both directories.
+
+  Local modifications:
+  1. Remove the Claude-specific model field; keep only name and description.
+     Add a short modification notice required by the upstream license.
+  2. Add AGENTS.md and project tooling as standards sources. Keep every upstream
+     frontend preference, selected by project language, framework, and conventions.
+  3. Clarify that behavior includes public interfaces, errors, side effects,
+     and caller-visible ordering.
+  4. Add a behavior baseline, checks appropriate to the change, targeted coverage
+     for unverified behavior, and verification results in the final report.
+     Leave code unchanged when a proposed change cannot be verified.
+  5. Move the adapted prompt into references/simplifier.md without changing its
+     body. SKILL.md assigns one fresh worker, passes the exact task scope,
+     prevents recursive delegation, and checks the worker's result.
