@@ -1,69 +1,33 @@
 ---
 name: hermes-agent
-description: "配置、运行或排查已安装的 Hermes Agent（Nous Research 的 agent 框架）——切换其模型/提供商、编辑配置、日常运行（chat/TUI/sessions/cron/send），或修复它（更新、回滚、doctor、日志、备份）。触发词：'Hermes is broken'、'change Hermes's model'，或提及 `~/.hermes/`、`~/.local/bin/hermes`、`/Applications/Hermes.app`。不适用于首次安装、源码贡献或仅限 Windows 的问题。"
+description: "本机部署了 Hermes Agent（Nous Research）。当任务涉及 Hermes——使用、配置、更新或排查它——或涉及 `~/.hermes/` 时使用。"
 ---
 
-# Hermes Agent — 运维操作
+# Hermes Agent
 
-Hermes Agent（Nous Research）已安装在本机上。本 skill 帮助你**配置、运行和排查**它。不涵盖首次安装、源码贡献或 Windows。
+Hermes Agent 以 git 方式安装在本机。本 skill 给出它的目录布局、查阅资料的位置和本地维护规则。Hermes 迭代很快：命令、参数、配置键和提供商以下列来源为准，不要凭记忆。
 
-Hermes 迭代很快，因此容易过期的清单（子命令、提供商、配置段、斜杠命令、症状列表）**不会**被复制到这里——你在运行时现场发现它们。本 skill 只保留稳定的内容：两条硬规则、机器事实、工作流、安全规范和注意事项。
+## 布局
 
-## 两条硬规则（优先级高于凭记忆回答）
+- **Home：** `~/.hermes/`——`config.yaml`（设置）、`.env`（密钥）、`auth.json`、`state.db`、`logs/`、`skills/`、`SOUL.md`。设置了 `$HERMES_HOME` 时，由它替代 `~/.hermes`。
+- **源码：** `~/.hermes/hermes-agent/`，是 `NousResearch/hermes-agent` 的 git checkout。
+- **入口：** CLI `~/.local/bin/hermes`（包装源码 venv 的脚本）、桌面应用 `/Applications/Hermes.app`，以及由 launchd 托管的消息网关（`ai.hermes.gateway`）。三者共用同一个 home，因此配置或凭据的改动会同时影响它们。
 
-**规则 1 — 不确定或未覆盖时，查阅文档。不要猜。**
-本机在本地有**完整的文档集**（git 安装）——优先于网络；内容相同，可离线、可 grep。文档根目录是：
+## 查阅位置
 
-```
-~/.hermes/hermes-agent/website/docs/        # 339 个 .md 文件，完整 Docusaurus 站点
-```
+1. **内置 skill：** `~/.hermes/hermes-agent/skills/autonomous-ai-agents/hermes-agent/SKILL.md`。由上游维护，`hermes update` 会刷新它。先读它；它的路由表为每个主题指向一个参考文件。
+2. **本地文档：** `~/.hermes/hermes-agent/website/docs/`，完整的文档站点。用 grep 检索。
+3. **Web 索引：** `https://hermes-agent.nousresearch.com/docs/llms.txt`，每个已文档化的功能一行。本地文档无法回答时使用。
+4. **CLI 帮助：** `hermes --help` 和 `hermes <command> --help` 给出已安装版本的命令和参数。运行命令前先查看。
 
-在其中 grep/glob 找到相关指南（例如 `grep -ril <topic> ~/.hermes/hermes-agent/website/docs/`），然后阅读该文件。关键章节：`user-guide/`、`integrations/`、`reference/`、`developer-guide/`。如果本地文档缺失（非 git 安装）或仍然找不到，退回到网络索引，再从它路由到具体指南的 URL：
+## 维护规则
 
-```
-https://hermes-agent.nousresearch.com/docs/assets/files/llms-d4972c57170916efd83766ae50c3bb3d.txt
-```
-
-永远不要编造命令、标志、配置键或提供商名称。
-
-**规则 2 — 运行前用 `--help` 核实确切的命令标志/参数。**
-Hermes 的子命令和标志在版本之间会变。运行任何具体命令之前，现场检查它：
-
-```bash
-hermes <subcommand> --help        # 例如 hermes config --help, hermes auth --help
-```
-
-不要凭记忆重建标志。`--help` 输出是当前真实情况的唯一权威来源。
-
-## 机器事实（结构稳定——用于定位）
-
-- **主目录：** `~/.hermes/` — 配置（`config.yaml`）、密钥（`.env`）、`auth.json`、`logs/`、`sessions/`、`state.db`、`skills/`，源码在 `~/.hermes/hermes-agent/`。
-- **GUI 和 CLI 共享同一个主目录。** `/Applications/Hermes.app` 和 CLI `~/.local/bin/hermes` 都运行在 `~/.hermes/` 之上。CLI 是一个轻薄的 bash 包装器，`exec` 到 `~/.hermes/hermes-agent/venv/bin/hermes`。**任何配置/认证改动同时影响 GUI 和 CLI。** 不存在按界面分开的配置。
-- **源码安装：** `.install_method=git`（文件 `~/.hermes/.install_method`），源码在 `~/.hermes/hermes-agent/`。官方更新走 `hermes update`，它可以做更新前备份（见 `hermes update --help`；由 `updates.pre_update_backup` 控制，本机默认关闭）。不要假设固定的备份路径——按 `reference/troubleshooting.md` 定位备份。
-- **完整文档在本地：** `~/.hermes/hermes-agent/website/docs/` 保存完整的 Docusaurus 文档站点（339 个 `.md` 文件）。优先于网络。`hermes update` 会替换源码目录，但这个相对路径保持稳定。
-- Hermes 自带的捆绑运维 skill 的本地副本位于 `~/.hermes/skills/autonomous-ai-agents/hermes-agent/SKILL.md`——可作为更完整（但清单繁重、过期更快）的参考。它的清单正是本 skill 要绕开的东西；把它**稳定**的指导（安全、注意事项）视为与下面的规则一致。
-
-## 路由——意图 → 参考文件 + 发现命令
-
-| 你想…… | 阅读 | 用以下命令发现当前真相 |
-|---|---|---|
-| 配置 / 切换提供商或模型、编辑任何配置 | `reference/config-editing.md` | `~/.hermes/config.yaml` 或 `hermes config show`；`hermes model`；`hermes config --help`、`hermes auth --help` |
-| 日常运行 / 使用（chat、TUI、sessions、cron、send） | `reference/operations.md` | `hermes --help`；`hermes <cmd> --help`；会话内 `/help` |
-| 诊断 / 维护 / 更新 / 回滚 | `reference/troubleshooting.md` | `hermes doctor`、`hermes status`、`hermes logs` |
-
-**发现命令（当前存在什么，永不复制进本 skill）：**
-
-- 子命令：`hermes --help`，然后用 `hermes <cmd> --help` 查看标志。
-- 配置：直接读 `~/.hermes/config.yaml`，或 `hermes config show`；路径通过 `hermes config path` / `hermes config env-path`。
-- 工具：`hermes tools list`。Skills：`hermes skills list`。提供商/模型：`hermes model`。
-- 会话内斜杠命令：`/help`。
-- 任何更深入或未覆盖的内容：**规则 1**——grep 本地文档 `~/.hermes/hermes-agent/website/docs/`（完整离线文档集），网络索引仅作后备。
-
-## 安全规范（与 Hermes 捆绑的 autonomous-ai-agents skill 一致）
-
-这些直接采纳自 Hermes 自己的运维 skill——不要另造一套。完整的编辑规范（专用 `config`/`auth` 命令、配置与 `.env` 分离、验证）在 `reference/config-editing.md` 中；以下是最基本的入口要点：
-
-- **密钥：** API 密钥走 `hermes auth`，不要手工编辑 `.env`。永远不以明文打印密钥，也绝不把它们提交到任何仓库。
-- **`security.redact_secrets` 默认开启**，并在进程启动时快照——会话中途切换它不会生效（需要重启）。这是有意设计，防止 LLM 在任务中途对自己关闭脱敏。
-- **命令审批（`approvals.mode`）：** `manual`（默认——破坏性命令前提示）/ `smart` / `off`（等价于 `--yolo`）。YOLO / `off` 不会禁用密钥脱敏；两者相互独立。在 `manual` 环境中，破坏性操作前要确认。
-- **改动需要重启才生效**——完整映射（tool/skill → `/reset`，config → `/restart` 或重新启动）见 `reference/troubleshooting.md`。
+- **源码树只读。** 通过 CLI、`config.yaml`、`.env` 和 `~/.hermes/skills/` 修改 Hermes。只用 `hermes update` 更新；用 `hermes update --plan` 预览。
+- **设置与密钥分开。** 用 `hermes config set KEY VAL` 修改设置；用 `hermes auth` 添加凭据。`.env` 只存放密钥。不要打印或提交密钥值。
+- **先用内置工具备份。** 每种工具会自行清理旧副本，因此不要添加带日期的 `.bak` 文件。
+  - `config.yaml`：Hermes 会自动在 `backups/config/` 中保留副本。
+  - `.env`、`auth.json`、cron 及其他状态：运行 `hermes backup --quick --label <reason>`。在会话中用 `/snapshot restore <id>` 恢复。
+  - `SOUL.md`、`memories/`：quick 快照不包含它们。把文件复制为 `<file>.bak`，覆盖上一份副本。
+  - 更新或大范围改动前：运行 `hermes backup`（完整 zip）。用 `hermes import <zip>` 恢复。
+- **重启后生效。** tool 和 skill 的改动在新会话中生效（`/reset`）。配置改动需 `hermes gateway restart` 才对网关生效，CLI 和桌面应用需重新启动。
+- **改动后验证。** 运行 `hermes config check` 和 `hermes doctor`；`hermes status` 显示当前生效状态；`hermes logs` 显示错误。
