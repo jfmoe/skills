@@ -11,7 +11,7 @@ Hermes Agent is a git install on this machine. This skill gives its layout, wher
 
 - **Home:** `~/.hermes/` — `config.yaml` (settings), `.env` (secrets), `auth.json`, `state.db`, `logs/`, `skills/`, `SOUL.md`. When `$HERMES_HOME` is set, it replaces `~/.hermes`.
 - **Source:** `~/.hermes/hermes-agent/`, a git checkout of `NousResearch/hermes-agent`.
-- **Entry points:** the CLI `~/.local/bin/hermes` (a wrapper around the source venv), the desktop app `/Applications/Hermes.app`, and the messaging gateway under launchd (`ai.hermes.gateway`). All three share one home, so a config or credential change affects all of them.
+- **Entry points:** the CLI `~/.local/bin/hermes` (a launcher script into the source install), the desktop app built from source by `hermes desktop` (`~/.hermes/hermes-agent/apps/desktop/release/mac-arm64/Hermes.app`), and the messaging gateway under launchd (`ai.hermes.gateway`). All three share one home, so a config or credential change affects all of them.
 
 ## Where to look
 
@@ -24,6 +24,7 @@ Hermes Agent is a git install on this machine. This skill gives its layout, wher
 
 - **Source tree is read-only.** Change Hermes through the CLI, `config.yaml`, `.env`, and `~/.hermes/skills/`. Update only with `hermes update`; preview with `hermes update --plan`.
 - **Settings and secrets stay apart.** Set settings with `hermes config set KEY VAL`; add credentials with `hermes auth`. `.env` holds secrets only. Never print or commit secret values.
+- **Own logins only.** Keep `auth.adopt_external_logins: false`. Hermes uses only its own logins (`hermes auth add <provider>`), so it never refreshes the Claude Code or Codex CLI login.
 - **Back up first, with the built-in tools.** Each tool prunes its own old copies, so do not add dated `.bak` files.
   - `config.yaml`: Hermes keeps copies in `backups/config/` automatically.
   - `.env`, `auth.json`, cron, and other state: run `hermes backup --quick --label <reason>`. Restore in a session with `/snapshot restore <id>`.
@@ -31,3 +32,4 @@ Hermes Agent is a git install on this machine. This skill gives its layout, wher
   - Before an update or a broad change: run `hermes backup` (full zip). `hermes import <zip>` restores it.
 - **Restart to apply.** Tool and skill changes apply in a new session (`/reset`). Config changes apply after `hermes gateway restart` for the gateway and a relaunch for the CLI and desktop app.
 - **Verify after a change.** Run `hermes config check` and `hermes doctor`; `hermes status` shows what is live; `hermes logs` shows errors.
+- **Tracking notes.** Before you update or reinstall Hermes, or change its update, credential, or `.env` settings, read `~/.hermes/TRACKING.md`. When an upstream issue blocks a local choice, add an entry there.
