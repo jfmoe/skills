@@ -22,7 +22,8 @@ Hermes Agent is a git install on this machine. This skill gives its layout, wher
 
 ## Maintenance rules
 
-- **Source tree is read-only.** Change Hermes through the CLI, `config.yaml`, `.env`, and `~/.hermes/skills/`. Update only with `hermes update`; preview with `hermes update --plan`.
+- **Source tree is read-only.** Change Hermes through the CLI, `config.yaml`, `.env`, and `~/.hermes/skills/`. Update only with `hermes update`.
+- **Review before every update.** Find what changed: run `hermes update --check`, then read `git -C ~/.hermes/hermes-agent log --oneline HEAD..origin/main` and the release notes (`gh release list -R NousResearch/hermes-agent`). Check each change against the local customizations: `config.yaml`, `.env`, `~/.hermes/TRACKING.md`, `SOUL.md`, plugins (`hermes plugins compat`), skills, cron jobs, and the gateway. `hermes update --plan` shows which services restart. If a change can break a customization, write an update plan (affected item, fix, rollback) and get the user's approval before you run `hermes update`. After the update, tell the user the version change, the notable changes, the effect on each customization, and the verification result.
 - **Settings and secrets stay apart.** Set settings with `hermes config set KEY VAL`; add credentials with `hermes auth`. `.env` holds secrets only. Never print or commit secret values.
 - **Own logins only.** Keep `auth.adopt_external_logins: false`. Hermes uses only its own logins (`hermes auth add <provider>`), so it never refreshes the Claude Code or Codex CLI login.
 - **Back up first, with the built-in tools.** Each tool prunes its own old copies, so do not add dated `.bak` files.
