@@ -10,6 +10,7 @@ Hermes Agent 以 git 方式安装在本机。本 skill 给出它的目录布局�
 ## 布局
 
 - **Home：** `~/.hermes/`——`config.yaml`（设置）、`.env`（密钥）、`auth.json`、`state.db`、`logs/`、`skills/`、`SOUL.md`。设置了 `$HERMES_HOME` 时，由它替代 `~/.hermes`。
+- **本地 git：** `~/.hermes/` 是一个没有远端的 git 仓库。它的白名单式 `.gitignore` 只跟踪 `config.yaml`、`SOUL.md`、`TRACKING.md` 和 `scripts/`。
 - **源码：** `~/.hermes/hermes-agent/`，是 `NousResearch/hermes-agent` 的 git checkout。
 - **入口：** CLI `~/.local/bin/hermes`（进入源码安装的启动脚本）、由 `hermes desktop` 从源码构建的桌面应用（`~/.hermes/hermes-agent/apps/desktop/release/mac-arm64/Hermes.app`），以及由 launchd 托管的消息网关（`ai.hermes.gateway`）。三者共用同一个 home，因此配置或凭据的改动会同时影响它们。
 
@@ -22,14 +23,14 @@ Hermes Agent 以 git 方式安装在本机。本 skill 给出它的目录布局�
 
 ## 维护规则
 
-- **源码树只读。** 通过 CLI、`config.yaml`、`.env` 和 `~/.hermes/skills/` 修改 Hermes。只用 `hermes update` 更新。
+- **源码树只读。** 通过 CLI、`config.yaml`、`.env` 和 `~/.hermes/skills/` 修改 Hermes。用 `hermes skills` 安装和更新 skill。只用 `hermes update` 更新 Hermes。
 - **每次更新前先审查。** 查明更新内容：运行 `hermes update --check`，然后阅读 `git -C ~/.hermes/hermes-agent log --oneline HEAD..origin/main` 和发布说明（`gh release list -R NousResearch/hermes-agent`）。逐项对照本地个性化配置：`config.yaml`、`.env`、`~/.hermes/TRACKING.md`、`SOUL.md`、插件（`hermes plugins compat`）、skill、cron 任务和网关。`hermes update --plan` 显示哪些服务会重启。如果某项改动可能破坏个性化配置，先制定更新计划（受影响项、修复方式、回滚方式），得到用户批准后再运行 `hermes update`。更新完成后，向用户说明版本变化、主要改动、对每项个性化配置的影响，以及验证结果。
 - **设置与密钥分开。** 用 `hermes config set KEY VAL` 修改设置；用 `hermes auth` 添加凭据。`.env` 只存放密钥。不要打印或提交密钥值。
 - **只用自己的登录。** 保持 `auth.adopt_external_logins: false`。Hermes 只使用自己的登录（`hermes auth add <provider>`），因此永远不会刷新 Claude Code 或 Codex CLI 的登录。
-- **先用内置工具备份。** 每种工具会自行清理旧副本，因此不要添加带日期的 `.bak` 文件。
-  - `config.yaml`：Hermes 会自动在 `backups/config/` 中保留副本。
+- **先用 git 和内置工具备份。** 不要添加带日期的 `.bak` 文件。
+  - git 跟踪的文件：每次改动前后各提交一次（`git -C ~/.hermes`）。从较早的提交恢复文件。Hermes 还会自动在 `backups/config/` 中保留 `config.yaml` 副本。
   - `.env`、`auth.json`、cron 及其他状态：运行 `hermes backup --quick --label <reason>`。在会话中用 `/snapshot restore <id>` 恢复。
-  - `SOUL.md`、`memories/`：quick 快照不包含它们。把文件复制为 `<file>.bak`，覆盖上一份副本。
+  - `memories/`：quick 快照和 git 都不包含它。把文件复制为 `<file>.bak`，覆盖上一份副本。
   - 更新或大范围改动前：运行 `hermes backup`（完整 zip）。用 `hermes import <zip>` 恢复。
 - **重启后生效。** tool 和 skill 的改动在新会话中生效（`/reset`）。配置改动需 `hermes gateway restart` 才对网关生效，CLI 和桌面应用需重新启动。
 - **改动后验证。** 运行 `hermes config check` 和 `hermes doctor`；`hermes status` 显示当前生效状态；`hermes logs` 显示错误。
