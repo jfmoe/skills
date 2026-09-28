@@ -55,7 +55,7 @@ npx skills add ~/Coder/skills --list
 
 当用户未指名 agent 时，默认目标为 `-a codex claude-code`。项目作用域是 CLI 默认值；`-g` 选择全局作用域。用 `--skill '*'` 选择所有仓库 skills；`--all` 则面向所有 skills 和所有受支持的 agents。
 
-在全局作用域下，`~/.agents/skills` 服务于除 Claude Code 和 Hermes Agent 之外的所有 agent。`codex` 目标填充该共享目录；`claude-code` 目标将 Claude Code 的目录链接到它。需要时单独指定 `hermes-agent` 目标。
+在全局作用域下，`~/.agents/skills` 服务于除 Claude Code 和 Hermes Agent 之外的所有 agent。`codex` 目标填充该共享目录；`claude-code` 目标将 Claude Code 的目录链接到它。Hermes Agent 有独立的安装方式；见 [Hermes Agent](#hermes-agent)。
 
 使用两个默认目标时，非交互安装采用如下布局：
 
@@ -81,6 +81,16 @@ npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
 当用户要求安装或更新 skills 时，自动运行安装/更新命令。如果作用域含糊，询问用户是指全局还是项目级——除非上下文明确表明是个人全局配置。
 
 关于 CLI 来源、发现、命令和选项，见 [skills-cli.md](skills-cli.md)。
+
+### Hermes Agent
+
+Hermes Agent 的 skills 用 `hermes skills` 单独维护，不用 `npx skills`。Hermes 会扫描每次安装、记录其来源，并检查上游更新。
+
+- **安装**：从 GitHub 源路径安装：`hermes skills install <owner>/<repo>/<path-to-skill> --yes`。本仓库中的 skill 使用 `jfmoe/skills/skills/<skill>`。Hermes 从 GitHub 安装，因此先推送源文件的改动。
+- **更新**：推送改动后运行 `hermes skills update <skill>`。`hermes skills check` 列出上游有变化的已安装 skills。
+- **移除**：`hermes skills uninstall <skill>`。
+- **扫描被拦截**：报告扫描发现，得到用户批准后才加 `--force`。
+- **其他应用自带的 skills**（例如 Surge）：把该应用的 skill 目录加入 `~/.hermes/config.yaml` 的 `skills.external_dirs`。
 
 ## 派生第三方 Skill
 

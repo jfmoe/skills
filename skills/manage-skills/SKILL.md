@@ -57,7 +57,7 @@ For a Kimi-only skill, do not use `-a kimi-code-cli`: its adapter writes to shar
 
 When the user does not name an agent, default targets are `-a codex claude-code`. Project scope is the CLI default; `-g` selects global scope. Select every repository skill with `--skill '*'`; `--all` instead targets every skill and every supported agent.
 
-At global scope, `~/.agents/skills` serves every agent except Claude Code and Hermes Agent. The `codex` target populates this shared directory; the `claude-code` target links Claude Code's directory to it. Target `hermes-agent` separately when requested.
+At global scope, `~/.agents/skills` serves every agent except Claude Code and Hermes Agent. The `codex` target populates this shared directory; the `claude-code` target links Claude Code's directory to it. Hermes Agent has its own install path; see [Hermes Agent](#hermes-agent).
 
 With both default targets, non-interactive installation uses this layout:
 
@@ -83,6 +83,16 @@ npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
 Run install/update commands automatically when the user asks to install or update skills. If scope is ambiguous, ask whether they mean global or project-level — unless context clearly indicates personal global setup.
 
 For CLI sources, discovery, commands, and options, see [skills-cli.md](skills-cli.md).
+
+### Hermes Agent
+
+Hermes Agent skills are maintained separately with `hermes skills`, not with `npx skills`. Hermes scans each install, records its source, and checks it for upstream updates.
+
+- **Install** from the GitHub source path: `hermes skills install <owner>/<repo>/<path-to-skill> --yes`. For a skill in this repository, use `jfmoe/skills/skills/<skill>`. Hermes installs from GitHub, so push the source edit first.
+- **Update** after a pushed edit: `hermes skills update <skill>`. `hermes skills check` lists installed skills with upstream changes.
+- **Remove**: `hermes skills uninstall <skill>`.
+- **Blocked scan**: report the finding and get the user's approval before you add `--force`.
+- **Skills shipped inside another app** (for example, Surge): add the app's skill directory to `skills.external_dirs` in `~/.hermes/config.yaml`.
 
 ## Forking a Third-Party Skill
 
