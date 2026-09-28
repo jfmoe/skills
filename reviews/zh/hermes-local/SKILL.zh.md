@@ -1,5 +1,5 @@
 ---
-name: hermes-agent
+name: hermes-local
 description: "本机部署了 Hermes Agent（Nous Research）。当任务涉及 Hermes——使用、配置、更新或排查它——或涉及 `~/.hermes/` 时使用。"
 ---
 

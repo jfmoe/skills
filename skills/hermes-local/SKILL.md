@@ -1,5 +1,5 @@
 ---
-name: hermes-agent
+name: hermes-local
 description: "Hermes Agent (Nous Research) is deployed on this machine. Use when a task involves Hermes — using, configuring, updating, or troubleshooting it — or touches `~/.hermes/`."
 ---
 
