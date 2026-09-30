@@ -24,6 +24,7 @@ Hermes Agent 以 git 方式安装在本机。本 skill 给出它的目录布局�
 ## 维护规则
 
 - **源码树只读。** 通过 CLI、`config.yaml`、`.env` 和 `~/.hermes/skills/` 修改 Hermes。用 `hermes skills` 安装和更新 skill。只用 `hermes update` 更新 Hermes。
+- **自定义插件来自 `jfmoe/hermes-plugins`。** 在 `~/Coder/hermes-plugins/plugins/<name>/` 中修改插件，并遵循该仓库的 `AGENTS.md`；不要修改 `~/.hermes/plugins/` 中的安装副本。用 `hermes plugins install jfmoe/hermes-plugins/plugins/<name> --enable` 安装。推送改动后，运行 `hermes plugins update <name>`。`hermes update` 前后，对每个自定义插件运行 `hermes plugins compat` 和 `hermes plugins doctor <name>`。
 - **每次更新前先审查。** 查明更新内容：运行 `hermes update --check`，然后阅读 `git -C ~/.hermes/hermes-agent log --oneline HEAD..origin/main` 和发布说明（`gh release list -R NousResearch/hermes-agent`）。逐项对照本地个性化配置：`config.yaml`、`.env`、`~/.hermes/TRACKING.md`、`SOUL.md`、插件（`hermes plugins compat`）、skill、cron 任务和网关。`hermes update --plan` 显示哪些服务会重启。如果某项改动可能破坏个性化配置，先制定更新计划（受影响项、修复方式、回滚方式），得到用户批准后再运行 `hermes update`。更新完成后，向用户说明版本变化、主要改动、对每项个性化配置的影响，以及验证结果。
 - **设置与密钥分开。** 用 `hermes config set KEY VAL` 修改设置；用 `hermes auth` 添加凭据。`.env` 只存放密钥。不要打印或提交密钥值。
 - **只用自己的登录。** 保持 `auth.adopt_external_logins: false`。Hermes 只使用自己的登录（`hermes auth add <provider>`），因此永远不会刷新 Claude Code 或 Codex CLI 的登录。
