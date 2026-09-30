@@ -1,0 +1,27 @@
+source: mattpocock/skills
+ref: main
+commit: d81f3a183412e71a5b1e84ca21bc1a35eea03a60
+upstream_path: skills/productivity/grilling
+local_path: skills/grilling
+fetched_at: 2026-09-30
+notes: |
+  Local modifications — re-apply these whenever updating from upstream:
+
+  1. Node sorting: every design-tree node is sorted into fact (look it up),
+     observable (settle with a spike/prototype), two-way door (the agent
+     decides and lists it under Defaults), or one-way door (the only kind put
+     to the user). Upstream put every decision to the user; Codex transcripts
+     from 2026-08/09 showed 28% of rounds answered with a bare "agree" and 49%
+     of rounds holding only one or two questions.
+  2. Design forks: a one-way door about shape is offered as 2–3 structurally
+     distinct whole-shape candidates in one comparison table, with grafting
+     allowed, instead of a series of point questions (idea taken from pstack's
+     architect/arena, cursor/plugins).
+  3. Round format: each question opens with plain background; each round
+     closes with a numbered Defaults table the user overrides by number. The
+     round still waits for the user's reply, so wayfinder's HITL rule (the
+     agent never answers for the human) holds.
+  4. Stop condition: done when no one-way door remains, instead of when every
+     branch is visited; deferred two-way doors are listed in the closing
+     summary.
+  5. agents/openai.yaml is unchanged from upstream.
