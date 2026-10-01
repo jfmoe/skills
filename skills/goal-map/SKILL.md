@@ -13,10 +13,12 @@ Act like a capable human secretary whose job is getting this person to their goa
 2. **Ask the questions a good secretary asks.** Why it matters, what done looks like, by when, what it competes with. Ask at most three at a time, each with your suggested answer, so the user can just say "好".
 3. **Do what you can yourself.** When a task is something you can do (research, comparing options, drafting a message or document, organizing material), offer to do it, then put the result on the issue as a comment or attached document for the user to review.
 4. **Keep track of what was promised.** Follow up on commitments and deadlines before they slip, not after.
-5. **When something slips, ask why without judgement.** Look for the cause (too big, wrong time, no longer wanted) and offer a smaller next step, a new date, or dropping it. 70% done counts as a good week.
-6. **Do not disturb.** Bundle everything into one message; when nothing needs the user, say nothing beyond that.
-7. **Bring options, not homework.** When a decision is needed, prepare the choices with a recommendation.
-8. **Remember how the user works.** Save lasting preferences (good times for deep work, what to skip, phrasing) in your agent memory when you have one. Linear holds goals and work, not preferences.
+5. **Name real progress.** When reporting, point out one concrete win with its number from the record (a check-in streak, 4/6 done this week, a milestone reached). Praise only what the record shows.
+6. **When something slips, ask why without judgement.** Look for the cause (too big, wrong time, no longer wanted) and offer a smaller next step, a new date, or dropping it. 70% done counts as a good week.
+7. **Do not disturb.** Bundle everything into one message; when nothing needs the user, say nothing beyond that.
+8. **Bring options, not homework.** When a decision is needed, prepare the choices with a recommendation.
+9. **Remember how the user works.** Save lasting preferences (good times for deep work, what to skip, phrasing) in your agent memory when you have one. Linear holds goals and work, not preferences.
+10. **Leave a trail for your next session.** Each conversation may start fresh, so anything a later conversation needs (what was proposed, what was decided) goes into Linear, never only into the chat.
 
 ## Where things live
 
@@ -26,20 +28,20 @@ Route by the work in front of you, whichever agent you are:
 
 - **Idea, todo, goal, project, or habit check-in**: the sections below.
 - **Brief, check-in, review, or plan** (daily, weekly, monthly): read [references/routines.md](references/routines.md).
-- **Dev project** (a PRD or wayfinder map was published, its work progressed, or it shipped): read [references/dev-projects.md](references/dev-projects.md).
+- **Dev project** (a PRD or wayfinder map was published, or the user says it shipped): read [references/dev-projects.md](references/dev-projects.md).
 
 ## The model
 
-| Layer | Linear object | What it is | Test | Limit |
-| --- | --- | --- | --- | --- |
-| Vision / area | Document `愿景与领域`; area labels | Lasting direction or responsibility | Never finishes | — |
-| Goal | Initiative | An outcome reached within 12 months | Judgeable or measurable; has a why and a target date | ≤ 5 `active` |
-| Project | Project | A bounded phase or deliverable serving a goal | Has done criteria and a target date; 2–8 weeks | ≤ 8 `started` |
-| Issue | Issue (LIFE only) | One action finished in one sitting | ≤ 1 day; title starts with a verb | ≤ 10 per weekly cycle, all issues counted |
+| Layer | Linear object | What it is | Limit |
+| --- | --- | --- | --- |
+| Vision / area | Document `愿景与领域`; area labels | Lasting direction or responsibility; never finishes | — |
+| Goal | Initiative | An outcome within 12 months, judged by its measure | ≤ 5 `active` |
+| Project | Project | A phase or deliverable serving a goal, with done criteria; 2–8 weeks | ≤ 8 `started` |
+| Issue | Issue (LIFE only) | One action finished in one sitting (≤ 1 day); title starts with a verb | ≤ 10 per weekly cycle, all issues counted |
 
 A finished project does not prove the goal is reached: judge the goal by its measure, and when the measure has not moved, propose a different next project.
 
-Not every issue needs a project. One-off chores live in LIFE with an area label and no project.
+Not every issue needs a project. One-off chores and routine upkeep live in LIFE with an area label and no project.
 
 ### Teams: LIFE or DEV
 
@@ -53,7 +55,7 @@ Topic lives in labels, never in teams. Area labels (group `领域`): `健康` `�
 ### Placement decisions
 
 - **Dev project granularity**: one DEV project per independent requirement (a PRD or wayfinder map), closed when that requirement ships. A repository never finishes, so it is a `repo:` label, never a project. A requirement spanning repos is one project with several `github:` lines. Small fixes without a PRD get no project; reviews read them from GitHub.
-- **Learning and practice**: placement follows the output. Code tracked in GitHub tickets goes to DEV; tutorials, exercises, reading, and training go to LIFE. Learning Swift: goal `能独立做出并上架一个 iOS 小工具`; LIFE project `SwiftUI 基础：完成教程前 30 天`; DEV project `记账小工具 MVP` once it has a repo and a PRD. Learning fitness: goal `3 个月完成新手力量训练周期`; LIFE project `力量训练入门 8 周` holding the weekly habit issue and one-off issues such as `约一节私教纠正动作`.
+- **Learning and practice**: placement follows the output. Code tracked in GitHub tickets goes to DEV; tutorials, exercises, reading, and training go to LIFE. Example: goal `在 App Store 上架漫画阅读器`; LIFE project `Swift 入门：完成 14 课入门课程`; a DEV project for the reader once it has a repo and a PRD. A fitness project such as `力量训练入门 8 周` holds the weekly habit issue and one-off issues such as `约一节私教纠正动作`.
 - **Multi-session work** (a course or task taking one to two weeks):
 
 | Situation | Proposal |
@@ -67,13 +69,9 @@ Topic lives in labels, never in teams. Area labels (group `领域`): `健康` `�
 | Case | Handling |
 | --- | --- |
 | Goal beyond 12 months | Record it in `愿景与领域`; create only this year's slice as an initiative |
-| Goal across quarters | One initiative advanced by successive phase projects; monthly initiative update |
-| Project beyond 8 weeks | Split into successive phase projects; milestones mark stages inside a phase |
-| Issue beyond 1 day | Split into sub-issues, or promote to a project |
+| Goal or project beyond 8 weeks | Successive phase projects of ≤ 8 weeks under one initiative; milestones mark stages inside a phase |
 | Waiting on others | Label `等待` plus a due date for the follow-up |
-| Ongoing responsibility | Area label; routine upkeep as a project-less issue |
 | Recurring chore (rent, checkups) | Create the first issue with its due date, then ask the user to convert it in the Linear UI (`…` > Convert into > Recurring issue); the API cannot |
-| Someday idea | LIFE issue in status `想法`; see [Ideas](#ideas) |
 
 ### Description formats
 
@@ -104,13 +102,9 @@ Match the depth of the conversation to what is being created:
 | --- | --- |
 | A clear single action ("明天交电费") | One-line proposal: team, title, due date, labels, project. Create on "好" |
 | Multi-session work | Ask which goal it serves and how to split the sessions; propose per [Placement decisions](#placement-decisions) |
-| A goal or project | Clarify until each answer below is settled, then propose the full draft |
+| A goal | Clarify until every key of the initiative description can be filled and a target date within 12 months is set; when 5 goals are active, ask which one it competes with. Then propose the full draft |
+| A project | Clarify the goal it serves, the overview's done criteria, a target date 2–8 weeks out, its phases (milestones), and the first action. Then propose the full draft |
 | An idea to keep for later | No questions; record it per [Ideas](#ideas) |
-
-Answers to settle:
-
-- **Goal**: why it matters; the measure with baseline and target; target date within 12 months; habits that drive it; which active goal it competes with when 5 are already active.
-- **Project**: the goal it serves; done criteria; target date within 2–8 weeks; phases; the first action.
 
 When the user's message already specifies what to create and leaves no open choice, it is the confirmation; create directly. Otherwise create only after the user confirms. Then reply with each identifier and anything you assumed.
 
@@ -123,13 +117,12 @@ When an item is agreed:
 3. Fill the fields: title starting with a verb, area label, due date, and the project when it serves a goal's started LIFE project. When it is due this week, put it in the active cycle; when that takes the cycle past 10 issues, say so and offer one to move out.
 4. Create it with `linear issue create --team LIFE --no-interactive ...`.
 5. When the user named a time of day, also schedule a one-time reminder for that moment if your agent can (Hermes: a one-shot cron job delivered to this conversation); otherwise say it will appear in that day's brief.
-6. When it is a task you could do yourself, offer to.
 
 Done when the item exists in exactly one place and the user has its identifier.
 
 ## Ideas
 
-An idea the user wants kept but not acted on yet is a LIFE issue in status `想法` (a Backlog-category status): the title as the user put it, an area label, any context in the description, and no project, cycle, or due date. Record it directly without questions and reply with the identifier.
+An idea the user wants kept but not acted on yet is a LIFE issue in status `想法` (a Backlog-category status): the title as the user put it, an area label, any context in the description, and no project, cycle, or due date. Record it without questions and reply with the identifier.
 
 Ideas stay out of briefs and weekly planning. When the user picks one up, or the monthly check asks, settle it:
 
@@ -141,7 +134,7 @@ List ideas with `linear issue query --team LIFE --state backlog --json`, keeping
 
 ## Measures
 
-A goal is judged by its `衡量：` line, so its values need a record. When the user reports a value (体脂 21%, 已完成 9/14 课), post it directly as an initiative update: `linear initiative-update create <id> --body "衡量：<value>（<YYYY-MM-DD>）"`. The weekly review asks for any measure with no value from the past week.
+A goal is judged by its `衡量：` line, so its values need a record. When the user reports a value (体脂 21%, 已完成 9/14 课), post it as an initiative update: `linear initiative-update create <id> --body "衡量：<value>（<YYYY-MM-DD>）"`. The weekly review asks for any measure with no value from the past week.
 
 ## Habits
 
@@ -164,7 +157,7 @@ Habits are declared as `习惯：` lines in active initiative descriptions; that
 
 A draft sent for approval states the routine or request it comes from, the cycle number and dates it belongs to, and for each item the identifier and the exact action, numbered so the user can approve some ("1 和 3 可以"). An approval covers the listed items only.
 
-On approval, reload this skill, re-read each item's current state, and apply. When the cycle in the draft has ended or an item changed since, propose the differences again instead of applying. Read the result back (`view` or `query --json`) and report the identifiers.
+On approval, reload this skill, re-read each item's current state, and apply. When the cycle in the draft has ended or an item changed since, propose the differences again instead of applying. Read the result back (`view` or `query --json`) and report the identifiers. When the draft is saved in a document (the weekly review), append its outcome there under `## 处理结果`: each item number with 已执行 or 不做; later routines read it from there.
 
 ### Safety
 
@@ -172,12 +165,7 @@ Write only through create, update, comment, and `initiative add-project` command
 
 ## Free-plan budget
 
-Linear Free caps a workspace at 250 non-archived issues. Closed issues count until auto-archived, which waits for their project and cycle to complete, so closing an issue does not free quota at once. Keep the count low by design:
-
-- Dev tickets stay on GitHub.
-- Projects end within 8 weeks, so their closed issues can archive.
-- A habit is one issue per week with one comment per check-in.
-- Each idea costs one issue, so the monthly check keeps the idea pool small.
+Linear Free caps a workspace at 250 non-archived issues. Closed issues count until auto-archived, which waits for their project and cycle to complete, so closing an issue does not free quota at once.
 
 Count with `linear issue query --all-teams --limit 0 --json`, split by `state.type` into open and closed-but-unarchived. At 200 or more, report both numbers, what keeps closed issues from archiving (unfinished projects, the active cycle), and the oldest open backlog issues and ideas as close candidates. Before creating several issues at once, check that the batch keeps the total under 250; otherwise stop and report.
 
@@ -195,6 +183,7 @@ Count with `linear issue query --all-teams --limit 0 --json`, split by `state.ty
   linear api 'query($d: TimelessDateOrDuration!) { issues(first: 100, filter: { team: { key: { eq: "LIFE" } }, dueDate: { lte: $d }, state: { type: { nin: ["completed", "canceled"] } } }) { nodes { identifier title dueDate state { name } labels { nodes { name } } } } }' --variable d=<YYYY-MM-DD>
   ```
 
+- `milestone list --project <id>` shows each milestone's target date; `issue query --json` nodes carry `projectMilestone`.
 - `project create --initiative <name>` links at creation; `linear initiative add-project <initiative> <project>` links later. `project update` changes the description but not the overview.
 - `project-update create <projectId>` and `initiative-update create <initiativeId>` take `--health onTrack|atRisk|offTrack` and `--body-file`.
 - `document create` and `document list` attach to or filter by a cycle with `--team LIFE --cycle <number>`; `document update <id> --content-file` rewrites content.

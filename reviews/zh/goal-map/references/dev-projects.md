@@ -1,6 +1,6 @@
 # 开发项目
 
-让 DEV 项目与 GitHub 上跟踪的需求保持同步。GitHub ticket 仍是工作单元；DEV 项目是一个独立需求在目标层面的把手。依据 GitHub 事实的更新直接执行；新建、完成或取消项目需要用户确认。
+让 DEV 项目与 GitHub 上跟踪的需求保持同步。GitHub ticket 仍是工作单元；DEV 项目是一个独立需求在目标层面的把手。
 
 ## 需求文档或 wayfinder 地图发布时
 
@@ -23,14 +23,16 @@
 
 完成标准：项目包含每一行 `github:`，且你已报告其标识符。
 
-## 工作推进中
+## 依据 GitHub 同步
 
-- 第一个 ticket 被认领时，把项目设为 `started`。
+周回顾用它收集到的 GitHub 事实执行：
+
+- 有任何 ticket 关闭或 PR 合并后，把 `planned` 的项目设为 `started`。
 - 某个里程碑的 ticket 全部以完成状态关闭时，发布 `linear project-update create <id> --health onTrack --body-file <file>`，列出已合并的 PR。
 
 ## 需求看起来已交付时
 
-当项目各 `github:` issue 下的子 issue 全部关闭，收集证据：每条的关闭原因（`completed` 或 `not_planned`）、已合并的 PR，以及概览中的完成标准。提议一种结果：
+当项目各 `github:` issue 下的子 issue 全部关闭，或用户说已交付时，收集证据：每条的关闭原因（`completed` 或 `not_planned`）、已合并的 PR，以及概览中的完成标准。提议一种结果：
 
 - **完成**：已合并的工作满足完成标准。
 - **取消**：工作以“不做”关闭，或已被替代。
