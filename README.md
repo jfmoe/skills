@@ -5,7 +5,7 @@ Personal source repository for user-created agent skills (Cursor and Claude Code
 ## Layout
 
 ```text
-AGENTS.md            Repository-level rules (CLAUDE.md is a symlink to this)
+AGENTS.md            Repository-level agent rules
 skills/              Installable skills (copied verbatim into projects on install)
   <skill>/           One folder per skill — flat, no category directories
 registry/
