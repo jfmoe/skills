@@ -1,267 +1,78 @@
 ---
 name: apple-container
-description: 'Use when the user mentions apple container, the `container` CLI, migrating from Docker to apple container, or running OCI containers natively on macOS. Also trigger when the user wants to run containers on Mac without Docker Desktop, troubleshoots `container run`/`container build` commands, or discusses launchd-based container orchestration on macOS.'
+description: 'Use for Apple Container CLI setup, operation, troubleshooting, Docker migration on macOS, or launchd-based container orchestration.'
 ---
 
 # Apple Container CLI
 
-Apple's native container runtime for macOS. Runs OCI-compatible Linux containers using Apple's virtualization framework — no Docker Desktop needed.
+Use the installed CLI and its matching official documentation to operate Apple's Linux containers on macOS. Keep version-dependent command syntax, platform requirements, and feature availability in those sources.
 
-**Requirements:** macOS 26 only. Apple does not support older macOS versions (it depends on macOS 26 virtualization/networking features).
+## Establish the environment
 
-> **Version note (1.0.0+):** `container system property get`/`set` were **removed**. System configuration now lives in a TOML file at `~/.config/container/config.toml`. The DNS setup below reflects this; older docs showing `container system property set dns.domain ...` are outdated and will fail.
+1. Run `command -v container`, `container --version`, `sw_vers`, and `uname -m`. If the CLI is absent, check the official installation requirements before installing through the user's preferred package manager.
+2. Read `container --help` and the relevant subcommand's `--help`. Use local help for available commands and flags; use the matching release documentation for behavior and limitations.
+3. For operations needing the service, inspect `container system status`. Start it if needed; preserve startup errors for diagnosis.
 
-## Install & First-Time Setup
+Proceed when the installed version, host compatibility, and required command support are established. If local help and documentation disagree, report the mismatch and verify the operation before relying on it.
 
-```bash
-brew install container
+## Find the matching reference
 
-# 1. Start the system service
-container system start
+Start at the [official repository](https://github.com/apple/container) and [releases](https://github.com/apple/container/releases). Select the tag matching `container --version`, then open the relevant file below. These paths are relative to that tag; `main` may describe unreleased behavior. If a path moved, locate its replacement in the selected tree. For a development build, use its commit when available and state any remaining uncertainty.
 
-# 2. Install the Linux kernel (required, only once)
-container system kernel set --recommended
+| Task | Official source in the selected tag |
+| --- | --- |
+| Installation and host requirements | `README.md` |
+| Command syntax | `docs/command-reference.md` |
+| System defaults and configuration | `docs/container-system-config.md` |
+| DNS, ports, and custom networks | `docs/networking.md` |
+| Host services and SSH forwarding | `docs/host-integration.md` |
+| Architecture selection and Rosetta | `docs/multiplatform-images.md` |
+| Persistent storage | `docs/volumes.md` |
+| Long-lived Linux machines | `docs/container-machine.md` |
+| Kubernetes, when exposed by local help | `docs/kubernetes.md` |
 
-# 3. Enable inter-container DNS (required for multi-container setups, needs sudo)
-sudo container system dns create local
+Read only the references needed for the task. Check release notes when upgrading or investigating a behavior change.
 
-# 4. Set it as the default domain via the TOML config (replaces the old `property set`)
-mkdir -p ~/.config/container
-cat >> ~/.config/container/config.toml <<'EOF'
+## Initialize and configure
+
+- Inspect `container system start --help` before scripting first startup. Startup can offer kernel installation; where supported, `container system start --enable-kernel-install` handles a missing kernel without an interactive prompt. Use `container system kernel set --recommended` for an explicit kernel install or update, rather than repeating it after every start.
+- Read the existing configuration before changing it. For TOML-based releases, edit the relevant keys in `~/.config/container/config.toml`, preserving unrelated sections. Merge into an existing table; blindly appending another `[dns]` table makes the file invalid.
+- Apply configuration changes using the documented lifecycle. Before a required service restart, inspect running workloads and account for the interruption. Where supported, verify effective values with `container system property list`.
+
+Initialization is complete when the service is healthy and the requested workload starts successfully; a successful configuration write alone is insufficient.
+
+## Networking
+
+Treat each communication path separately:
+
+- **Mac to container:** use a published port or a reachable container IP. For DNS names, configure the service's DNS domain and the Mac's resolver as described in the matching networking guide.
+- **Container to container:** verify network membership and test resolution from the calling container. On releases using `[dns] domain`, this registers qualified names; `container system dns create <domain>` configures the Mac's resolver. These serve different callers.
+- **Container to Mac:** consult the host integration guide. If using `container system dns create --localhost`, check its documented packet-filter, restart, and Private Relay effects before changing host networking.
+
+For a fresh local DNS setup, use the guide's example domain, such as `test`, consistently. Preserve an existing working domain unless the task requires changing it. With TOML configuration, merge:
+
+```toml
 [dns]
-domain = "local"
-EOF
-
-# 5. Restart the service so the config takes effect
-container system stop && container system start
+domain = "test"
 ```
 
-Step 2 is mandatory — without a kernel, `container run` fails. For DNS you need **both** the `dns create` command (step 3) and the `[dns] domain` entry in `config.toml` (step 4); creating the domain alone leaves resolution non-functional. Verify config with `container system property list`.
+Follow the matching guide to apply it and configure the host resolver with `sudo container system dns create test` when host name resolution is needed.
 
-## Docker → Apple Container Migration
+Do not assume Docker Compose-style bare service names resolve on custom networks. Check the release's networking limitations. Use a documented qualified name on a supported network, or inspect the destination container's IP on the shared network. Parse `container inspect` as JSON and select the intended network; avoid assuming the first address is correct. Recheck addresses after recreating containers.
 
-The CLI is intentionally Docker-compatible in syntax. Most commands map directly:
+Networking is verified only after the intended caller resolves or addresses the destination and reaches its application port. Host-only success does not prove container-to-container connectivity.
 
-| Docker                  | Apple Container                             | Notes                                                       |
-| ----------------------- | ------------------------------------------- | ----------------------------------------------------------- |
-| `docker run`            | `container run`                             | Same flags: `-d`, `--rm`, `--name`, `-p`, `-v`, `-e`, `-it` |
-| `docker build`          | `container build`                           | Same: `-t/--tag`, `-f/--file`, `--build-arg`, `--target`    |
-| `docker ps`             | `container list` / `container ls`           | `-a` for all                                                |
-| `docker exec`           | `container exec`                            | Same: `-it`, `-e`, `-w`                                     |
-| `docker stop`           | `container stop`                            | Adds `--all` flag                                           |
-| `docker rm`             | `container delete` / `container rm`         | Adds `--all` flag                                           |
-| `docker logs`           | `container logs`                            | Same: `-f`, `-n`                                            |
-| `docker images`         | `container image list`                      |                                                             |
-| `docker pull`           | `container image pull`                      |                                                             |
-| `docker push`           | `container image push`                      |                                                             |
-| `docker tag`            | `container image tag`                       |                                                             |
-| `docker rmi`            | `container image delete`                    |                                                             |
-| `docker cp`             | `container copy` / `container cp`           |                                                             |
-| `docker save`           | `container image save`                      | Export image to tar                                         |
-| `docker load`           | `container image load`                      | Import image from tar                                       |
-| `docker export`         | `container export`                          | Export container filesystem to tar                          |
-| `docker inspect`        | `container inspect`                         |                                                             |
-| `docker stats`          | `container stats`                           | Adds `--no-stream`                                          |
-| `docker volume create`  | `container volume create`                   |                                                             |
-| `docker volume rm`      | `container volume delete`                   |                                                             |
-| `docker network create` | `container network create`                  | macOS 26+                                                   |
-| `docker login`          | `container registry login`                  |                                                             |
-| `docker logout`         | `container registry logout`                 |                                                             |
-| `docker system prune`   | `container prune` + `container image prune` | Separate commands                                           |
-| `docker compose`        | _(not available)_                           | No Compose equivalent yet                                   |
+## Docker migration and persistent workloads
 
-## Common Workflows
+- Translate each required operation using local help. Similar command names do not guarantee identical flags, JSON schemas, Docker API compatibility, or lifecycle behavior. Verify any tool that depends on a Docker socket against its actual integration requirements.
+- Check current Compose and restart-policy support before choosing orchestration. If the installed version lacks the required behavior, use a script or launchd job that handles service readiness, dependencies, application health, and persistent data. Distinguish startup at login from recovery after an application crash; `RunAtLoad` alone does not provide crash recovery.
+- For launchd jobs, resolve the executable with `command -v container` and use its absolute path or an explicit PATH. Test in the job's user context. Use bounded readiness checks and retain failure output.
+- Inspect volume contents and the image's documented data-directory contract before changing mounts. If an ext4 volume's `lost+found` prevents initialization, configure a supported subdirectory for application data. Preserve existing data and follow the image's migration procedure for an already initialized database.
+- Select the intended image architecture explicitly for cross-architecture execution, for example `container run --arch amd64 ...` or `--platform linux/amd64` when supported. Check Rosetta requirements separately; `--rosetta` alone does not select the image architecture.
+- Make cleanup idempotent by checking resource state and handling only expected absence. Keep permission, service, and storage errors visible instead of masking all failures with `|| true`.
 
-### Build and run a web server
+## Verify and finish
 
-```bash
-container build --tag web-app --file Dockerfile .
-container run --name web-app --detach --rm -p 8080:80 web-app
-```
+Exercise the requested behavior: application response, connectivity from the real caller, data persistence, or recovery after restart, as applicable. Inspect container and service logs when it fails. Build-only or service-only success is not proof of application health.
 
-### Interactive shell in a container
-
-```bash
-container run -it --rm ubuntu:latest /bin/bash
-# Or exec into running container:
-container exec -it my-container sh
-```
-
-### Mount volumes
-
-```bash
-# Bind mount
-container run -v /host/path:/container/path my-image
-
-# Named volume
-container volume create my-data
-container run -v my-data:/data my-image
-```
-
-### Local DNS (access containers by name)
-
-Both steps are required — creating the domain without the `[dns] domain` config entry leaves DNS non-functional:
-
-```bash
-sudo container system dns create local
-# Set default domain in ~/.config/container/config.toml (replaces removed `property set`):
-#   [dns]
-#   domain = "local"
-container system stop && container system start   # restart to apply
-# Now access containers at: http://<container-name>.local
-container run --name my-app -d --rm nginx
-open http://my-app.local
-```
-
-### Push to registry
-
-```bash
-container registry login registry.example.com
-container image tag my-app registry.example.com/team/my-app:latest
-container image push registry.example.com/team/my-app:latest
-```
-
-### Resource limits
-
-```bash
-container run --cpus 2 --memory 1024 my-image
-```
-
-### Environment variables
-
-```bash
-container run -e KEY=value --env-file .env my-image
-```
-
-### Networking between containers (macOS 26+)
-
-Requires DNS setup first (see Install & First-Time Setup above).
-
-```bash
-container network create my-net
-container run --name db --network my-net -d postgres
-container run --name app --network my-net -d my-app
-# app can reach db at hostname "db" (resolves as db.local)
-```
-
-## Docker Migration Pitfalls
-
-### Volumes use ext4 → `lost+found` breaks some images
-
-Named volumes are ext4-formatted and contain a `lost+found` directory at the mount root. Images that expect an empty mount point (e.g., PostgreSQL) will fail:
-
-```
-initdb: error: directory "/var/lib/postgresql/data" exists but is not empty
-```
-
-**Fix:** Set the data directory to a subdirectory within the volume:
-
-```bash
-container run -e PGDATA=/var/lib/postgresql/data/pgdata \
-  -v pgdata:/var/lib/postgresql/data postgres:16-alpine
-```
-
-This applies to any image that checks for an empty mount point (MySQL `datadir`, etc.).
-
-### No restart policy ([#286](https://github.com/apple/container/issues/286))
-
-Apple Container has no `--restart` flag. Containers do not survive system reboots or crashes. Use a macOS launchd plist with `RunAtLoad` to auto-start containers at login.
-
-### No Compose ([Discussion #194](https://github.com/apple/container/discussions/194))
-
-No built-in equivalent to `docker compose`. Multi-container orchestration requires a shell script that handles: network/volume creation, startup order, health-check waits, and DSN wiring.
-
-### System service doesn't auto-start ([#158](https://github.com/apple/container/issues/158))
-
-`container system start` must run before any container commands work. After a reboot, the service is not running. Management scripts should include an `ensure_system` guard:
-
-```bash
-ensure_system() {
-    if ! container list &>/dev/null; then
-        container system start 2>/dev/null || true
-        local i=0
-        while [ $i -lt 30 ]; do
-            container list &>/dev/null && return 0
-            sleep 1; i=$((i + 1))
-        done
-        return 1
-    fi
-}
-```
-
-### `container inspect` JSON differs from Docker
-
-Do not use `grep` to extract fields from `container inspect` output — escaping differences (e.g., backslashes in IP addresses) cause subtle bugs. Use proper JSON parsing:
-
-```bash
-# Good
-container inspect my-container | python3 -c "
-import sys,json
-print(json.load(sys.stdin)[0]['networks'][0]['ipv4Address'].split('/')[0])
-"
-
-# Bad — fragile, breaks on escaped characters
-container inspect my-container | grep -o '"ipv4Address":"[^/]*' | cut -d'"' -f4
-```
-
-### Watchtower / Docker-socket-dependent tools don't work
-
-Tools like Watchtower that rely on `/var/run/docker.sock` cannot function in Apple Container. Replace with a launchd plist that periodically runs `container image pull` + recreates the container.
-
-### launchd scripts need explicit PATH
-
-macOS launchd does not inherit the user's shell PATH. Scripts invoked by launchd must set PATH explicitly, or `container` (installed at `/opt/homebrew/bin/container`) won't be found:
-
-```bash
-#!/bin/bash
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-```
-
-### `set -euo pipefail` and cleanup commands
-
-`container stop` / `container delete` return non-zero for non-existent containers. With `set -e`, this aborts the script. Always append `|| true`:
-
-```bash
-container stop my-app 2>/dev/null || true
-container delete my-app 2>/dev/null || true
-```
-
-## Key Differences from Docker
-
-1. **No daemon** — uses macOS launchd services (`container system start/stop`)
-2. **Apple Virtualization** — runs a real Linux VM per container, not a shared daemon
-3. **No Compose** — orchestrate with scripts or use individual commands
-4. **DNS requires setup** — `sudo container system dns create <domain>` + a `[dns] domain = "<domain>"` entry in `~/.config/container/config.toml` (the old `container system property set dns.domain` was removed in 1.0.0)
-5. **Rosetta support** — run x86_64 images on arm64: `container run --rosetta ...`
-6. **SSH forwarding** — `container run --ssh ...` forwards host SSH agent
-7. **Socket publishing** — `container run --publish-socket host:container` for Unix sockets
-8. **Builder is separate** — BuildKit runs in its own container (`container builder start/stop`)
-9. **TOML config (1.0.0+)** — system configuration lives in `~/.config/container/config.toml` with sections `[build]`, `[container]`, `[dns]`, `[kernel]`, `[network]`, `[registry]`, `[vminit]`. `container system property list` inspects current values; there is no `get`/`set`.
-10. **`container machine` (1.0.0+)** — manages long-lived Linux VMs with tighter host integration, distinct from per-container ephemeral VMs (`container machine create/run/list/stop/delete`).
-
-## System Management
-
-```bash
-container system status          # Check service health
-container system version         # Show CLI and API versions
-container system df              # Disk usage
-container system logs --last 5m  # Recent service logs
-container system kernel set --recommended  # Update kernel
-container system property list   # Show current config (from config.toml); no get/set in 1.0.0+
-container system dns list        # List configured DNS domains
-```
-
-## Cleanup
-
-```bash
-container stop --all             # Stop all running containers
-container delete --all           # Remove all containers
-container image prune --all      # Remove unused images
-container volume prune           # Remove unused volumes
-container network prune          # Remove unused networks
-```
-
-## Further Reference
-
-For the complete command reference with all flags and options, fetch:
-https://raw.githubusercontent.com/apple/container/refs/heads/main/docs/command-reference.md
+Remove only disposable resources created for this task. Inspect the affected resources and confirm scope before broad stop, delete, or prune operations. Report the installed version, changes made, checks performed, and any unresolved limitations.
