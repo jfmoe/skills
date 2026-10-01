@@ -58,7 +58,7 @@ review 类 brief 加「评审口径」段：每条发现标注类型（事实冲
 
 全权限 `--dangerously-bypass-approvals-and-sandbox`；一次性委派覆盖 `-c model_reasoning_effort="high"`。
 
-模型按委派类型固定：`review` 使用 `gpt-6-astra`；`explore` 和 `research` 使用 `gpt-6-sol`。以下命令中的 `<model>` 必须按此映射填入，不继承默认模型。
+模型按委派类型固定：`review` 使用 `gpt-6-astra`；`explore` 和 `research` 使用 `gpt-6.1-sol`。以下命令中的 `<model>` 必须按此映射填入，不继承默认模型。
 
 用宿主后台任务跑 `codex exec`，长 timeout；长 brief 走 stdin，`-o` 兜底捕获最终消息：
 
