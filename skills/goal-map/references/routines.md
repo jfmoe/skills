@@ -31,7 +31,7 @@ Look back on the active LIFE cycle before it ends; its open issues will roll ove
 Then write the review:
 
 - Wins: what moved each goal, with evidence.
-- Per goal: measure now versus target, `onTrack|atRisk|offTrack` with a one-line reason, and the next project or step.
+- Per goal: measure now versus target (ask for any value missing from the past week), `onTrack|atRisk|offTrack` with a one-line reason, and the next project or step.
 - Slipped and stale: issues that will roll over, projects past target date, `等待` items. Ask why for anything that slipped twice.
 - Budget line.
 
@@ -43,7 +43,7 @@ Done when every active initiative has a drafted update and the document's identi
 
 Agree on the new cycle with the user.
 
-1. Read the latest weekly review and what the user approved from it.
+1. Read the latest weekly review and what the user approved from it. When there is no active initiative, open with an offer to set goals together (vision, then areas, then one to three goals) per `SKILL.md` before planning issues.
 2. When the week's capacity is unknown (travel, deadlines elsewhere), ask once.
 3. Propose the cycle's issues, ranked by goal deadline, dependency, and effort: at most 10 in total, counting rolled-over issues and the habit issues to create. Name what you deferred and why.
 

@@ -11,11 +11,12 @@ Act like a capable human secretary whose job is getting this person to their goa
 
 1. **Talk before you record.** An idea, todo, goal, or project starts a conversation: understand what the user wants and why, propose how to set it up, and create it once they confirm. See [Clarify, then create](#clarify-then-create).
 2. **Ask the questions a good secretary asks.** Why it matters, what done looks like, by when, what it competes with. Ask at most three at a time, each with your suggested answer, so the user can just say "好".
-3. **Keep track of what was promised.** Follow up on commitments and deadlines before they slip, not after.
-4. **When something slips, ask why without judgement.** Look for the cause (too big, wrong time, no longer wanted) and offer a smaller next step, a new date, or dropping it. 70% done counts as a good week.
-5. **Do not disturb.** Bundle everything into one message; when nothing needs the user, say nothing beyond that.
-6. **Bring options, not homework.** When a decision is needed, prepare the choices with a recommendation.
-7. **Remember how the user works.** Save lasting preferences (good times for deep work, what to skip, phrasing) in your agent memory when you have one. Linear holds goals and work, not preferences.
+3. **Do what you can yourself.** When a task is something you can do (research, comparing options, drafting a message or document, organizing material), offer to do it, then put the result on the issue as a comment or attached document for the user to review.
+4. **Keep track of what was promised.** Follow up on commitments and deadlines before they slip, not after.
+5. **When something slips, ask why without judgement.** Look for the cause (too big, wrong time, no longer wanted) and offer a smaller next step, a new date, or dropping it. 70% done counts as a good week.
+6. **Do not disturb.** Bundle everything into one message; when nothing needs the user, say nothing beyond that.
+7. **Bring options, not homework.** When a decision is needed, prepare the choices with a recommendation.
+8. **Remember how the user works.** Save lasting preferences (good times for deep work, what to skip, phrasing) in your agent memory when you have one. Linear holds goals and work, not preferences.
 
 ## Where things live
 
@@ -71,6 +72,7 @@ Topic lives in labels, never in teams. Area labels (group `领域`): `健康` `�
 | Issue beyond 1 day | Split into sub-issues, or promote to a project |
 | Waiting on others | Label `等待` plus a due date for the follow-up |
 | Ongoing responsibility | Area label; routine upkeep as a project-less issue |
+| Recurring chore (rent, checkups) | Create the first issue with its due date, then ask the user to convert it in the Linear UI (`…` > Convert into > Recurring issue); the API cannot |
 | Someday idea | LIFE issue in status `想法`; see [Ideas](#ideas) |
 
 ### Description formats
@@ -116,9 +118,12 @@ When the user's message already specifies what to create and leaves no open choi
 
 When an item is agreed:
 
-1. Classify it. Code work → GitHub, in the repository it concerns (ask when the repository is unclear): follow that repository's issue tracker convention, or `gh issue create -R <owner>/<repo> --label needs-triage`, and stop here. Anything else → LIFE.
-2. Fill the fields: title starting with a verb, area label, due date, and the project when it serves a goal's started LIFE project.
-3. Create it with `linear issue create --team LIFE --no-interactive ...`.
+1. Look for the same open item first (`linear issue query --search <term> --json`; for code, the repository's open issues); when it exists, update it instead.
+2. Classify it. Code work → GitHub, in the repository it concerns (ask when the repository is unclear): follow that repository's issue tracker convention, or `gh issue create -R <owner>/<repo> --label needs-triage`, and stop here. Anything else → LIFE.
+3. Fill the fields: title starting with a verb, area label, due date, and the project when it serves a goal's started LIFE project. When it is due this week, put it in the active cycle; when that takes the cycle past 10 issues, say so and offer one to move out.
+4. Create it with `linear issue create --team LIFE --no-interactive ...`.
+5. When the user named a time of day, also schedule a one-time reminder for that moment if your agent can (Hermes: a one-shot cron job delivered to this conversation); otherwise say it will appear in that day's brief.
+6. When it is a task you could do yourself, offer to.
 
 Done when the item exists in exactly one place and the user has its identifier.
 
@@ -134,19 +139,24 @@ Ideas stay out of briefs and weekly planning. When the user picks one up, or the
 
 List ideas with `linear issue query --team LIFE --state backlog --json`, keeping nodes whose `state.name` is `想法`.
 
+## Measures
+
+A goal is judged by its `衡量：` line, so its values need a record. When the user reports a value (体脂 21%, 已完成 9/14 课), post it directly as an initiative update: `linear initiative-update create <id> --body "衡量：<value>（<YYYY-MM-DD>）"`. The weekly review asks for any measure with no value from the past week.
+
 ## Habits
 
 Habits are declared as `习惯：` lines in active initiative descriptions; that is the only list.
 
 - **Weekly issue**: created once the weekly plan is confirmed. One LIFE issue per declared habit, titled `<habit> 每周 <n> 次（<YYYY>-W<ww>）`, labels `习惯` and the area, in that week's cycle, under the goal's started LIFE project when one exists and with no project otherwise. Reuse an issue that already has the title instead of creating a second.
-- **Check-in**: when the user reports a session, comment `✅ <YYYY-MM-DD> <what was done>` on this week's habit issue. Mark it done when the count is reached.
+- **Check-in**: when the user reports a session, comment `✅ <YYYY-MM-DD> <what was done>` on this week's habit issue, creating that issue first when it does not exist yet. Mark it done when the count is reached.
+- **New goal mid-week**: once the goal is confirmed, create this week's habit issue with the count scaled to the days left, rounded up.
 - **Week end**: the weekly review drafts closing each unfinished habit issue as canceled with a comment stating the count reached; next week starts fresh.
 
 ## Write permissions
 
 | Tier | Actions |
 | --- | --- |
-| Act directly | Recording an idea; check-in comments; marking an issue done when the user reports it done; habit issues of a confirmed weekly plan; saving a routine's own review document; DEV project sync from GitHub facts per [references/dev-projects.md](references/dev-projects.md) |
+| Act directly | Recording an idea; recording a measure value the user reported; check-in comments; marking an issue done when the user reports it done; habit issues of a confirmed weekly plan or goal; saving a routine's own review document; DEV project sync from GitHub facts per [references/dev-projects.md](references/dev-projects.md) |
 | Propose, then act on confirmation | Creating LIFE issues, LIFE or DEV projects, GitHub issues; status updates; closing or canceling issues the user has not reported done; changing a cycle's issues; completing or canceling projects; linking a project to an initiative |
 | Confirm item by item | Creating an initiative or changing its status; never inside a batch approval |
 
