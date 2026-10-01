@@ -71,7 +71,7 @@ Topic lives in labels, never in teams. Area labels (group `领域`): `健康` `�
 | Issue beyond 1 day | Split into sub-issues, or promote to a project |
 | Waiting on others | Label `等待` plus a due date for the follow-up |
 | Ongoing responsibility | Area label; routine upkeep as a project-less issue |
-| Someday idea | Initiative with status `planned`, or a project with status `backlog` and no issues |
+| Someday idea | LIFE issue in status `想法`; see [Ideas](#ideas) |
 
 ### Description formats
 
@@ -103,7 +103,7 @@ Match the depth of the conversation to what is being created:
 | A clear single action ("明天交电费") | One-line proposal: team, title, due date, labels, project. Create on "好" |
 | Multi-session work | Ask which goal it serves and how to split the sessions; propose per [Placement decisions](#placement-decisions) |
 | A goal or project | Clarify until each answer below is settled, then propose the full draft |
-| An idea with no next action | Ask whether it is for now or someday; someday becomes a planned initiative or empty backlog project |
+| An idea to keep for later | No questions; record it per [Ideas](#ideas) |
 
 Answers to settle:
 
@@ -122,6 +122,18 @@ When an item is agreed:
 
 Done when the item exists in exactly one place and the user has its identifier.
 
+## Ideas
+
+An idea the user wants kept but not acted on yet is a LIFE issue in status `想法` (a Backlog-category status): the title as the user put it, an area label, any context in the description, and no project, cycle, or due date. Record it directly without questions and reply with the identifier.
+
+Ideas stay out of briefs and weekly planning. When the user picks one up, or the monthly check asks, settle it:
+
+- **One action**: move it to `Todo`; it is now a normal issue.
+- **A project or goal**: clarify and create it per [Clarify, then create](#clarify-then-create), then move the idea issue into the new project as its first step.
+- **Dropped**: mark it canceled.
+
+List ideas with `linear issue query --team LIFE --state backlog --json`, keeping nodes whose `state.name` is `想法`.
+
 ## Habits
 
 Habits are declared as `习惯：` lines in active initiative descriptions; that is the only list.
@@ -134,7 +146,7 @@ Habits are declared as `习惯：` lines in active initiative descriptions; that
 
 | Tier | Actions |
 | --- | --- |
-| Act directly | Check-in comments; marking an issue done when the user reports it done; habit issues of a confirmed weekly plan; saving a routine's own review document; DEV project sync from GitHub facts per [references/dev-projects.md](references/dev-projects.md) |
+| Act directly | Recording an idea; check-in comments; marking an issue done when the user reports it done; habit issues of a confirmed weekly plan; saving a routine's own review document; DEV project sync from GitHub facts per [references/dev-projects.md](references/dev-projects.md) |
 | Propose, then act on confirmation | Creating LIFE issues, LIFE or DEV projects, GitHub issues; status updates; closing or canceling issues the user has not reported done; changing a cycle's issues; completing or canceling projects; linking a project to an initiative |
 | Confirm item by item | Creating an initiative or changing its status; never inside a batch approval |
 
@@ -155,9 +167,9 @@ Linear Free caps a workspace at 250 non-archived issues. Closed issues count unt
 - Dev tickets stay on GitHub.
 - Projects end within 8 weeks, so their closed issues can archive.
 - A habit is one issue per week with one comment per check-in.
-- Someday ideas live as planned initiatives or empty backlog projects, which cost no issues.
+- Each idea costs one issue, so the monthly check keeps the idea pool small.
 
-Count with `linear issue query --all-teams --limit 0 --json`, split by `state.type` into open and closed-but-unarchived. At 200 or more, report both numbers, what keeps closed issues from archiving (unfinished projects, the active cycle), and the oldest open backlog issues as close candidates. Before creating several issues at once, check that the batch keeps the total under 250; otherwise stop and report.
+Count with `linear issue query --all-teams --limit 0 --json`, split by `state.type` into open and closed-but-unarchived. At 200 or more, report both numbers, what keeps closed issues from archiving (unfinished projects, the active cycle), and the oldest open backlog issues and ideas as close candidates. Before creating several issues at once, check that the batch keeps the total under 250; otherwise stop and report.
 
 ## CLI notes
 

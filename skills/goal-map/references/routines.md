@@ -53,5 +53,6 @@ After confirmation, move the agreed issues into the cycle and create the habit i
 
 - Per initiative: an initiative update draft and a check that its measure is still the right one.
 - Projects: started projects past their target date, and finished phases to close.
+- Ideas: each idea older than a month, with a suggested outcome (one action, a project or goal, keep, or drop) per `SKILL.md`.
 - Budget: counts, plus the oldest open backlog issues as close candidates.
 - Vision: ask whether `愿景与领域` still holds when a goal was completed or dropped this month.

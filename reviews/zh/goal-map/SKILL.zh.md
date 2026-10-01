@@ -71,7 +71,7 @@ Linear 免费版允许两个团队，按执行在哪里跟踪来划分：
 | 超过 1 天的 issue | 拆成子 issue，或升级为项目 |
 | 等待别人 | 标签 `等待`，加跟进用的截止日期 |
 | 持续责任 | 领域标签；日常维护作为不挂项目的 issue |
-| 以后再说的想法 | 状态为 `planned` 的 initiative，或状态为 `backlog` 且不含 issue 的项目 |
+| 以后再说的想法 | 状态为 `想法` 的 LIFE issue；见[想法](#想法) |
 
 ### 描述格式
 
@@ -103,7 +103,7 @@ Initiative 描述：
 | 明确的单个动作（“明天交电费”） | 一行提议：团队、标题、截止日期、标签、项目。用户说“好”就创建 |
 | 需要多次完成的工作 | 问它服务哪个目标、怎么分次；按[归属决策](#归属决策)提议 |
 | 目标或项目 | 澄清到下列每个答案都确定，再提出完整草稿 |
-| 没有下一步动作的想法 | 问是现在做还是以后再说；以后再说的建成 planned initiative 或空的 backlog 项目 |
+| 想先留着以后再说的想法 | 不追问；按[想法](#想法)记录 |
 
 需要确定的答案：
 
@@ -122,6 +122,18 @@ Initiative 描述：
 
 完成标准：该条目恰好存在于一个地方，且用户拿到了它的标识符。
 
+## 想法
+
+用户想先留着、暂不处理的想法，是一条状态为 `想法`（属于 Backlog 类别的状态）的 LIFE issue：标题沿用用户的说法，带领域标签，背景写进描述，不挂项目、不进 cycle、不设截止日期。不追问，直接记录，并回复标识符。
+
+想法不进入简报和周规划。用户拿起某条想法，或月度检查问到时，确定它的去向：
+
+- **一个动作**：把它移到 `Todo`；它就成了普通 issue。
+- **一个项目或目标**：按[先澄清再创建](#先澄清再创建)澄清并创建，然后把这条想法 issue 移进新项目，作为第一步。
+- **放弃**：标为已取消。
+
+用 `linear issue query --team LIFE --state backlog --json` 列出想法，保留 `state.name` 为 `想法` 的节点。
+
 ## 习惯
 
 习惯以 `习惯：` 行声明在活跃 initiative 的描述里；这是唯一的清单。
@@ -134,7 +146,7 @@ Initiative 描述：
 
 | 级别 | 操作 |
 | --- | --- |
-| 直接执行 | 打卡评论；用户报告完成时把 issue 标为完成；已确认的周计划中的习惯 issue；保存例行流程自己的回顾文档；按 [references/dev-projects.md](references/dev-projects.md) 依据 GitHub 事实同步 DEV 项目 |
+| 直接执行 | 记录想法；打卡评论；用户报告完成时把 issue 标为完成；已确认的周计划中的习惯 issue；保存例行流程自己的回顾文档；按 [references/dev-projects.md](references/dev-projects.md) 依据 GitHub 事实同步 DEV 项目 |
 | 先提议，确认后执行 | 新建 LIFE issue、LIFE 或 DEV 项目、GitHub issue；进度更新；关闭或取消用户未报告完成的 issue；调整某个 cycle 里的 issue；完成或取消项目；把项目关联到 initiative |
 | 逐条确认 | 新建 initiative 或改变其状态；不能包含在批量批准里 |
 
@@ -155,9 +167,9 @@ Linear 免费版限制每个工作区最多 250 个未归档 issue。已关闭�
 - 开发 ticket 留在 GitHub。
 - 项目在 8 周内结束，其中已关闭的 issue 才能归档。
 - 一个习惯每周一条 issue，每次打卡一条评论。
-- 以后再说的想法用 planned initiative 或空的 backlog 项目，不占 issue。
+- 每条想法占一个 issue，所以月度检查要让想法池保持精简。
 
-用 `linear issue query --all-teams --limit 0 --json` 计数，按 `state.type` 分成未完成和已关闭但未归档两部分。达到 200 及以上时，报告这两个数、阻止已关闭 issue 归档的原因（未结束的项目、当前 cycle），并列出最老的未完成 backlog issue 作为关闭候选。一次新建多条 issue 前，先确认这批创建后总数仍低于 250；否则停下来报告。
+用 `linear issue query --all-teams --limit 0 --json` 计数，按 `state.type` 分成未完成和已关闭但未归档两部分。达到 200 及以上时，报告这两个数、阻止已关闭 issue 归档的原因（未结束的项目、当前 cycle），并列出最老的未完成 backlog issue 和想法作为关闭候选。一次新建多条 issue 前，先确认这批创建后总数仍低于 250；否则停下来报告。
 
 ## CLI 注意事项
 
