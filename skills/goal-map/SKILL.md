@@ -19,6 +19,7 @@ Act like a capable human secretary whose job is getting this person to their goa
 8. **Bring options, not homework.** When a decision is needed, prepare the choices with a recommendation.
 9. **Remember how the user works.** Save lasting preferences (good times for deep work, what to skip, phrasing) in your agent memory when you have one. Linear holds goals and work, not preferences.
 10. **Leave a trail for your next session.** Each conversation may start fresh, so anything a later conversation needs (what was proposed, what was decided) goes into Linear, never only into the chat.
+11. **Call things by name.** When you mention an issue, project, or goal to the user, lead with a short form of its title and put an issue's identifier in parentheses after it: `语法基础（LIFE-5）`. The name tells the user what it is; the identifier lets them point at it.
 
 ## Where things live
 
@@ -106,7 +107,7 @@ Match the depth of the conversation to what is being created:
 | A project | Clarify the goal it serves, the overview's done criteria, a target date 2–8 weeks out, its phases (milestones), and the first action. Then propose the full draft |
 | An idea to keep for later | No questions; record it per [Ideas](#ideas) |
 
-When the user's message already specifies what to create and leaves no open choice, it is the confirmation; create directly. Otherwise create only after the user confirms. Then reply with each identifier and anything you assumed.
+When the user's message already specifies what to create and leaves no open choice, it is the confirmation; create directly. Otherwise create only after the user confirms. Then reply with each created item by name and anything you assumed.
 
 ## Capture
 
@@ -118,11 +119,11 @@ When an item is agreed:
 4. Create it with `linear issue create --team LIFE --no-interactive ...`.
 5. When the user named a time of day, also schedule a one-time reminder for that moment if your agent can (Hermes: a one-shot cron job delivered to this conversation); otherwise say it will appear in that day's brief.
 
-Done when the item exists in exactly one place and the user has its identifier.
+Done when the item exists in exactly one place and the user has its name and identifier.
 
 ## Ideas
 
-An idea the user wants kept but not acted on yet is a LIFE issue in status `想法` (a Backlog-category status): the title as the user put it, an area label, any context in the description, and no project, cycle, or due date. Record it without questions and reply with the identifier.
+An idea the user wants kept but not acted on yet is a LIFE issue in status `想法` (a Backlog-category status): the title as the user put it, an area label, any context in the description, and no project, cycle, or due date. Record it without questions and reply with its name and identifier.
 
 Ideas stay out of briefs and weekly planning. When the user picks one up, or the monthly check asks, settle it:
 
@@ -155,9 +156,9 @@ Habits are declared as `习惯：` lines in active initiative descriptions; that
 
 ### Drafts and approvals
 
-A draft sent for approval states the routine or request it comes from, the cycle number and dates it belongs to, and for each item the identifier and the exact action, numbered so the user can approve some ("1 和 3 可以"). An approval covers the listed items only.
+A draft sent for approval states the routine or request it comes from, the cycle number and dates it belongs to, and each item by name with its identifier and the exact action, numbered so the user can approve some ("1 和 3 可以"). An approval covers the listed items only.
 
-On approval, reload this skill, re-read each item's current state, and apply. When the cycle in the draft has ended or an item changed since, propose the differences again instead of applying. Read the result back (`view` or `query --json`) and report the identifiers. When the draft is saved in a document (the weekly review), append its outcome there under `## 处理结果`: each item number with 已执行 or 不做; later routines read it from there.
+On approval, reload this skill, re-read each item's current state, and apply. When the cycle in the draft has ended or an item changed since, propose the differences again instead of applying. Read the result back (`view` or `query --json`) and report each item by name. When the draft is saved in a document (the weekly review), append its outcome there under `## 处理结果`: each item number with 已执行 or 不做; later routines read it from there.
 
 ### Safety
 

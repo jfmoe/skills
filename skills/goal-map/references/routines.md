@@ -44,7 +44,7 @@ Draft, numbered: a status update per active initiative and started project, unfi
 
 Save the review and the draft as document `周回顾 <YYYY>-W<ww>` attached to the active LIFE cycle by its number; when `document list --team LIFE --cycle <number> --json` already has that title, update it instead. Send both to the user.
 
-Done when every active initiative has a drafted update and the document's identifier is reported.
+Done when every active initiative has a drafted update and the document's title is reported.
 
 ## Weekly planning (start of week)
 

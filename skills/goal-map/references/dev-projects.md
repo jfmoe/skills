@@ -21,7 +21,7 @@ Run this after the repository's issue tracker workflow (`to-spec`, `wayfinder`) 
    The overview follows the format in `SKILL.md`. Omit `--initiative` when no goal was agreed; link one later with `linear initiative add-project <initiative> <project>`.
 4. When the PRD defines phases, add milestones: `linear milestone create --project <id> --name <phase> --target-date <date>`.
 
-Done when the project carries every `github:` line and you have reported its identifier.
+Done when the project carries every `github:` line and you have reported it by name.
 
 ## Sync from GitHub
 

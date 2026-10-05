@@ -21,7 +21,7 @@
    概览遵循 `SKILL.md` 中的格式。没有商定目标时省略 `--initiative`；之后用 `linear initiative add-project <initiative> <project>` 关联。
 4. 需求文档定义了阶段时，添加里程碑：`linear milestone create --project <id> --name <phase> --target-date <date>`。
 
-完成标准：项目包含每一行 `github:`，且你已报告其标识符。
+完成标准：项目包含每一行 `github:`，且你已按名字报告该项目。
 
 ## 依据 GitHub 同步
 

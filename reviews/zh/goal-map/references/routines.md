@@ -44,7 +44,7 @@
 
 把回顾和草稿保存为文档 `周回顾 <YYYY>-W<ww>`，按编号附到当前 LIFE cycle；`document list --team LIFE --cycle <number> --json` 中已有同标题文档时，改为更新它。把两者一起发给用户。
 
-完成标准：每个活跃 initiative 都有一份起草的更新，且已报告文档的标识符。
+完成标准：每个活跃 initiative 都有一份起草的更新，且已报告文档的标题。
 
 ## 周规划（周初）
 
