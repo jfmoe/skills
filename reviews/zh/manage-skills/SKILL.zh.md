@@ -85,10 +85,13 @@ npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
 ### Hermes Agent
 
 Hermes Agent 的 skills 用 `hermes skills` 单独维护，不用 `npx skills`。Hermes 会扫描每次安装、记录其来源，并检查上游更新。
+不要把 skill 链接或复制到 `~/.hermes/skills`，也不要使用 `npx skills -a hermes-agent`：取代 Hermes 安装的链接会破坏其更新检查，未登记的副本则永远不会被扫描或更新。
 
 - **安装**：从 GitHub 源路径安装：`hermes skills install <owner>/<repo>/<path-to-skill> --yes`。本仓库中的 skill 使用 `jfmoe/skills/skills/<skill>`。Hermes 从 GitHub 安装，因此先推送源文件的改动。
 - **更新**：推送改动后运行 `hermes skills update <skill>`。`hermes skills check` 列出上游有变化的已安装 skills。
 - **移除**：`hermes skills uninstall <skill>`。
+- **本地修改**：`update` 因本地修改跳过某个 skill 时，把已安装副本与源文件做 diff。只有源文件已包含全部修改时才加 `--force`；否则先把修改移入源文件。
+- **审计**：在 `hermes skills check` 中，每一行都应为 `up_to_date`。`update_available` 用 `update` 修复；`invalid_install`（通常是链接取代了安装）用 `uninstall`、删除链接、再 `install` 修复；`orphaned` 用 `uninstall` 修复。`hermes skills list` 中来源为 `local`、且不来自 `skills.external_dirs` 的 skill，是在 `hermes skills` 之外安装的；从 GitHub 重新安装。
 - **扫描被拦截**：报告扫描发现，得到用户批准后才加 `--force`。
 - **其他应用自带的 skills**（例如 Surge）：把该应用的 skill 目录加入 `~/.hermes/config.yaml` 的 `skills.external_dirs`。
 

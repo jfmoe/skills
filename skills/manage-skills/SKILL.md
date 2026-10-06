@@ -87,10 +87,13 @@ For CLI sources, discovery, commands, and options, see [skills-cli.md](skills-cl
 ### Hermes Agent
 
 Hermes Agent skills are maintained separately with `hermes skills`, not with `npx skills`. Hermes scans each install, records its source, and checks it for upstream updates.
+Never link or copy a skill into `~/.hermes/skills`, and never use `npx skills -a hermes-agent`: a link replacing a Hermes install breaks its update check, and an unregistered copy is never scanned or updated.
 
 - **Install** from the GitHub source path: `hermes skills install <owner>/<repo>/<path-to-skill> --yes`. For a skill in this repository, use `jfmoe/skills/skills/<skill>`. Hermes installs from GitHub, so push the source edit first.
 - **Update** after a pushed edit: `hermes skills update <skill>`. `hermes skills check` lists installed skills with upstream changes.
 - **Remove**: `hermes skills uninstall <skill>`.
+- **Local edits**: when `update` skips a skill for local edits, diff the installed copy against the source. Add `--force` only when the source already holds every edit; otherwise move the edits into the source first.
+- **Audit**: in `hermes skills check`, every row should read `up_to_date`. Fix `update_available` with `update`; `invalid_install` (usually a link replacing the install) with `uninstall`, removing the link, and `install`; `orphaned` with `uninstall`. A skill with source `local` in `hermes skills list` that does not come from `skills.external_dirs` was installed outside `hermes skills`; reinstall it from GitHub.
 - **Blocked scan**: report the finding and get the user's approval before you add `--force`.
 - **Skills shipped inside another app** (for example, Surge): add the app's skill directory to `skills.external_dirs` in `~/.hermes/config.yaml`.
 
