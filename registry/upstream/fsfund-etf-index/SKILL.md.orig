@@ -1,0 +1,130 @@
+---
+name: fsfund-etf-index
+description: >-
+  通过内部 UDSP 数据服务查询指数、ETF、场外联接基金数据。支持指数分类、指数/基金信息、指数360聚合、基金360聚合、行情估值、资金流向、持仓行业、基金经理、业绩表现等。
+  当用户询问指数行情、ETF 行情、联接基金、指数详情、ETF 详情、场外基金详情、成分股、行业分布、PE/PB、净流入、基金经理等数据需求时触发。
+---
+
+# fsfund-etf-index（内部指数 / ETF / 联接）
+
+通过 UDSP Skill 网关查询指数、场内 ETF、场外联接基金数据。**接口列表与出入参不写死在本文档**，由网关元数据接口动态提供。
+
+## Agent 工作流（必读）
+
+```
+1. refresh-meta          # 首次或过期时拉取本 Skill 绑定的接口元数据
+2. list-apis             # 确认 PATH（业务接口名，如 INF_FUND_INFO）
+3. schema <PATH>         # 查看该接口最新入参/出参、必填组
+4. call <PATH> '{...}'   # 按 schema 构造 JSON 调用
+```
+
+脚本路径：`scripts/etf_index.py`（在 skill 根目录下执行）。
+
+```bash
+export HJ_APP_SECRET=你的密钥   # Windows CMD 用 set；PowerShell 用 $env:HJ_APP_SECRET=
+python scripts/etf_index.py refresh-meta
+python scripts/etf_index.py list-apis
+python scripts/etf_index.py schema INF_FUND_INFO
+python scripts/etf_index.py call INF_FUND_INFO "{\"IS_ETF_FUND\":\"是\",\"TRACK_INDX_WINDCODE\":\"000300.SH\",\"currentPage\":\"1\"}"
+```
+
+元数据来源：网关接口 **`get_udsp_2_api_out_in_param`**，入参 **`skill_url=fsfund-etf-index`**。返回中的 **`PATH`** 即业务调用时的接口名。
+
+缓存：写入 `.cache/meta_registry.json`，默认 **3600 秒**有效（`HJ_META_CACHE_SEC`）；平台接口变更后执行 `refresh-meta`。
+
+## 触发场景
+
+- 用户询问指数、ETF、基金相关信息时使用本skill
+- 指数 / ETF / 联接 / 场外指数基金：列表、详情、行情、估值、持仓、行业、净流入、基金经理、业绩排名
+- 指数或基金代码（如 `000300.SH`、`512000.SH`）
+- 多只 ETF 对比、按管理人筛选、分类导出
+
+## 调用规范
+
+### URL
+
+```
+{HJ_BASE_URL}{PATH}
+```
+
+默认前缀：`https://app.fsfund.com/apps/cerdo/udsp-api/udsp/skill/v01/`
+
+### 认证
+
+| Header | 说明 |
+|--------|------|
+| `hjAppSecret` | 环境变量 `HJ_APP_SECRET` |
+| `Content-Type` | `application/json;charset=UTF-8` |
+
+### 环境变量
+
+| 变量 | 说明 |
+|------|------|
+| `HJ_APP_SECRET` | 密钥（必填） |
+| `HJ_BASE_URL` | 网关前缀（可选） |
+| `HJ_SKILL_URL` | Skill 标识，默认 `fsfund-etf-index` |
+| `HJ_META_CACHE_SEC` | 元数据缓存秒数，默认 `3600` |
+
+### 响应
+
+- 成功：`code` 为 `"0000"` 等；业务数据通常在 `data.result`
+- 展示给用户时用 `titleMap` 或 `schema` 中的中文名，**禁止直接输出 API 字段名**
+- 测试环境可能默认只返回约 1000 条，需 `currentPage` 分页
+
+## 场景路由（业务意图）
+
+调用前先 `list-apis` 确认 PATH 仍有效；入参以 `schema <PATH>` 为准。
+
+| 用户意图 | 典型 PATH / 用法 |
+|----------|------------------|
+| 指数分类 | 在 `list-apis` 中找指数分类相关 PATH |
+| 指数基本信息 | 指数信息类 PATH + `INDX_WINDCODE` 等 |
+| 基金基本信息 | 基金信息类 PATH + `FUND_WINDCODE` 等 |
+| 跟踪某指数的 ETF | `INF_FUND_INFO` + `IS_ETF_FUND=是` + `TRACK_INDX_WINDCODE` |
+| 跟踪某指数的联接 | `INF_FUND_INFO` + `IS_ETF_LINK=0-否；1-是` + `TRACK_INDX_WINDCODE` |
+| 指数详情（聚合） | 名称含 `INDX360` 的 PATH；默认拉 **6 个月** `STDATE`/`ENDDATE` |
+| 基金/ETF 详情（聚合） | 名称含 `FUND360` 的 PATH；默认拉 **6 个月** |
+| 指数行情 / 估值 / 资金流 | 在 list 中找 `INF_INDX_PRICE`、`INF_INDX_VALUATION`、`INF_INDX_CAP_DIRECT` 等 |
+| 基金净值 / 规模 / 净流入 | `INF_FUND_NAV` |
+| 上市基金行情 / 贴水率 | `INF_FUND_PRICE` |
+| 业绩与同类排名 | `INF_FUND_PERF` |
+| 基金经理 | `INF_FUND_MGR_INFO` |
+| 持仓 / 行业 / 资产结构 | `INF_FUND_PRT_*` 系列 |
+
+## 不支持 / 勿编造
+
+- FED / ROE 分位等未在 schema 出参中的衍生指标
+- 交易下单、主动基金详情、组合管理、个股深度数据
+
+## 展示规范
+
+### Wind 代码
+
+用户给 6 位码时补 Wind 后缀：沪市常见 `.SH`（如指数 `000300.SH`、基金 `512000.SH`），深市常见 `.SZ`。不确定时先用 `INF_INDX_INFO` / `INF_FUND_INFO` 模糊查，勿臆造交易所。
+
+### 日期标注（硬性）
+
+回复末尾独立段落「**日期标注：**」，按指标逐项标注，禁止笼统同一天：
+
+- 行情：`DATA_DATE` / `TRADE_DT` / `TRADE_DATE`
+- 估值：`TRADE_DATE`
+- 持仓/行业：`END_DT` / `DATA_DATE`
+- 业绩：`TRADE_DATE`
+
+### 单位
+
+以 schema 与返回为准；净流入类字段注意 **万元/元** 差异，展示时用业务中文名。
+
+## Agent 要点
+
+1. **先 meta 后 call**：未拉过元数据或缓存过期 → `refresh-meta`
+2. **不确定字段名** → `schema`，不要凭记忆写参
+3. **聚合接口**优先，减少往返；默认 6 个月区间
+4. **分页**拉全后再筛选/汇总（尤其按 `FUND_MGR`）
+5. 接口增删改由平台维护，**无需改 Skill 文档**
+
+## 补充材料
+
+- 安装：[INSTALL.md](INSTALL.md)
+- CLI：`scripts/etf_index.py`（`refresh-meta` / `list-apis` / `schema` / `call`）
+- 兼容：`scripts/api_client.py`（仅 `call`，无 schema）

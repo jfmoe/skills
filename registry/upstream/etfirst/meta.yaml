@@ -1,0 +1,14 @@
+source: https://www.nffund.com/wxfiles/miniapp/openu/static/assets/etfirst/0.4.2/SKILL.md
+ref: "0.4.2"
+commit: null
+upstream_path: SKILL.md
+local_path: skills/etf/providers/etfirst
+fetched_at: 2026-10-03
+notes: |
+  - 上游为版本化下载文件，未提供 Git commit；原始文件 SHA-256: 6fabdd08f37947475eb5e42b29923be40697054f9c0fc02cac0c9ebd6e450ec8。
+  - 主入口按任务路由，命令参数与字段表按列表、指数、ETF、场外、认证和展示规则拆分。
+  - 保留实时行情时间来源、分页完整性、部分失败与字段语义，去除重复示例和关键词表。
+  - 金额与 ROE 按具体字段表解释；指数 etf 净流入单位冲突保留为待核实项。
+  - 认证路径与 logged_in 限制依据已安装 ETFirst 0.4.2 源码核对；支持 Pixi 项目调用入口。
+  - 合并到 etf 的南方提供方模块；路由入口统一管理两家能力，运行时仍使用 ETFirst CLI。
+  - 基于 CLI 源码、动态 schema 与有限业务样本更新能力证据；纠正请求成本、参数及覆盖边界。

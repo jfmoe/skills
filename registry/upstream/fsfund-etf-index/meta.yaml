@@ -1,0 +1,13 @@
+source: https://data.fsfund.com/oss/file/v1/fileView/47aa9645-baa8-47fa-b247-9683aff14026_t
+ref: "47aa9645-baa8-47fa-b247-9683aff14026_t"
+commit: null
+upstream_path: .
+local_path: skills/etf/providers/fsfund
+fetched_at: 2026-10-03
+notes: |
+  - 上游为无 Git commit 的下载包，package.zip 原样保存；SHA-256: 452692802a0aeb1686534c617aeca11845592957fccb60ae696b3e99357f792e。
+  - etf 内含主 CLI、HTTP 客户端和元数据缓存模块；未使用旧 api_client 兼容入口和打包字节码。
+  - 提炼动态 schema、分页、时间单位和环境配置说明；仅保留一个 etf 技能入口。
+  - schema 展示 NOTNULLFLAG 的独立必填条件，并区分组内择一，附离线回归测试。
+  - 服务提供方按 fsfund.com 官网确认为华宝基金；补充风险分析与估值字段路由，并区分第三方实测与接口契约。
+  - 基于 CLI 源码、动态 schema 与有限业务样本更新能力证据；纠正请求成本、参数及覆盖边界。
