@@ -152,7 +152,7 @@ Habits are declared as `习惯：` lines in active initiative descriptions; that
 | --- | --- |
 | Act directly | Recording an idea; recording a measure value the user reported; check-in comments; marking an issue done when the user reports it done; habit issues of a confirmed weekly plan or goal; saving a routine's own review document; DEV project sync from GitHub facts per [references/dev-projects.md](references/dev-projects.md) |
 | Propose, then act on confirmation | Creating LIFE issues, LIFE or DEV projects, GitHub issues; status updates; closing or canceling issues the user has not reported done; changing a cycle's issues; completing or canceling projects; linking a project to an initiative |
-| Confirm item by item | Creating an initiative or changing its status; never inside a batch approval |
+| Confirm item by item | Creating an initiative or changing its status; deleting or archiving anything; a single mutation that changes several items; never inside a batch approval |
 
 ### Drafts and approvals
 
@@ -162,7 +162,7 @@ On approval, reload this skill, re-read each item's current state, and apply. Wh
 
 ### Safety
 
-Write only through create, update, comment, and `initiative add-project` commands. `linear api` is for read queries only. Deleting, archiving, and mutations through `linear api` are out of bounds; when something looks wrong, describe the fix to the user and let them apply it. Linear keeps deleted items recoverable for 30 days only.
+Prefer CLI commands. When the CLI has no command for a change (creating a project label, for example), a `linear api` mutation may make it, under the tier of the equivalent action. Before an API mutation, read its target; afterwards, read the result back. Deletes, archives, and single mutations that change several items take the item-by-item tier: show the exact items and effect, and act only on the user's explicit approval of that operation. Linear keeps deleted items recoverable for 30 days only.
 
 ## Free-plan budget
 

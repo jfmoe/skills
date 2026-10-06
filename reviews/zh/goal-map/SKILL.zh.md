@@ -152,7 +152,7 @@ Initiative 描述：
 | --- | --- |
 | 直接执行 | 记录想法；记录用户报告的衡量值；打卡评论；用户报告完成时把 issue 标为完成；已确认的周计划或目标中的习惯 issue；保存例行流程自己的回顾文档；按 [references/dev-projects.md](references/dev-projects.md) 依据 GitHub 事实同步 DEV 项目 |
 | 先提议，确认后执行 | 新建 LIFE issue、LIFE 或 DEV 项目、GitHub issue；进度更新；关闭或取消用户未报告完成的 issue；调整某个 cycle 里的 issue；完成或取消项目；把项目关联到 initiative |
-| 逐条确认 | 新建 initiative 或改变其状态；不能包含在批量批准里 |
+| 逐条确认 | 新建 initiative 或改变其状态；删除或归档任何内容；一次变更多个对象的单个变更；不能包含在批量批准里 |
 
 ### 草稿与批准
 
@@ -162,7 +162,7 @@ Initiative 描述：
 
 ### 安全
 
-只通过 create、update、comment 和 `initiative add-project` 命令写入。`linear api` 只用于读查询。删除、归档以及通过 `linear api` 发起变更都不允许；发现问题时，向用户说明修复方案，由用户执行。Linear 只在 30 天内保留已删除内容可恢复。
+优先使用 CLI 命令。CLI 没有对应命令时（例如创建项目标签），可以通过 `linear api` 变更完成，权限级别与等价操作相同。执行 API 变更前先读取目标，完成后读回结果。删除、归档以及一次变更多个对象的单个变更属于逐条确认级别：列出确切对象和影响，只在用户明确批准该操作后执行。Linear 只在 30 天内保留已删除内容可恢复。
 
 ## 免费额度
 
