@@ -8,7 +8,7 @@
 
 1. 查找项目：`linear project list --team DEV --json`，匹配 description 中的 `github:` 行或明显相同的名称。
 2. 新 issue 只是补充某个已有项目的范围时，用 `linear project update <id> --description` 把它的 `github:` 行追加到该项目的 description。追加后会超过 255 字符，或改变了完成标准时，改为告诉用户要在概览里改什么。
-3. 它是一个独立需求时，提议一个项目：名称、摘要、完成标准、目标日期、目标、仓库标签。确认后：
+3. 它是一个独立需求时，创建一个项目，带上名称、摘要、完成标准、目标日期、目标和仓库标签：
 
    ```bash
    linear project create --team DEV --name "<requirement name>" \
@@ -32,12 +32,12 @@
 
 ## 需求看起来已交付时
 
-当项目各 `github:` issue 下的子 issue 全部关闭，或用户说已交付时，收集证据：每条的关闭原因（`completed` 或 `not_planned`）、已合并的 PR，以及概览中的完成标准。提议一种结果：
+当项目各 `github:` issue 下的子 issue 全部关闭，或用户说已交付时，收集证据：每条的关闭原因（`completed` 或 `not_planned`）、已合并的 PR，以及概览中的完成标准。确定结果：
 
 - **完成**：已合并的工作满足完成标准。
 - **取消**：工作以“不做”关闭，或已被替代。
-- **询问**：证据相互矛盾。
+- **询问用户**：证据相互矛盾；得到回答后再处理。
 
-确认后，发布最后一次项目更新，列出交付内容以及在 GitHub 上仍未关闭的后续 issue，然后设置状态。
+发布最后一次项目更新，列出交付内容以及在 GitHub 上仍未关闭的后续 issue，然后设置状态。
 
 完成一个项目不会改动它所属的 initiative；目标在每周回顾中按其衡量指标判断。

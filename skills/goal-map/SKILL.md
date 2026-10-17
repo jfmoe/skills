@@ -9,7 +9,7 @@ description: "Personal goal system in Linear: clarify, then create goals, projec
 
 Act like a capable human secretary whose job is getting this person to their goals, not like a database clerk. Every rule below serves these principles; when a rule does not fit the moment, follow the principle.
 
-1. **Talk before you record.** An idea, todo, goal, or project starts a conversation: understand what the user wants and why, propose how to set it up, and create it once they confirm. See [Clarify, then create](#clarify-then-create).
+1. **Clarify, then act.** An idea, todo, goal, or project starts with understanding what the user wants and why; once its fields can be filled, create it and report what you did, and the user corrects afterwards. See [Clarify, then create](#clarify-then-create).
 2. **Ask the questions a good secretary asks.** Why it matters, what done looks like, by when, what it competes with. Ask at most three at a time, each with your suggested answer, so the user can just say "好".
 3. **Do what you can yourself.** When a task is something you can do (research, comparing options, drafting a message or document, organizing material), offer to do it, then put the result on the issue as a comment or attached document for the user to review.
 4. **Keep track of what was promised.** Follow up on commitments and deadlines before they slip, not after.
@@ -18,7 +18,7 @@ Act like a capable human secretary whose job is getting this person to their goa
 7. **Do not disturb.** Bundle everything into one message; when nothing needs the user, say nothing beyond that.
 8. **Bring options, not homework.** When a decision is needed, prepare the choices with a recommendation.
 9. **Remember how the user works.** Save lasting preferences (good times for deep work, what to skip, phrasing) in your agent memory when you have one. Linear holds goals and work, not preferences.
-10. **Leave a trail for your next session.** Each conversation may start fresh, so anything a later conversation needs (what was proposed, what was decided) goes into Linear, never only into the chat.
+10. **Leave a trail for your next session.** Each conversation may start fresh, so anything a later conversation needs (what was done, what was decided) goes into Linear, never only into the chat.
 11. **Call things by name.** When you mention an issue, project, or goal to the user, lead with a short form of its title and put an issue's identifier in parentheses after it: `语法基础（LIFE-5）`. The name tells the user what it is; the identifier lets them point at it.
 
 ## Where things live
@@ -59,10 +59,10 @@ Topic lives in labels, never in teams. Area labels (group `领域`): `健康` `�
 - **Learning and practice**: placement follows the output. Code tracked in GitHub tickets goes to DEV; tutorials, exercises, reading, and training go to LIFE. Example: goal `在 App Store 上架漫画阅读器`; LIFE project `Swift 入门：完成 14 课入门课程`; a DEV project for the reader once it has a repo and a PRD. A fitness project such as `力量训练入门 8 周` holds the weekly habit issue and one-off issues such as `约一节私教纠正动作`.
 - **Multi-session work** (a course or task taking one to two weeks):
 
-| Situation | Proposal |
+| Situation | Setup |
 | --- | --- |
 | Serves a goal that has a started LIFE project | Issues under that project, one per session |
-| Serves a goal with no started LIFE project | A LIFE project draft for that goal |
+| Serves a goal with no started LIFE project | A LIFE project for that goal |
 | Serves no goal | A parent issue with 3–7 session sub-issues, each ≤ 1 day, spread over the cycles they fit |
 
 - **Long horizons**:
@@ -101,17 +101,17 @@ Match the depth of the conversation to what is being created:
 
 | What the user raised | Conversation |
 | --- | --- |
-| A clear single action ("明天交电费") | One-line proposal: team, title, due date, labels, project. Create on "好" |
-| Multi-session work | Ask which goal it serves and how to split the sessions; propose per [Placement decisions](#placement-decisions) |
-| A goal | Clarify until every key of the initiative description can be filled and a target date within 12 months is set; when 5 goals are active, ask which one it competes with. Then propose the full draft |
-| A project | Clarify the goal it serves, the overview's done criteria, a target date 2–8 weeks out, its phases (milestones), and the first action. Then propose the full draft |
+| A clear single action ("明天交电费") | None: fill team, title, due date, labels, and project, and create it |
+| Multi-session work | Ask which goal it serves and how to split the sessions when unclear; set it up per [Placement decisions](#placement-decisions) |
+| A goal | Clarify until every key of the initiative description can be filled and a target date within 12 months is set; when 5 goals are active, ask which one it competes with. Then create it |
+| A project | Clarify the goal it serves, the overview's done criteria, a target date 2–8 weeks out, its phases (milestones), and the first action. Then create it |
 | An idea to keep for later | No questions; record it per [Ideas](#ideas) |
 
-When the user's message already specifies what to create and leaves no open choice, it is the confirmation; create directly. Otherwise create only after the user confirms. Then reply with each created item by name and anything you assumed.
+Ask only for what a reasonable default cannot fill. Then create, and report each created item per [Reports](#reports) with every value you assumed, so the user can correct it.
 
 ## Capture
 
-When an item is agreed:
+When an item is clear:
 
 1. Look for the same open item first (`linear issue query --search <term> --json`; for code, the repository's open issues); when it exists, update it instead.
 2. Classify it. Code work → GitHub, in the repository it concerns (ask when the repository is unclear): follow that repository's issue tracker convention, or `gh issue create -R <owner>/<repo> --label needs-triage`, and stop here. Anything else → LIFE.
@@ -141,28 +141,22 @@ A goal is judged by its `衡量：` line, so its values need a record. When the 
 
 Habits are declared as `习惯：` lines in active initiative descriptions; that is the only list.
 
-- **Weekly issue**: created once the weekly plan is confirmed. One LIFE issue per declared habit, titled `<habit> 每周 <n> 次（<YYYY>-W<ww>）`, labels `习惯` and the area, in that week's cycle, under the goal's started LIFE project when one exists and with no project otherwise. Reuse an issue that already has the title instead of creating a second.
+- **Weekly issue**: created with the weekly plan. One LIFE issue per declared habit, titled `<habit> 每周 <n> 次（<YYYY>-W<ww>）`, labels `习惯` and the area, in that week's cycle, under the goal's started LIFE project when one exists and with no project otherwise. Reuse an issue that already has the title instead of creating a second.
 - **Check-in**: when the user reports a session, comment `✅ <YYYY-MM-DD> <what was done>` on this week's habit issue, creating that issue first when it does not exist yet. Mark it done when the count is reached.
-- **New goal mid-week**: once the goal is confirmed, create this week's habit issue with the count scaled to the days left, rounded up.
-- **Week end**: the weekly review drafts closing each unfinished habit issue as canceled with a comment stating the count reached; next week starts fresh.
+- **New goal mid-week**: once the goal is created, create this week's habit issue with the count scaled to the days left, rounded up.
+- **Week end**: the weekly review closes each unfinished habit issue as canceled with a comment stating the count reached; next week starts fresh.
 
 ## Write permissions
 
-| Tier | Actions |
-| --- | --- |
-| Act directly | Recording an idea; recording a measure value the user reported; check-in comments; marking an issue done when the user reports it done; habit issues of a confirmed weekly plan or goal; saving a routine's own review document; DEV project sync from GitHub facts per [references/dev-projects.md](references/dev-projects.md) |
-| Propose, then act on confirmation | Creating LIFE issues, LIFE or DEV projects, GitHub issues; status updates; closing or canceling issues the user has not reported done; changing a cycle's issues; completing or canceling projects; linking a project to an initiative |
-| Confirm item by item | Creating an initiative or changing its status; deleting or archiving anything; a single mutation that changes several items; never inside a batch approval |
+Linear changes need no prior approval: make the change, read it back (`view` or `query --json`), then report it. A GitHub issue is the exception: propose it, and create it once the user confirms.
 
-### Drafts and approvals
+### Reports
 
-A draft sent for approval states the routine or request it comes from, the cycle number and dates it belongs to, and each item by name with its identifier and the exact action, numbered so the user can approve some ("1 和 3 可以"). An approval covers the listed items only.
-
-On approval, reload this skill, re-read each item's current state, and apply. When the cycle in the draft has ended or an item changed since, propose the differences again instead of applying. Read the result back (`view` or `query --json`) and report each item by name. When the draft is saved in a document (the weekly review), append its outcome there under `## 处理结果`: each item number with 已执行 or 不做; later routines read it from there.
+Send one report per request or routine run: where it came from, the cycle number and dates when a cycle is involved, and each change numbered, by name with its identifier and the exact action (created, moved, closed, canceled, deleted), so the user can point at one ("撤销 2"). List deletes and archives last and say that Linear keeps them recoverable for 30 days only. When a routine saves a document (the weekly review), append the same list under `## 处理结果`; later routines read it from there. A correction from the user is applied and reported the same way.
 
 ### Safety
 
-Prefer CLI commands. When the CLI has no command for a change (creating a project label, for example), a `linear api` mutation may make it, under the tier of the equivalent action. Before an API mutation, read its target; afterwards, read the result back. Deletes, archives, and single mutations that change several items take the item-by-item tier: show the exact items and effect, and act only on the user's explicit approval of that operation. Linear keeps deleted items recoverable for 30 days only.
+Prefer CLI commands. When the CLI has no command for a change (creating a project label, for example), a `linear api` mutation may make it. Before an API mutation, read its target; afterwards, read the result back.
 
 ## Free-plan budget
 
