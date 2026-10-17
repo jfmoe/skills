@@ -162,7 +162,7 @@ Linear 里的修改无需事先批准：直接修改，读回结果（`view` 或
 
 Linear 免费版限制每个工作区最多 250 个未归档 issue。已关闭的 issue 在自动归档前都计数，而自动归档要等其项目和 cycle 结束，所以关闭 issue 不会立刻释放额度。
 
-用 `linear issue query --all-teams --limit 0 --json` 计数，按 `state.type` 分成未完成和已关闭但未归档两部分。达到 200 及以上时，报告这两个数、阻止已关闭 issue 归档的原因（未结束的项目、当前 cycle），并列出最老的未完成 backlog issue 和想法作为关闭候选。一次新建多条 issue 前，先确认这批创建后总数仍低于 250；否则停下来报告。
+CLI 3.x 用 `linear issue query --all-teams --limit all --json` 计数（2.6.0 用 `--limit 0`），按 `state.type` 分成未完成和已关闭但未归档两部分。按返回形状解析：3.x 返回数组，2.6.0 返回 `{nodes, pageInfo}`；分页没有读完时不要报出总数。达到 200 及以上时，报告这两个数、阻止已关闭 issue 归档的原因（未结束的项目、当前 cycle），并列出最老的未完成 backlog issue 和想法作为关闭候选。一次新建多条 issue 前，先确认这批创建后总数仍低于 250；否则停下来报告。
 
 ## CLI 注意事项
 

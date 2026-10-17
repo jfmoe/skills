@@ -162,7 +162,7 @@ Prefer CLI commands. When the CLI has no command for a change (creating a projec
 
 Linear Free caps a workspace at 250 non-archived issues. Closed issues count until auto-archived, which waits for their project and cycle to complete, so closing an issue does not free quota at once.
 
-Count with `linear issue query --all-teams --limit 0 --json`, split by `state.type` into open and closed-but-unarchived. At 200 or more, report both numbers, what keeps closed issues from archiving (unfinished projects, the active cycle), and the oldest open backlog issues and ideas as close candidates. Before creating several issues at once, check that the batch keeps the total under 250; otherwise stop and report.
+Count with `linear issue query --all-teams --limit all --json` on CLI 3.x (`--limit 0` on 2.6.0), split by `state.type` into open and closed-but-unarchived. Parse the returned shape: 3.x returns an array, while 2.6.0 returns `{nodes, pageInfo}`; reject incomplete pagination before declaring totals. At 200 or more, report both numbers, what keeps closed issues from archiving (unfinished projects, the active cycle), and the oldest open backlog issues and ideas as close candidates. Before creating several issues at once, check that the batch keeps the total under 250; otherwise stop and report.
 
 ## CLI notes
 
