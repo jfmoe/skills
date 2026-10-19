@@ -1,6 +1,7 @@
 ---
 name: cheap-server-ssh
-description: Use when the user asks to connect to cheap_server.
+description: Manually connect to the SSH host alias cheap_server.
+disable-model-invocation: true
 ---
 
 # Cheap Server SSH
@@ -9,21 +10,20 @@ Use this skill for remote operations on the SSH host alias `cheap_server`.
 
 ## Required Workflow
 
-1. Invoke `ssh` skill in the same turn and follow both skills together.
-2. Ask user confirmation before connecting (example: "是否现在连接 cheap_server VPS？").
-3. After user confirms, verify SSH alias availability.
+1. Ask user confirmation before connecting (example: "是否现在连接 cheap_server VPS？").
+2. After user confirms, verify SSH alias availability.
 
 ```bash
 rg '^Host\\s+cheap_server$' ~/.ssh/config
 ```
 
-4. Start interactive connection immediately.
+3. Start interactive connection immediately.
 
 ```bash
 ssh cheap_server
 ```
 
-5. After login succeeds, stop and wait for the user's next instruction.
+4. After login succeeds, stop and wait for the user's next instruction.
 
 ## Optional Next Steps (Run Only After User Asks)
 

@@ -56,17 +56,17 @@ npx skills add <source> [options]
 Repository recipes:
 
 ```bash
-# Install or synchronize all repository skills globally
-npx skills add ~/Coder/skills -g -a codex claude-code --skill '*' -y
+# Install a requested repository skill globally
+npx skills add ~/Coder/skills -g -a codex claude-code --skill <requested-skill> -y
 
-# Install or synchronize all repository skills in the current project
-npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
+# Install a requested repository skill in the current project
+npx skills add ~/Coder/skills -a codex claude-code --skill <requested-skill> -y
 
 # Install one repository skill globally
 npx skills add ~/Coder/skills -g -a codex claude-code --skill manage-skills -y
 
-# Shared global directory (~/.agents/skills)
-npx skills add ~/Coder/skills -g -a codex --skill '*' -y
+# Install a requested skill in the shared global directory (~/.agents/skills)
+npx skills add ~/Coder/skills -g -a codex --skill <requested-skill> -y
 
 # One third-party skill
 npx skills add vercel-labs/agent-skills -g -a codex claude-code \

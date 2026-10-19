@@ -5,7 +5,7 @@ description: 当用户要求创建、编辑、安装、更新、同步、列出�
 
 # 管理 Skills
 
-个人 skill 源仓库：`~/Coder/skills`（远端 `https://github.com/jfmoe/skills`）。所有源码编辑都在此进行；绝不手工编辑运行时安装目录。
+个人 skill 源仓库：`~/Coder/skills`（远端 `https://github.com/jfmoe/skills`）。所有源码编辑都在此进行；运行时副本从这里同步。
 
 ## 仓库准备
 
@@ -49,11 +49,15 @@ npx skills add ~/Coder/skills --list
 - 创建或编辑英文 skill 的 `.md` 文件后，在同一提交中重新生成其镜像文件。编辑后的 `--list` 校验必须显示不变的 skill 集合。
 - 以中文给出的审查反馈会应用到英文源文件上；源文件保持为准。
 
-## 安装与同步
+## 安装、更新与同步
+
+更新只刷新已安装的 skill，并保留其 agent 目标。`--skill '*'` 用于用户要求的全仓库安装，不作为更新已安装 skill 的捷径。
 
 明确指名的单个 agent 是私有目标：验证其原生 skill 目录，且只安装到那里。绝不回退到项目级或全局的 `.agents/skills`；那些只用于共享的多 agent 安装或明确请求。如果原生目标未知，停止并报告。
 
-当用户未指名 agent 时，默认目标为 `-a codex claude-code`。项目作用域是 CLI 默认值；`-g` 选择全局作用域。用 `--skill '*'` 选择所有仓库 skills；`--all` 则面向所有 skills 和所有受支持的 agents。
+对于 Kimi 专用 skill，不要使用 `-a kimi-code-cli`：其适配器会写入共享的 `~/.agents/skills`。将仓库副本同步到 `$KIMI_CODE_HOME/skills/<skill>/`（默认 `~/.kimi-code/skills/<skill>/`），验证 `SKILL.md` 一致，并且只移除同名的共享副本。
+
+新安装未指名 agent 时，默认目标为 `-a codex claude-code`。更新和同步保留现有目标。项目作用域是 CLI 默认值；`-g` 选择全局作用域。
 
 在全局作用域下，`~/.agents/skills` 服务于除 Claude Code 和 Hermes Agent 之外的所有 agent。`codex` 目标填充该共享目录；`claude-code` 目标将 Claude Code 的目录链接到它。Hermes Agent 有独立的安装方式；见 [Hermes Agent](#hermes-agent)。
 
@@ -66,16 +70,16 @@ npx skills add ~/Coder/skills --list
 
 `--copy` 写入独立副本。单个唯一目标目录也使用复制模式，因为不需要链接；链接失败时回退为复制。
 
-全局（自建）：
+全局安装一个请求的仓库 skill：
 
 ```bash
-npx skills add ~/Coder/skills -g -a codex claude-code --skill '*' -y
+npx skills add ~/Coder/skills -g -a codex claude-code --skill <requested-skill> -y
 ```
 
-项目级（自建）：
+在项目中安装一个请求的仓库 skill：
 
 ```bash
-npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
+npx skills add ~/Coder/skills -a codex claude-code --skill <requested-skill> -y
 ```
 
 当用户要求安装或更新 skills 时，自动运行安装/更新命令。如果作用域含糊，询问用户是指全局还是项目级——除非上下文明确表明是个人全局配置。

@@ -1,6 +1,7 @@
 ---
 name: cheap-server-ssh
-description: 当用户要求连接 cheap_server 时使用。
+description: 手动连接 SSH 主机别名 cheap_server。
+disable-model-invocation: true
 ---
 
 # Cheap Server SSH
@@ -9,21 +10,20 @@ description: 当用户要求连接 cheap_server 时使用。
 
 ## 必需流程
 
-1. 在同一轮中调用 `ssh` skill，并同时遵循两个 skill 的要求。
-2. 连接前先向用户确认（示例："是否现在连接 cheap_server VPS？"）。
-3. 用户确认后，验证 SSH 别名是否可用。
+1. 连接前先向用户确认（示例："是否现在连接 cheap_server VPS？"）。
+2. 用户确认后，验证 SSH 别名是否可用。
 
 ```bash
 rg '^Host\\s+cheap_server$' ~/.ssh/config
 ```
 
-4. 立即开始交互式连接。
+3. 立即开始交互式连接。
 
 ```bash
 ssh cheap_server
 ```
 
-5. 登录成功后，停下来等待用户的下一条指令。
+4. 登录成功后，停下来等待用户的下一条指令。
 
 ## 可选后续步骤（仅在用户提出要求后执行）
 

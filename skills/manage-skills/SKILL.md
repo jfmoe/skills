@@ -49,13 +49,15 @@ An English-authored skill gets a Chinese review mirror under `reviews/zh/<skill>
 - After creating or editing an English skill's `.md` files, regenerate its mirror files in the same commit. The post-edit `--list` validation must show an unchanged skill set.
 - Review feedback given in Chinese is applied to the English source; the source stays canonical.
 
-## Installing and Syncing
+## Installing, Updating, and Syncing
+
+Updates refresh already-installed skills and preserve their agent targets. Use `--skill '*'` for a requested full-repository installation, not as a shortcut for updating installed skills.
 
 An explicitly named single agent is a private target: verify its native skill directory and install only there. Never fall back to project or global `.agents/skills`; use those only for shared multi-agent installs or explicit requests. If the native target is unknown, stop and report.
 
 For a Kimi-only skill, do not use `-a kimi-code-cli`: its adapter writes to shared `~/.agents/skills`. Synchronize the repository copy to `$KIMI_CODE_HOME/skills/<skill>/` (default: `~/.kimi-code/skills/<skill>/`), verify `SKILL.md` matches, and remove only its same-named shared copy.
 
-When the user does not name an agent, default targets are `-a codex claude-code`. Project scope is the CLI default; `-g` selects global scope. Select every repository skill with `--skill '*'`; `--all` instead targets every skill and every supported agent.
+For a new installation without a named agent, default targets are `-a codex claude-code`. Updates and syncs preserve existing targets. Project scope is the CLI default; `-g` selects global scope.
 
 At global scope, `~/.agents/skills` serves every agent except Claude Code and Hermes Agent. The `codex` target populates this shared directory; the `claude-code` target links Claude Code's directory to it. Hermes Agent has its own install path; see [Hermes Agent](#hermes-agent).
 
@@ -68,16 +70,16 @@ With both default targets, non-interactive installation uses this layout:
 
 `--copy` writes independent copies. A single unique target directory also uses copy mode because no link is needed; a failed link falls back to a copy.
 
-Global (self-created):
+Install one requested repository skill globally:
 
 ```bash
-npx skills add ~/Coder/skills -g -a codex claude-code --skill '*' -y
+npx skills add ~/Coder/skills -g -a codex claude-code --skill <requested-skill> -y
 ```
 
-Project-level (self-created):
+Install one requested repository skill in the project:
 
 ```bash
-npx skills add ~/Coder/skills -a codex claude-code --skill '*' -y
+npx skills add ~/Coder/skills -a codex claude-code --skill <requested-skill> -y
 ```
 
 Run install/update commands automatically when the user asks to install or update skills. If scope is ambiguous, ask whether they mean global or project-level — unless context clearly indicates personal global setup.
