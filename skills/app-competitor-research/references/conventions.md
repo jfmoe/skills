@@ -40,7 +40,7 @@
 ## 证据
 
 - 文件名用 `<编号>-<英文短描述>.jpg`，一条事实有多张图时加 `-a`、`-b`；iPad 截图在编号后加 `-ipad`；动效关键帧用 `<编号>-<描述>-seg<N>-start|mid|end.jpg`。
-- 截图当场复制进调研目录。iPhone Use 只保留最近 100 张，过后就被覆盖了。
+- 截图用 `wda shot <路径>` 直接存进调研目录。默认尺寸等于屏幕的 point 尺寸；要看清小字，另存一张 `--crop` 放大的局部图。
 - 文件名要和图片内容一致。
 - 截图、录像、测试素材都用 Git LFS 提交：`git lfs track 'research/*/screenshots/**/*.jpg' 'research/*/screenshots/**/*.png' 'research/*/recordings/**' 'research/test-materials/out/**'`。录像是动效事实唯一的原始证据；素材入库的是实际使用的那一版，重新生成不保证字节一致。
 - 录像放在 `recordings/<前缀>/`，文件名以编号开头。测量的明细（每段的时间戳等）放在 `screenshots/<设备>/<前缀>/<前缀>-measurements.md`，事实里只写结论值。

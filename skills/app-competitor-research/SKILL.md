@@ -1,6 +1,6 @@
 ---
 name: app-competitor-research
-description: 通过真机自动化对 iOS/iPadOS App 做客观、可追溯的竞品调研：主导方规划、搭环境、派任务、审核，Codex 用 iPhone Use 在真机上采集事实、截图和动效录像。用于开始一项竞品调研、继续或补测已有的竞品调研目录，以及给已有调研补充另一台设备或另一个模块。
+description: 通过真机自动化对 iOS/iPadOS App 做客观、可追溯的竞品调研：主导方规划、搭环境、派任务、审核，执行方用 ios-wda 在真机上采集事实、截图和动效录像。用于开始一项竞品调研、继续或补测已有的竞品调研目录，以及给已有调研补充另一台设备或另一个模块。
 ---
 
 # 真机竞品调研
@@ -10,7 +10,9 @@ description: 通过真机自动化对 iOS/iPadOS App 做客观、可追溯的竞
 分工：
 
 - **主导方**（加载本技能的 agent）：负责规划、开工检查、R0 准备、编写任务书、派任务、审核、处理阻塞、和用户沟通。
-- **执行方**：按任务书操作真机，写事实文件。可以是 Herdr 面板里的 Codex（已装 iPhone Use 插件），也可以是加载 `ios-wda` 技能的 agent（主导方自己或 subagent）。iPhone Use 缺的手势、密码框输入、录屏，统一用 `ios-wda` 补。
+- **执行方**：加载 `ios-wda` 技能，按任务书操作真机，写事实文件。通常是 Herdr 面板里的 Codex，也可以是 subagent 或主导方自己。
+
+设备操作只走 `ios-wda`：读控件树、点击、各种手势、密码框输入、转屏、截图、录屏都由它完成。下文的 `wda` 指 ios-wda 技能里的命令。
 
 主导方只在执行方停下的空档里操作设备，并且要先写交接说明（见[协调执行方](references/orchestration.md#中断与交接)）。
 
@@ -51,8 +53,8 @@ research/
 
 设备和工具逐项核对：
 - 每台设备：自动锁定设为"永不"，接上电源，已解锁，App 已安装；
-- iPhone Use 的 `pua_setup status` 正常，`pua_ready` 返回 `ready=true`；
-- Herdr 里能找到执行方面板，状态是 idle；
+- `wda status` 输出 `ready`、`unlocked`，设备型号正确；
+- 执行方能加载 `ios-wda` 技能；执行方是 Codex 时，Herdr 里能找到它的面板，状态是 idle；
 - 记下执行方的额度剩余，额度少时提前告知用户。
 
 **完成标准**：以上每一项都有明确结论。用户需要做的事，一次性列给用户。
@@ -103,5 +105,5 @@ research/
 
 - [记录规范](references/conventions.md)：客观性、事实表格、编号前缀、设备维度、证据。
 - [任务书](references/briefs.md)：R1、第二设备对照、R2 通用要求、各模块检查项。
-- [协调执行方](references/orchestration.md)：Herdr 指令、会话管理、阻塞处理、额度用尽、WDA 直连手势、本地测试服务。
+- [协调执行方](references/orchestration.md)：Herdr 指令、会话管理、阻塞处理、额度用尽、切换设备、本地测试服务。
 - [动效测量](references/motion.md)：录屏工具、精度与限制、测量规程、措辞。
