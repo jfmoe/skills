@@ -1,6 +1,8 @@
 # 协调执行方
 
-执行方通常是 Herdr 面板里的 Codex，它用 `ios-wda` 技能操作设备。先运行 `herdr agent list`，找到 agent 是 codex、cwd 是调研仓库的那个面板，记下它的 pane ID。Herdr 的完整用法见 herdr 技能。
+本文件讲执行方是 Herdr 面板里的 Codex 的情况。执行方是 subagent 时，把任务书原文作为它的 prompt；阻塞处理、交接、切换设备、测试服务几节照样适用。
+
+先运行 `herdr agent list`，找到 agent 是 codex、cwd 是调研仓库的那个面板，记下它的 pane ID。Herdr 的完整用法见 herdr 技能。
 
 ## 派任务和会话
 
