@@ -6,7 +6,7 @@
 - 返回值是字符串时原样输出（比如 base64、XML），其他类型输出 JSON。
 - 路径以 `/` 开头。POST 一定要带 JSON 请求体，没有参数时写 `'{}'`。
 
-坐标都用 point，时长的单位见下表各行。适用版本是 appium/WebDriverAgent v16.x，其他版本以源码 `WebDriverAgentLib/Commands/` 为准。
+坐标都用 point，时长的单位见下表各行。适用版本是 appium/WebDriverAgent v16.x，其他版本，或者接口返回 404 时，以本机源码为准：`$WDA_HOME/WebDriverAgent/WebDriverAgentLib/Commands/`（默认 `~/.local/share/ios-wda/...`）。路由带 `.withoutSession` 的才能用 `--root` 调用。
 
 ## 会话内（`/session/<id>` 下）
 
@@ -37,6 +37,7 @@
 | `GET` / `POST /appium/settings` | `{"settings": {...}}` | 会话设置，见下文 |
 | `POST /wda/setPasteboard` | `{"content": "<base64>", "contentType": "plaintext"}` | 写入剪贴板 |
 | `POST /wda/getPasteboard` | `{"contentType": "plaintext"}` | 读取剪贴板，返回 base64。实测 iPadOS 27 上 WDA 不在前台时返回空：iOS 限制后台读取剪贴板 |
+| `POST /wda/pressButton` | `{"name": "home"}` | 按物理按键：`home`、`volumeUp`、`volumeDown`，有操作按钮的机型还有 `action`。只有会话内路径，加 `--root` 会返回 404 |
 | `GET /wda/device/info`、`GET /wda/batteryInfo` | | 设备信息（`name` 是脱敏后的值）、电量 |
 
 ## 根路径（加 `--root`）
@@ -48,7 +49,6 @@
 | `GET /wda/activeAppInfo` | 前台 App 的 bundleId、pid |
 | `GET /wda/locked`、`POST /wda/lock`、`POST /wda/unlock` | 查询锁屏状态、锁屏、解锁。设置了锁屏密码的设备，unlock 只能点亮屏幕 |
 | `POST /wda/homescreen` | 回到主屏幕 |
-| `POST /wda/pressButton` | 按物理按键，请求体 `{"name": "volumeUp"}`，也可以是 `"volumeDown"`、`"home"` |
 
 ## W3C 手势
 
