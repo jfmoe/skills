@@ -62,7 +62,7 @@ For each hit: smell, test, Quality item missed, new disposition.
 
 ## Wrong thing
 
-**Symptom.** Getters, config literals, `class_exists`, framework glue, utilities already exercised by a real caller, tests added to move coverage.
+**Symptom.** Getters, config literals, `class_exists`, framework glue, utilities already exercised by a real caller, tests added to move coverage, tests asserting a retired behavior is rejected or absent.
 
 **Quality.** Load-bearing. Coverage.
 
