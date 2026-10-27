@@ -24,7 +24,7 @@ For each hit: smell, test, Quality item missed, new disposition.
 
 **Symptom.** Several behaviors in one test, causal data off-stage, a giant fixture used in a sliver, or driving the unit through unrelated layers.
 
-**Quality.** One behavior. DAMP.
+**Quality.** One behavior. DAMP. Minimal setup.
 
 **Keep when.** A real workflow *is* the unit. Size is the scenario.
 
@@ -43,6 +43,14 @@ For each hit: smell, test, Quality item missed, new disposition.
 **Quality.** Isolated.
 
 **Keep when.** Concurrency or randomness is the subject and the test controls it (seed, deterministic schedule). Real-system tests live in the slow suite.
+
+## Slow
+
+**Symptom.** Most of a test's time goes to setup or waiting rather than the rule: a shared workflow run before every test, a real deadline slept through, one process per row of a rule table.
+
+**Quality.** Minimal setup. Isolated.
+
+**Keep when.** The time *is* the boundary (a real kill, a real network deadline) and few tests pay it.
 
 ## Duplication
 
