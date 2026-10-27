@@ -12,7 +12,7 @@ A test *pins* one **rule** at one **layer**, with an independent **oracle**. Wri
 1. Name the rule (which bug goes *red*) and the oracle. Done: both are written down.
 2. Walk the [tree](#tree). Write one test at that layer. Done: the test sits on the chosen layer; a boundary test names the fact in-process cannot observe.
 3. Apply every [Quality](#quality) item. Done: every item holds.
-4. Run the test and read its runtime. Done: the runtime is explained by the rule itself; a boundary test's runtime is spent on its boundary, not on setup or waiting.
+4. Run the test and read its runtime. Done: the runtime is known, and every slow second belongs to the rule or its boundary fact.
 
 ## Review
 
@@ -34,9 +34,9 @@ What rule does this test pin?
           third-party engine native result           → native
 ```
 
-**in-process.** Public API of the unit; fake the next I/O hop. Calculation, queuing, mapping, validation, state machines, persistence rules over a real temporary store.
+**in-process.** Public API of the unit; fake the next I/O hop. Calculation, queuing, mapping, validation, state machines, persistence rules (a real temporary store counts as in-process).
 
-**boundary.** Exercise that process, wire, or OS fact for real. A rule that merely *passes through* a boundary is not a boundary rule: pin the rule in-process, then keep a few representative boundary paths per boundary, not one per rule. "Survives a restart" is usually reopening the same store in-process; "the child is reaped after a kill" is a boundary. HTTP authz, kill/crash isolation, browser journeys that need JS or visual state.
+**boundary.** Exercise that process, wire, or OS fact for real. A rule that merely *passes through* a boundary is not a boundary rule: pin the rule in-process, then keep a few representative boundary paths per boundary, not one per rule. HTTP authz, kill/crash isolation, browser journeys that need JS or visual state.
 
 **native.** One real execute of the engine. Map fields from a fixture. Query semantics, rendering, and other engine results stay native; a fake never stands in for them.
 
@@ -56,7 +56,7 @@ Apply every item.
 
 **Minimal setup.** Setup builds only what the rule reads. Prepare state directly instead of running an unrelated workflow (installation, full service startup, login, a UI path) to reach it; that workflow has its own tests.
 
-**Isolated.** Any order, same result. Inject clock, seed, and I/O at the boundary. Deadlines advance on a fake clock or injected time, never by sleeping through them. Before asserting that something did *not* happen, wait for a signal that processing finished.
+**Isolated.** Any order, same result. Inject clock, seed, and I/O at the boundary; deadlines advance on the injected clock. Before asserting that something did *not* happen, wait for a signal that processing finished. Quarantine or fix flakes.
 
 **Load-bearing.** Test what the team could get wrong. Framework, config literals, and getters are covered by the behavior they drive.
 
