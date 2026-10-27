@@ -62,7 +62,7 @@
 
 ## Wrong thing
 
-**症状。** getter、配置字面量、`class_exists`、框架胶水、已被真实调用方锻炼过的工具函数、为推覆盖率而加的测试。
+**症状。** getter、配置字面量、`class_exists`、框架胶水、已被真实调用方锻炼过的工具函数、为推覆盖率而加的测试、断言已退役行为被拒绝或不存在的测试。
 
 **Quality.** Load-bearing. Coverage.
 
