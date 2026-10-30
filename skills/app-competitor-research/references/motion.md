@@ -6,7 +6,7 @@
 
 | 方式 | 命令 | 精度 | 限制 |
 |---|---|---|---|
-| WDA MJPEG（默认） | `wda record <秒> <out.mp4> [--pct 25]` | 约 20fps，每帧约 50ms，局部 40～120ms | 瓶颈在设备端截屏，调缩放比例也不能提速；录屏时可以继续操作 |
+| WDA MJPEG（默认） | `wda record <秒> <out.mp4> [--pct 25]` | 约 12～20fps，实测中位帧间隔 40～80ms，个别间隔超过 400ms | 瓶颈在设备端截屏，调缩放比例也不能提速；录屏时可以继续操作 |
 | USB 屏幕采集 | 先 `swiftc -O research/tools/record_device.swift -o /tmp/record_device`，再 `/tmp/record_device record <设备名片段> <秒> <out.mov>` | 约 59fps，每帧约 17ms | 开始录制后约 20 秒，WDA 的 XCTest 连接会断开，录完运行 `wda start`。单次录制不超过 10 秒，只在需要精确比较时用 |
 
 分析：`uv run --with numpy python -I research/tools/analyze_motion.py <录像> --frames <目录> [--mark <秒>]`。它会输出：
@@ -18,9 +18,9 @@ USB 采集需要通过 CoreMediaIO 开启屏幕采集设备，`startRunning` 之
 
 ## 规程
 
-1. 在后台启动 `wda record`，等 2～3 秒，再用 `wda` 执行动作，等录屏结束。
+1. 在后台启动 `wda record`，等 2～3 秒，再用 `wda` 执行动作，等录屏结束。启动录屏、等待和动作写在同一次 shell 调用里：分成几次工具调用时，中间的模型耗时会让动作落到录像结束之后。
 2. 每个测量项重复 3 次，每次的值都写下来。
-3. 事实写成"画面从开始变化到静止约 N ms（MJPEG 约 50ms 精度，3 次：a / b / c）"，并写明是否包含人为动作，例如"包含按住 100ms 和拖动 400ms"。点击类动作通常不包含手指动作。
+3. 事实写成"画面从开始变化到静止约 N ms（MJPEG，中位帧间隔 M ms，3 次：a / b / c）"，并写明是否包含人为动作，例如"包含按住 100ms 和拖动 400ms"。点击类动作通常不包含手指动作。
 4. 录像放在 `recordings/<前缀>/`（Git LFS 入库），文件名以编号开头；关键帧复制到 screenshots，文件名同样以编号开头；每段的时间戳写进 `<前缀>-measurements.md`，事实里只写结论值。
 5. 运动段把手指操作和动画混在一起时，如实写出口径。分析结果不合理时，在 notes.md 里写清楚，不要硬凑。
 
