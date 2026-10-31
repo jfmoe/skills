@@ -483,6 +483,7 @@ def match(nodes, text):
 
 
 def screenshot(path, scale=1.0, crop=None):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     win = s("GET", "/window/size")["value"]
     png = base64.b64decode(request("GET", "/screenshot")["value"])
     with tempfile.NamedTemporaryFile(suffix=".png") as tmp:

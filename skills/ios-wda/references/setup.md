@@ -54,5 +54,7 @@
 | 设备提示开发者不受信任或无法验证 | 这是第一次装这个开发者签名的 App | 在"VPN 与设备管理"里信任这个开发者，操作时设备要联网 |
 | 用了约 7 天后突然无法启动 | 免费团队的描述文件过期了 | 运行 `setup`，再运行 `start` |
 | 报 device support 或平台版本不匹配 | Xcode 版本比设备上的 iOS 旧 | 升级 Xcode |
+| `hold`、`doubletap` 之后 runner 退出，或 runner 每隔一分钟左右断开，`runner.log` 末尾是 `The connection was invalidated` | 设备上的 iOS 比 Xcode 带的 SDK 新：`xcrun xcodebuild -showsdks` 里没有设备的系统版本 | 升级 Xcode，再运行 `setup`、`start`。升级后仍可能偶尔退出，`start` 能恢复；恢复后先看画面，再决定要不要重发刚才的动作 |
+| `orient` 返回 `Unable To Rotate Device` | 当前界面不接受这个方向。iPhone 上只支持竖屏的系统"设置"App 也这样返回 | 不是工具故障，不能据此断定 App 不支持横屏。先进入支持横屏的界面（比如阅读器）再转 |
 | 接口返回 404 或 `unknown command` | 不同版本的 WDA 接口有差异 | `status` 里能看到 WDA 版本号，对照这个版本的源码确认接口 |
 | 控件树为空，截图显示"正在从 Mac 使用此 iPhone" | Mac 的 iPhone 镜像正在占用设备 | 退出 iPhone 镜像，然后解锁设备 |
