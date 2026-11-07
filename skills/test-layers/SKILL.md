@@ -58,7 +58,7 @@ Apply every item.
 
 **Isolated.** Any order, same result. Inject clock, seed, and I/O at the boundary; deadlines advance on the injected clock. Before asserting that something did *not* happen, wait for a signal that processing finished. Quarantine or fix flakes.
 
-**Load-bearing.** Test what the team could get wrong. Framework, config literals, and getters are covered by the behavior they drive.
+**Load-bearing.** Test what the team could get wrong. Framework, config literals, and getters are covered by the behavior they drive. A retired behavior leaves with its tests; the removal itself is the evidence, so no test asserts the old command, field, or route is now rejected or absent.
 
 **Coverage.** Unexecuted code is a lead. An assertion that would go red if the operator flipped pins the rule.
 
