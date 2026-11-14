@@ -30,7 +30,7 @@
 1. 上游按版本号发布，没有“最新版本”页面。用只取响应头的请求查看当前版本的 `SKILL.md`（地址见 `registry/upstream/etfirst/meta.yaml`）的大小与修改时间，并试探后续版本号是否存在。
 2. 没有新版本且文件未变：结束。
 3. 有新版本：下载新版 `SKILL.md` 存档，与旧存档比较，把命令、参数和字段的变化改进 `providers/etfirst/` 的参考文件；项目里固定的 ETFirst 包地址（Fire 是 `pixi.toml`）一并升级。
-4. 用一只已知 ETF 跑一次 `etf-detail all`，确认子接口与字段表一致。会话过期且自动续期失败时，由用户本人执行 `etfirst auth login --api-key <KEY>` 重新登录。
+4. 用一只已知 ETF 跑一次 `etf-detail all`，确认子接口与字段表一致。会话过期时按[认证说明](../providers/etfirst/references/auth.md)先清会话再重试。
 
 ### 华宝 UDSP
 
