@@ -1,0 +1,12 @@
+source: https://esa.huatai-pb.com/download/htbr-etf-skill.zip
+ref: "1.0.8"
+commit: null
+upstream_path: .
+local_path: skills/etf/providers/htbr
+fetched_at: 2026-11-14
+notes: |
+  - 上游为无 Git commit 的下载包，package.zip 原样保存；SHA-256: 178a9e7ff18c09af4a0061fc425c38cf71c2a4f5c32032ada3d0e5f6ba8e3a27。版本号取自包内 SKILL.md 的 frontmatter。
+  - 服务提供方为华泰柏瑞基金，响应 meta.dataSource 为 gildata-jydb（恒生聚源）。
+  - 只取接口定义：references/apis 与 references/workflows 由 sync_upstream.py 从包内原样同步，仅替换调用命令前缀；包内的安装流程、凭据脚本、自动更新、话术守卫和字节码均不采用。
+  - 客户端重写为 htbr_client.py：从环境变量 HTBR_API_KEY 取密钥，协议（/auth/token 换取令牌、/business/<api_id>:invoke）依据包内 api_client.py。
+  - 72 个接口于 2026-11-14 逐一实测：52 个可用，20 个返回 404 API_NOT_FOUND（基金经理 13 个、指数 7 个）；未开放接口不同步文档，清单见 references/availability.json。

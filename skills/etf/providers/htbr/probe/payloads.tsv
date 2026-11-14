@@ -1,0 +1,76 @@
+# One payload per interface, used by scripts/probe.py to check which interfaces are served.
+# Samples: ETF 510300 (inner code 16930), active fund 006567 (inner code 201445),
+# manager 101001646, company 42742, index 000300.SH (inner code 3145).
+# Replace the date ranges with a recent month and recent report periods before a run.
+company-resolve	{"companyName": "华泰柏瑞基金"}
+etf-capital-flow	{"fundCode": "510300.OF", "beginDate": "20261014", "endDate": "20261113"}
+etf-capital-flow-stats	{"beginDate": "20261014", "endDate": "20261113", "indexCycle": 3, "unit": 6}
+etf-capital-report	{"innerCode": 16930, "beginDate": "2026-10-14", "endDate": "2026-11-13", "unit": 3}
+etf-earning-forecast	{"innerCode": 16930, "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+etf-margin	{"innerCode": 16930, "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+etf-pr-components	{"fundObject": ["16930"]}
+etf-pr-list	{"fundObject": ["16930"]}
+etf-range-quote	{"fundObject": [16930], "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+etf-shares-change	{"innerCode": 16930, "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-annual-return	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-annual-risk	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-asset-size	{"fundCode": "510300"}
+fund-basic-info	{"fundCode": "510300"}
+fund-calmar	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-company-funds	{"companyCode": ["42742"]}
+fund-daily-quote	{"secuCode": "510300", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-dividend-history	{"fundCode": "510300"}
+fund-drawdown	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-fin-indicator	{"fundObject": [201445]}
+fund-holding-detail	{"fundObject": ["201445"], "beginDate": "2026-01-01", "endDate": "2026-09-30", "poscharacter": 2}
+fund-index-related	{"indexCode": "3145"}
+fund-industry-concentration	{"fundObject": [201445], "poscharacter": 2, "proportionType": 1, "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-industry-dist	{"fundObject": [201445], "poscharacter": "2", "industryType": "38", "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-info-ratio	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-manager-bond-concentration	{"standard": 1, "personalCodes": [101001646]}
+fund-manager-concept-position	{"personalCodes": [101001646], "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-manager-experience	{"personalCodes": [101001646]}
+fund-manager-fund-position	{"personalCodes": [101001646], "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-manager-history	{"fundCode": "006567"}
+fund-manager-image	{"typeCodes": "11", "personalCodes": [101001646]}
+fund-manager-industry-fixed	{"personalCodes": [101001646], "posCharacters": 1, "industryStandard": 22}
+fund-manager-industry-regular	{"personalCodes": [101001646], "holdType": 1, "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-manager-info	{"personalCode": "101001646"}
+fund-manager-position-detail	{"personalCodes": [101001646], "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-manager-products-income	{"personalCode": [101001646]}
+fund-manager-resolve	{"managerName": "姜诚"}
+fund-manager-revenue-statis	{"personalCodes": [101001646], "timeInterval": 3}
+fund-manager-risk-return	{"personalCodes": [101001646]}
+fund-manager-scale	{"personalCodes": [101001646]}
+fund-manager-stage-revenue	{"personalCodes": [101001646]}
+fund-manager-stage-revenue-rank	{"fundTypeCode": 1101, "timeInterval": 365, "rankN": 20}
+fund-manager-stock-concentration	{"personalObject": ["101001646"]}
+fund-manager-tag	{"personalCodes": ["101001646"]}
+fund-manager-viewpoint	{"personalCodes": [101001646]}
+fund-max-dd	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-monthly-return	{"fundCode": "510300"}
+fund-nav	{"fundObject": [16930], "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-nav-change	{"fundObject": ["201445"], "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-nav-trend	{"fundCode": "510300", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-quarterly-return	{"fundCode": "510300"}
+fund-rate	{"fundCode": "510300"}
+fund-resolve	{"secuCode": "510300"}
+fund-return-risk	{"innerCodes": [16930]}
+fund-return-sum	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-sharpe	{"fundCode": "510300.OF", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+fund-stage-performance	{"fundCode": "510300"}
+fund-valuation	{"innerCode": 201445, "beginDate": "2026-01-01", "endDate": "2026-09-30"}
+fund-yearly-return	{"fundCode": "510300"}
+index-basic-info	{"indexObject": ["3145"]}
+index-capital-flow	{"indexObject": ["000300.SH"], "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+index-constituents	{"indexObject": ["000300.SH"]}
+index-daily-quote	{"indexCodes": ["000300.SH"], "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+index-industry-dist	{"indexObject": ["000300.SH"]}
+index-margin	{"indexObject": ["000300.SH"]}
+index-multi-period-quote	{"indexObject": ["3145"], "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+index-pe-bands	{"indexObject": ["000300.SH"], "type": "PE_TTM", "period": 1}
+index-performance-trend	{"indexCode": "000300", "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+index-range-quote	{"indexCodes": ["000300.SH"], "beginDate": "2026-10-14", "endDate": "2026-11-13"}
+index-resolve	{"secuCode": "000300"}
+index-return-risk	{"indexObject": ["000300.SH"], "indexCycle": 1}
+index-value-analysis	{"indexObject": ["3145"], "beginDate": "2026-10-14", "endDate": "2026-11-13"}

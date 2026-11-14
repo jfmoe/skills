@@ -1,0 +1,437 @@
+{
+ "checked_on": "2026-11-14",
+ "interfaces": {
+  "company-resolve": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 2.8
+  },
+  "etf-capital-flow": {
+   "status": 200,
+   "error": null,
+   "records": 23,
+   "seconds": 0.3
+  },
+  "etf-capital-flow-stats": {
+   "status": 200,
+   "error": null,
+   "records": 2,
+   "seconds": 6.6
+  },
+  "etf-capital-report": {
+   "status": 200,
+   "error": null,
+   "records": 23,
+   "seconds": 0.2
+  },
+  "etf-earning-forecast": {
+   "status": 200,
+   "error": null,
+   "records": 124,
+   "seconds": 0.2
+  },
+  "etf-margin": {
+   "status": 200,
+   "error": null,
+   "records": 5,
+   "seconds": 0.1
+  },
+  "etf-pr-components": {
+   "status": 200,
+   "error": null,
+   "records": 300,
+   "seconds": 20.3
+  },
+  "etf-pr-list": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 1.3
+  },
+  "etf-range-quote": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.1
+  },
+  "etf-shares-change": {
+   "status": 200,
+   "error": null,
+   "records": 23,
+   "seconds": 0.1
+  },
+  "fund-annual-return": {
+   "status": 200,
+   "error": null,
+   "records": 5,
+   "seconds": 3.4
+  },
+  "fund-annual-risk": {
+   "status": 200,
+   "error": null,
+   "records": 10,
+   "seconds": 0.5
+  },
+  "fund-asset-size": {
+   "status": 200,
+   "error": null,
+   "records": 57,
+   "seconds": 0.5
+  },
+  "fund-basic-info": {
+   "status": 200,
+   "error": null,
+   "records": null,
+   "seconds": 31.6
+  },
+  "fund-calmar": {
+   "status": 200,
+   "error": null,
+   "records": 8,
+   "seconds": 0.6
+  },
+  "fund-company-funds": {
+   "status": 200,
+   "error": null,
+   "records": 381,
+   "seconds": 0.3
+  },
+  "fund-daily-quote": {
+   "status": 200,
+   "error": null,
+   "records": 23,
+   "seconds": 0.6
+  },
+  "fund-dividend-history": {
+   "status": 200,
+   "error": null,
+   "records": 14,
+   "seconds": 0.4
+  },
+  "fund-drawdown": {
+   "status": 200,
+   "error": null,
+   "records": 24,
+   "seconds": 0.8
+  },
+  "fund-fin-indicator": {
+   "status": 200,
+   "error": null,
+   "records": 4,
+   "seconds": 0.2
+  },
+  "fund-holding-detail": {
+   "status": 200,
+   "error": null,
+   "records": 39,
+   "seconds": 0.2
+  },
+  "fund-index-related": {
+   "status": 200,
+   "error": null,
+   "records": 308,
+   "seconds": 0.3
+  },
+  "fund-industry-concentration": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.1
+  },
+  "fund-industry-dist": {
+   "status": 200,
+   "error": null,
+   "records": 17,
+   "seconds": 0.1
+  },
+  "fund-info-ratio": {
+   "status": 200,
+   "error": null,
+   "records": 7,
+   "seconds": 0.4
+  },
+  "fund-manager-bond-concentration": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-concept-position": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-experience": {
+   "status": 200,
+   "error": null,
+   "records": 2,
+   "seconds": 0.1
+  },
+  "fund-manager-fund-position": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-history": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.2
+  },
+  "fund-manager-image": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-industry-fixed": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-industry-regular": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-info": {
+   "status": 200,
+   "error": null,
+   "records": null,
+   "seconds": 1.5
+  },
+  "fund-manager-position-detail": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-products-income": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 45.7
+  },
+  "fund-manager-resolve": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.2
+  },
+  "fund-manager-revenue-statis": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.2
+  },
+  "fund-manager-risk-return": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-scale": {
+   "status": 200,
+   "error": null,
+   "records": 4,
+   "seconds": 0.2
+  },
+  "fund-manager-stage-revenue": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.2
+  },
+  "fund-manager-stage-revenue-rank": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-stock-concentration": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "fund-manager-tag": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.2
+  },
+  "fund-manager-viewpoint": {
+   "status": 200,
+   "error": null,
+   "records": 402,
+   "seconds": 0.8
+  },
+  "fund-max-dd": {
+   "status": 200,
+   "error": null,
+   "records": 9,
+   "seconds": 1.9
+  },
+  "fund-monthly-return": {
+   "status": 200,
+   "error": null,
+   "records": 175,
+   "seconds": 0.3
+  },
+  "fund-nav": {
+   "status": 200,
+   "error": null,
+   "records": 23,
+   "seconds": 0.7
+  },
+  "fund-nav-change": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 93.3
+  },
+  "fund-nav-trend": {
+   "status": 200,
+   "error": null,
+   "records": 24,
+   "seconds": 0.2
+  },
+  "fund-quarterly-return": {
+   "status": 200,
+   "error": null,
+   "records": 59,
+   "seconds": 0.2
+  },
+  "fund-rate": {
+   "status": 200,
+   "error": null,
+   "records": 2,
+   "seconds": 0.4
+  },
+  "fund-resolve": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.7
+  },
+  "fund-return-risk": {
+   "status": 200,
+   "error": null,
+   "records": 70,
+   "seconds": 0.1
+  },
+  "fund-return-sum": {
+   "status": 200,
+   "error": null,
+   "records": 11,
+   "seconds": 0.5
+  },
+  "fund-sharpe": {
+   "status": 200,
+   "error": null,
+   "records": 10,
+   "seconds": 0.4
+  },
+  "fund-stage-performance": {
+   "status": 200,
+   "error": null,
+   "records": 10,
+   "seconds": 3.9
+  },
+  "fund-valuation": {
+   "status": 200,
+   "error": null,
+   "records": 4,
+   "seconds": 0.1
+  },
+  "fund-yearly-return": {
+   "status": 200,
+   "error": null,
+   "records": 15,
+   "seconds": 0.2
+  },
+  "index-basic-info": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.1
+  },
+  "index-capital-flow": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "index-constituents": {
+   "status": 200,
+   "error": null,
+   "records": 300,
+   "seconds": 0.3
+  },
+  "index-daily-quote": {
+   "status": 200,
+   "error": null,
+   "records": 23,
+   "seconds": 7.9
+  },
+  "index-industry-dist": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "index-margin": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "index-multi-period-quote": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "index-pe-bands": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "index-performance-trend": {
+   "status": 200,
+   "error": null,
+   "records": 24,
+   "seconds": 5.7
+  },
+  "index-range-quote": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 11.9
+  },
+  "index-resolve": {
+   "status": 200,
+   "error": null,
+   "records": 1,
+   "seconds": 0.5
+  },
+  "index-return-risk": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  },
+  "index-value-analysis": {
+   "status": 404,
+   "error": "API_NOT_FOUND",
+   "records": null,
+   "seconds": 0.1
+  }
+ }
+}

@@ -1,11 +1,12 @@
 # 环境与认证
 
-技能包内只有一个 `SKILL.md`；提供方文档和华宝客户端均在包内。ETFirst 是独立运行时依赖，凭据不随包分发。
+技能包内只有一个 `SKILL.md`；三个来源的文档以及华宝、华泰柏瑞的客户端均在包内。ETFirst 是独立运行时依赖，凭据不随包分发。
 
 ## Fire 项目
 
 - 南方：`pixi run etfirst --help`，认证与状态见[ETFirst 认证](../providers/etfirst/references/auth.md)。沿用已登录的本机配置，不重复登录或更改凭据位置。
 - 华宝：`pixi run etf-fsfund list-apis`。任务使用已有 `python-dotenv` 从根目录 `.env` 加载 `HJ_APP_SECRET`；`.env` 保持 Git 忽略。查询本身无需修改 `.env`。
+- 华泰柏瑞：`pixi run etf-htbr invoke index-resolve '{"secuCode":"000300"}'`。任务从根目录 `.env` 加载 `HTBR_API_KEY`。
 
 ## 本机 Hermes
 
@@ -39,4 +40,13 @@ python -m dotenv -f .env run -- python <技能目录>/providers/fsfund/scripts/e
 | `HJ_SKILL_URL` | 默认 `fsfund-etf-index` |
 | `HJ_META_CACHE_SEC` | 元数据缓存有效秒数，默认 3600 |
 
-只需配置密钥，其余变量默认即可。验证顺序：`list-apis` → `schema INF_FUND_INFO` → 按 schema 查询一个已知基金，检查业务成功与返回记录。错误时保留状态和服务端说明，不回显密钥。南方的配置 JSON 与华宝 `.env` 是两套独立认证，不能互换。
+华泰柏瑞客户端只用标准库，Python 3.10+。密钥在[华泰柏瑞技能注册页](https://esa.huatai-pb.com/skillReg/app-cli-front/htbr-etf-skill-guide.html)用手机号登录后从“我的 API Key”取得，由用户本人注册；每个密钥每天 500 次成功调用。
+
+| 环境变量 | 华泰柏瑞含义 |
+|---|---|
+| `HTBR_API_KEY` | 必填密钥，只用于换取短期令牌 |
+| `HTBR_BASE_URL` | 默认 `https://esa.huatai-pb.com/api/v1` |
+
+令牌缓存在 `providers/htbr/.cache/token.json`（已被技能的 `.gitignore` 排除）。官方包把密钥存到 `~/.htbr/credentials.json`，本技能不读它。
+
+只需配置密钥，其余变量默认即可。验证顺序：`list-apis` → `schema INF_FUND_INFO` → 按 schema 查询一个已知基金，检查业务成功与返回记录。错误时保留状态和服务端说明，不回显密钥。南方的配置 JSON、华宝和华泰柏瑞的密钥是三套独立认证，不能互换。
