@@ -4,10 +4,12 @@ Usage:
     python htbr_client.py invoke <api_id> '<json payload>'
 
 The API key comes from the HTBR_API_KEY environment variable and is exchanged for a
-short-lived token, cached next to this provider so repeated commands reuse it. Exit code 0
+short-lived token. The token is cached per key in the user's cache directory, outside the
+skill, so repeated commands reuse it and installed copies of the skill never carry it. Exit code 0
 means the gateway reported success; anything else prints the gateway's status and error.
 """
 
+import hashlib
 import json
 import os
 import sys
@@ -21,7 +23,7 @@ BASE_URL = os.environ.get("HTBR_BASE_URL", "https://esa.huatai-pb.com/api/v1").r
 SKILL_ID = "htbr-etf-skill"
 TIMEOUT = 120
 TOKEN_MARGIN = 120
-TOKEN_CACHE = Path(__file__).resolve().parents[1] / ".cache" / "token.json"
+CACHE_HOME = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache") / "htbr-etf"
 
 
 class GatewayError(Exception):
@@ -62,14 +64,23 @@ def _post(path: str, payload: dict, token: str | None = None) -> dict:
     raise GatewayError(status, body)
 
 
+def _cached_token(cache: Path) -> str | None:
+    try:
+        cached = json.loads(cache.read_text())
+        if cached["base_url"] == BASE_URL and time.time() < cached["expires_at"] - TOKEN_MARGIN:
+            return str(cached["access_token"])
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+    return None
+
+
 def _token(refresh: bool = False) -> str:
-    if not refresh and TOKEN_CACHE.is_file():
-        cached = json.loads(TOKEN_CACHE.read_text())
-        if cached.get("base_url") == BASE_URL and time.time() < cached["expires_at"] - TOKEN_MARGIN:
-            return cached["access_token"]
     key = os.environ.get("HTBR_API_KEY")
     if not key:
         raise SystemExit("HTBR_API_KEY is not set")
+    cache = CACHE_HOME / f"token-{hashlib.sha256(key.encode()).hexdigest()[:8]}.json"
+    if not refresh and (token := _cached_token(cache)):
+        return token
     data = _post(
         "/auth/token",
         {
@@ -79,18 +90,20 @@ def _token(refresh: bool = False) -> str:
             "timestamp": int(time.time()),
         },
     )["data"]
-    TOKEN_CACHE.parent.mkdir(exist_ok=True)
-    TOKEN_CACHE.touch(mode=0o600, exist_ok=True)
-    TOKEN_CACHE.write_text(
-        json.dumps(
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    pending = cache.with_suffix(f".{os.getpid()}.tmp")
+    descriptor = os.open(pending, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(descriptor, "w") as file:
+        json.dump(
             {
                 "base_url": BASE_URL,
                 "access_token": data["accessToken"],
                 "expires_at": time.time() + int(data.get("expiresIn") or 0),
-            }
+            },
+            file,
         )
-    )
-    return data["accessToken"]
+    os.replace(pending, cache)
+    return str(data["accessToken"])
 
 
 def invoke(api_id: str, payload: dict) -> dict:

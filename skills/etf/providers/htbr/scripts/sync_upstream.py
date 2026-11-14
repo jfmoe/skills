@@ -3,8 +3,10 @@
 Usage:
     python sync_upstream.py <unpacked htbr-etf-skill directory>
 
-Only interfaces that ``references/availability.json`` records as served are copied, plus all
-workflow documents and the interface catalogue with the rows of unserved interfaces dropped.
+Interfaces that ``references/availability.json`` records as not found (HTTP 404) are left
+out; every other documented interface is copied, plus all workflow documents and the
+interface catalogue with the rows of left-out interfaces dropped. An interface whose probe
+ended in any other error keeps its document and is listed as undetermined.
 The text is kept as upstream wrote it except for the command prefix, which becomes this
 skill's client. The summary lists documents that were added, changed or removed,
 which is what a maintainer reviews after an upstream release.
@@ -61,8 +63,9 @@ def main(arguments: list[str]) -> int:
         return 2
     upstream = Path(arguments[0]) / "references"
     availability = json.loads((PROVIDER / "references" / "availability.json").read_text())
-    served = {name for name, entry in availability["interfaces"].items() if entry["status"] == 200}
+    probed = availability["interfaces"]
     documented = {path.stem for path in (upstream / "apis").glob("*.md")}
+    served = {name for name in documented if probed.get(name, {}).get("status") != 404}
     catalog = PROVIDER / "references" / "api-catalog.md"
     catalog_text = served_catalog((upstream / "api-catalog.md").read_text(), served)
     catalog_changed = not catalog.is_file() or catalog.read_text() != catalog_text
@@ -71,8 +74,11 @@ def main(arguments: list[str]) -> int:
         "catalog_changed": catalog_changed,
         "apis": sync(upstream / "apis", PROVIDER / "references" / "apis", served),
         "workflows": sync(upstream / "workflows", PROVIDER / "references" / "workflows", None),
-        "documented_but_never_probed": sorted(documented - set(availability["interfaces"])),
-        "probed_but_no_longer_documented": sorted(set(availability["interfaces"]) - documented),
+        "undetermined": sorted(
+            name for name in documented & set(probed) if probed[name]["status"] not in (200, 404)
+        ),
+        "documented_but_never_probed": sorted(documented - set(probed)),
+        "probed_but_no_longer_documented": sorted(set(probed) - documented),
     }
     print(json.dumps(report, ensure_ascii=False, indent=1))
     return 0

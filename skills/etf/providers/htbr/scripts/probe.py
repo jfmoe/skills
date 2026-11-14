@@ -6,7 +6,9 @@ Usage:
 Each payload line is ``api_id<TAB>json payload``; lines starting with ``#`` are skipped. Raw
 responses go to the response directory, one file per interface. The availability file gets
 one entry per interface: HTTP status, gateway error code, and the number of records returned.
-Every call counts against the daily quota, so run it only when checking for upstream changes.
+A rejected key or an exhausted quota stops the run without writing the availability file,
+because every later interface would look unserved. Every call counts against the daily quota,
+so run it only when checking for upstream changes.
 """
 
 import json
@@ -16,6 +18,7 @@ from datetime import date
 from pathlib import Path
 
 import htbr_client
+
 
 def record_count(data: object) -> int | None:
     """Rows in a response: the list itself, or the first list the data object holds."""
@@ -41,7 +44,12 @@ def main(arguments: list[str]) -> int:
         try:
             status, body = 200, htbr_client.invoke(api_id, json.loads(payload))
         except htbr_client.GatewayError as failure:
+            if failure.status in (401, 429):
+                print(f"stopped at {api_id}: {failure}", file=sys.stderr)
+                return 1
             status, body = failure.status, failure.body
+        except OSError as failure:  # timeouts and network errors
+            status, body = 0, {"error": {"code": type(failure).__name__, "message": str(failure)}}
         (responses / f"{api_id}.json").write_text(json.dumps(body, ensure_ascii=False, indent=1))
         error = body.get("error") if isinstance(body, dict) else None
         result[api_id] = {
@@ -61,7 +69,8 @@ def main(arguments: list[str]) -> int:
         + "\n"
     )
     served = sum(entry["status"] == 200 for entry in result.values())
-    print(f"{served} of {len(result)} interfaces served")
+    unknown = [name for name, entry in result.items() if entry["status"] not in (200, 404)]
+    print(f"{served} of {len(result)} interfaces served; undetermined: {unknown}")
     return 0
 
 

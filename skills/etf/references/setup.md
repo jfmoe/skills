@@ -47,6 +47,6 @@ python -m dotenv -f .env run -- python <技能目录>/providers/fsfund/scripts/e
 | `HTBR_API_KEY` | 必填密钥，只用于换取短期令牌 |
 | `HTBR_BASE_URL` | 默认 `https://esa.huatai-pb.com/api/v1` |
 
-令牌缓存在 `providers/htbr/.cache/token.json`（已被技能的 `.gitignore` 排除）。官方包把密钥存到 `~/.htbr/credentials.json`，本技能不读它。
+令牌按密钥缓存在 `${XDG_CACHE_HOME:-~/.cache}/htbr-etf/`，文件权限 600，不在技能目录内，不会随技能安装被复制。官方包把密钥存到 `~/.htbr/credentials.json`，本技能不读它。
 
 只需配置密钥，其余变量默认即可。验证顺序：`list-apis` → `schema INF_FUND_INFO` → 按 schema 查询一个已知基金，检查业务成功与返回记录。错误时保留状态和服务端说明，不回显密钥。南方的配置 JSON、华宝和华泰柏瑞的密钥是三套独立认证，不能互换。

@@ -9,7 +9,7 @@ pixi run etf-htbr invoke fund-resolve '{"secuCode":"510300"}'
 pixi run etf-htbr invoke etf-earning-forecast '{"innerCode":16930,"beginDate":"2026-10-14","endDate":"2026-11-13"}'
 ```
 
-其他环境把 `pixi run etf-htbr` 换成 `python <技能目录>/providers/htbr/scripts/htbr_client.py`，并设置 `HTBR_API_KEY`。客户端先用密钥换短期令牌（缓存在本目录 `.cache/`），再调用 `/business/<api_id>:invoke`；成功时打印完整响应并以 0 退出，失败时把 HTTP 状态和网关错误写到标准错误并以 1 退出。
+其他环境把 `pixi run etf-htbr` 换成 `python <技能目录>/providers/htbr/scripts/htbr_client.py`，并设置 `HTBR_API_KEY`。客户端先用密钥换短期令牌（按密钥缓存在用户缓存目录 `~/.cache/htbr-etf/`，不在技能目录内），再调用 `/business/<api_id>:invoke`；成功时打印完整响应并以 0 退出，失败时把 HTTP 状态和网关错误写到标准错误并以 1 退出。
 
 1. 在[接口目录](references/api-catalog.md)按需求找到 `api_id`，再读 `references/apis/<api_id>.md` 确认参数、代码口径和字段含义。目录和接口文档是上游原文，只列实测可用的接口。
 2. 先解析代码。接口要的代码口径各不相同：六位证券代码（`510300`）、带后缀代码（`510300.OF`、`000300.SH`）、内码（`16930`）、经理编号、公司编号。只有名称或口径不符时，按 `references/workflows/` 里对应的解析流程先调 `fund-resolve`、`index-resolve`、`company-resolve` 或 `fund-manager-resolve`；多个候选时请用户选择，不按第一条取。

@@ -45,18 +45,19 @@
 3. 把 `providers/htbr/probe/payloads.tsv` 里的日期换成最近一个月和最近的报告期；上游新增接口时按其文档补一行。然后运行（约 72 次调用，带 3 秒间隔，约 5 分钟）：
 
    ```bash
-   cd providers/htbr/scripts
-   HTBR_API_KEY=... python probe.py ../probe/payloads.tsv <临时目录> ../references/availability.json
+   cd ~/Coder/fire
+   H=~/Coder/skills/skills/etf/providers/htbr
+   pixi run python -m dotenv -f .env run -- python $H/scripts/probe.py $H/probe/payloads.tsv "$(mktemp -d)" $H/references/availability.json
    ```
 
-   在 Fire 项目里用 `pixi run python -m dotenv -f .env run -- python <技能目录>/providers/htbr/scripts/probe.py ...` 从 `.env` 取密钥。
+   在源仓库的文件上运行，密钥由 Fire 的 `.env` 提供，不写在命令行里。密钥无效或额度用完时它立即停止且不改写 `availability.json`；单个接口超时或网络错误记为“未确定”，不影响其他接口。
 4. 同步文档并看差异报告：
 
    ```bash
    python sync_upstream.py <解压后的 htbr-etf-skill 目录>
    ```
 
-   报告列出新增、变化、删除的接口文档，以及“有文档但没实测”“实测过但文档已删除”的接口。
+   只有实测返回 404 的接口被当作未开放、不同步文档；其他错误的接口保留文档并列在报告的 `undetermined` 里，查明原因后重测。报告还列出新增、变化、删除的接口文档，以及“有文档但没实测”“实测过但文档已删除”的接口。
 5. 状态为 200 但记录数为 0 或 `null` 的接口，逐个看原始响应，区分“样本无数据”和“实际未开放”。
 6. 按结果更新华泰柏瑞指南的“独有或更强的能力”和“未开放接口”两节、来源比较里的分工表、入口的选择表。
 
