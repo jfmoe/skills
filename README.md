@@ -10,6 +10,7 @@ skills/              Installable skills (copied verbatim into projects on instal
   <skill>/           One folder per skill — flat, no category directories
 registry/
   upstream/          Pristine upstream snapshots and provenance for forks
+prompts/             Hand-pasted prompts: lab/ (experimental) and stable/<type>/
 ```
 
 Repository-managed skills come in two classes:
