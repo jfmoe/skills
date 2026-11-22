@@ -1,0 +1,21 @@
+source: unclebob/ub-mode
+ref: master
+commit: 3da62bf3fcfd2034de41f30d920d2739e566171f
+upstream_path: .
+local_path: skills/ub-mode
+fetched_at: 2026-11-22
+notes: |
+  First Make it Work and the principle sections of Then Make it Right are
+  kept verbatim, so upstream edits to them port directly.
+  - Description and intro name the implementer as the reader, add review use,
+    and route conflicts with the spec or task scope to whoever gave the task.
+    The description now triggers on any implementation or code change;
+    upstream loaded only on /ub-mode or an explicit request.
+  - Crapper, Dryer, and Mutator became Optional Metrics: off unless the
+    project declares them in docs/agents/quality-gates.md, results are leads,
+    and there is no coverage goal. Upstream's "cover the uncovered" and
+    "reduce CRAP by testing" pushed toward tests written for the number.
+  - Practice lost Keep a Log, Guard the Context Window, Worktree Cleanup, and
+    Commit and Push; herdr-architect and commit-message own those. It keeps
+    one rule: structural and behavioral change in separate commits.
+  The MIT license is retained.

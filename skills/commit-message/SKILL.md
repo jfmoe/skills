@@ -7,6 +7,15 @@ description: Write a git commit message or commit changes. Use when the user ask
 
 A commit message is the permanent record of a change. Future maintainers and agents find it through `git log --grep` and `git blame`, then use it to understand why the code looks the way it does. The code shows what changed; the message carries what the code cannot: why, and how the change was proven.
 
+## Splitting
+
+Structural change and behavioral change go in separate commits, so either can be reverted or traced without the other.
+
+- A `refactor:` commit changes structure only: what each test expects stays as it was, and the checks pass before and after it.
+- A `feat:` or `fix:` commit carries one behavior change together with its tests. Red-green cycles within it are one commit.
+- A preparatory refactor lands before the behavior change it makes room for.
+- When both kinds are already mixed in the working tree and cannot be staged apart by file, commit them together and say so in the body.
+
 ## Subject
 
 Use Conventional Commits: `<type>(<scope>): <summary>`, in the imperative mood, around 50 characters. Make the summary specific enough that a reader skimming history can tell this commit apart from others.

@@ -16,6 +16,10 @@ Creating, editing, installing, syncing, and forking skills are the `manage-skill
 
 Recording, editing, finding, and promoting prompts under `prompts/` are the `manage-prompts` skill's job (`skills/manage-prompts/SKILL.md`), the single home for the prompt rules.
 
+## Development workflow
+
+Before editing `herdr-architect`, `ub-mode`, `test-layers`, or `commit-message`, read `docs/workflow.md`: these skills share rules, and it says which file owns each one.
+
 ## Agent skills
 
 ### Issue tracker
