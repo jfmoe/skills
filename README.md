@@ -19,6 +19,10 @@ Repository-managed skills come in two classes:
 - **Fork** — a modified third-party skill. Installable copy at `skills/<skill>/`; pristine upstream snapshot at `registry/upstream/<skill>/` (see `registry/upstream/README.md`).
 Unmodified third-party skills are installed directly from their upstream source and stay outside this repository.
 
+## Development workflow
+
+`docs/workflow.md` explains how `herdr-architect`, `ub-mode`, `test-layers`, and `commit-message` combine with the third-party engineering skills into one spec-to-merge workflow: principles, roles, installation, and maintenance.
+
 ## Validation
 
 ```bash
