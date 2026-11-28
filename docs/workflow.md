@@ -9,16 +9,16 @@
 3. **从第一性原理设计。** 讨论规格时先问“需求从一开始就存在时会怎么设计”，不在旧设计上打补丁；先减后加。
 4. **实施者和评审者看同一份原则。** 实施者开工前读原则卡，评审时把同一份原则卡交给评审者。
 5. **测试只为规则而写。** 说不出哪个 bug 会让测试变红，就不写这条测试。不设覆盖率目标，度量结果只当线索。
-6. **规则从摩擦中来。** 项目规范不预先起草。实施中出现问题时，能机械判定的做成检查，需要判断的写进项目规范。
+6. **规则从摩擦中来。** 项目规范不预先起草。实施中出现问题时，架构师提出修改方案，用户裁定后，能机械判定的做成检查，需要判断的写进项目规范。
 
 ## 角色
 
 | 角色 | 是谁 | 负责 |
 | --- | --- | --- |
 | 架构师 | 调用 `herdr-architect` 的会话 | 设计、裁定、评审、合入、关票、回顾 |
-| 工人 | Herdr 其他 pane 里的 Agent，种类不限 | 实现、修正、跑检查、查证 |
-| 顾问 | 用户用 `advisor=` 指定的 Agent，通常是与架构师不同的模型；可选 | 设计阶段基于同一份前提独立出一份方案，由架构师取舍 |
-| 评审者 | `code-review` 启动的两个 subagent | 分别按规范和规格评审 diff |
+| 工人 | 架构师用 `hc` 按票启动的终端里的 Agent，种类不限，须上报 OSC 7501 状态 | 实现、修正、跑检查、查证 |
+| 顾问 | 用户要求时加入的 Agent，通常是与架构师不同的模型；可选 | 设计阶段基于同一份前提独立出一份方案，由架构师取舍 |
+| 评审者 | 规格收尾时 `code-review` 启动的两个 subagent | 分别按规范和规格评审整个规格的 diff |
 
 ## 流程
 
@@ -32,7 +32,7 @@
   发布                 用户确认拆票方案后发布规格和票
   项目事实             检查命令、合入策略、授权、可选度量是否开启
 
-每张票（工人，上下文已清空）
+每张票（工人，每张票一个新终端）
   读实施说明和原则卡
   [refactor]           预备重构（可选）
   tdd                  红 → 绿；test-layers 决定测试放在哪一层
@@ -41,13 +41,13 @@
   [fix / test]         改变行为或测试预期值的评审修正（可选）
   [refactor]           纯结构的评审修正（可选）
   整理提交             超过 3 个时合并同类提交，只改写本票尚未推送的提交
-  → 架构师评审 diff、合入、关票
+  → 架构师自己核对 diff（不开 subagent 评审）、合入、关票
 
 规格收尾（架构师）
-  code-review          评审整个规格
+  code-review          评审整个规格；代码的独立评审只在这里做
   可选度量             项目声明后才跑，只看本规格改过的文件
   修正、清理 worktree
-  回顾                 返工的票、重复出现的回问和评审问题 → 落实为检查或规范
+  回顾                 返工的票、重复出现的回问和评审问题 → 修改方案，用户裁定后落实为检查或规范
   在规格上写结论
 ```
 
@@ -63,7 +63,7 @@
 | `commit-message` | 本仓库，Original | 提交如何拆分、提交信息怎么写 |
 | `audit-code-simplifications` | 本仓库，Fork | 审查存量代码的简化机会。不在每张票的路径上，在规格之间按需使用，候选项经提问和设计进入新规格 |
 | `grilling`、`domain-modeling`、`to-spec`、`to-tickets`、`implement`、`tdd`、`code-review`、`retro` | 第三方，`mattpocock/skills` | 流程各阶段的具体做法 |
-| `herdr` | 第三方，`herdrdev/herdr` | 操作 Herdr 的命令用法 |
+| `hc --skill` | 随 herdr-core 安装的手册，不是 skill | 启动、等待、读取和清理终端的用法；架构师开工前读 |
 
 第三方 skill 不在本仓库修改。本流程对它们的调整都写在 `herdr-architect` 和实施说明里，例如“先提交再运行 `code-review`”和“评审时额外加入哪些规范来源”。
 
@@ -86,8 +86,8 @@
 | 文件 | 作用 | 何时出现 |
 | --- | --- | --- |
 | `docs/agents/issue-tracker.md` | tracker 的读票、评论、关票操作 | 必需；由 `setup-matt-pocock-skills` 生成 |
-| 检查命令（lint、测试、CI） | 能机械判定的规则 | 项目自带；架构师纠偏和回顾时补充 |
-| `CODING_STANDARDS.md` 或项目已有的规范文件 | 需要判断的评审规则；`code-review` 必读 | 出现第一条有证据的规则时由架构师写入，没有文件时新建 |
+| 检查命令（lint、测试、CI） | 能机械判定的规则 | 项目自带；用户认可架构师的纠偏方案后补充 |
+| `CODING_STANDARDS.md` 或项目已有的规范文件 | 需要判断的评审规则；`code-review` 必读 | 出现第一条有证据的规则、用户认可后由架构师写入，没有文件时新建 |
 | `docs/agents/quality-gates.md` | 声明要跑的度量工具（CRAP 分数、重复度、变异测试）、范围和阈值 | 可选；文件不存在即关闭度量。格式尚未约定 |
 
 ## 安装
@@ -106,11 +106,10 @@
 
 2. 安装第三方 skill：
    - `mattpocock/skills`：Claude Code 中以插件 `mattpocock-skills@mattpocock` 安装。其他种类的工人需要另行安装其中的 `implement`、`tdd`、`code-review`；缺少时架构师会在准备阶段停下来提示。
-   - `herdr`：来源 `herdrdev/herdr`。
 
 3. 每个项目运行一次 `setup-matt-pocock-skills`，生成 `docs/agents/issue-tracker.md` 等文件。
 
-4. 在 Herdr 中启动会话（`HERDR_ENV=1`），调用 `/herdr-architect <规格引用或想法>`。
+4. 安装 Herdr app（`curl -fsSL https://releases.herdr.dev/app/install.sh | sh`，没有 herdr-core 时一并安装），在它的终端里启动会话（`$HC_TERMINAL_ID` 已设置），调用 `/herdr-architect`，用自然语言说明规格或想法。
 
 ## 维护
 
@@ -136,12 +135,13 @@
 - **`ub-mode`**：与上游的差异集中在三处：开头的读者说明、Optional Metrics 一节、Practice 一节，其余逐字相同。上游更新时按 `manage-skills` 的三方比较流程处理，对照 `registry/upstream/ub-mode/SKILL.md.orig`。
 - **`mattpocock/skills`**：随插件更新。更新后检查 `herdr-architect` 依赖的几处是否还成立：`code-review` 的规范来源由调用者列出；`tdd` 把重构留给评审阶段；`to-spec` 的规格模板包含 Testing Decisions。
 
-### 回顾产出的去向
+### 纠偏和回顾产出的去向
 
-架构师在规格收尾时做回顾。项目内的改进直接落实并单独提交；流程模板的改进改 `herdr-architect`；涉及原则卡等其他 skill 的改进只作为建议交给用户，由用户在本仓库修改。
+架构师在实施中纠偏、在规格收尾时回顾，都只提出修改方案，写进调度目录的 `architect/corrections.md`，由用户裁定。用户认可后，项目内的修改由架构师落实并单独提交；`herdr-architect` 模板、原则卡等 skill 的修改由用户在本仓库做，架构师不改安装目录里的副本。
 
 ## 已知限制
 
+- 等待工人完全依赖 Agent 通过 OSC 7501 上报的状态。已实测 Claude Code 2.1.332 和 Codex 0.172 都会上报一轮的结束，Claude Code 停在权限弹窗时上报 `blocked`；Codex 的 `blocked` 尚未实测。
 - 工人需要读取工作目录之外的原则卡和 `test-layers` 文件。Claude Code 可以；其他种类的 Agent 是否受沙箱限制尚未实测。
 - 原则卡的描述会让它在任何实施或改代码的场景下被加载，不限于本流程。
 - “结构与行为分开提交”这条规则同时写在 `commit-message`、原则卡和实施说明里，修改时要一并更新。
